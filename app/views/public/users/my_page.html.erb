@@ -1,0 +1,40 @@
+<div class="row">
+    <div class="col-xs7">
+        <div class="about">
+        <h5>About <%= @user.first_name %></h5>
+        </div>
+        <div class="row">
+            <div class="col-xs-5">
+                <div class="profile">
+                    <%= form_with(model: @user, url:public_user_path(@user),method: :patch ,local: true ) do |f|%>
+                        <%= f.attachment_field :image%>
+                        <%= f.text_area :introduce %>
+                        <%= f.submit class:"btn btn-primary" %>
+                        <% f.hidden_field :first_name, value: @user.first_name %>
+                        <% f.hidden_field :last_name, value: @user.last_name %>
+                        <% f.hidden_field :first_name_kana, value: @user.first_name_kana %>
+                        <% f.hidden_field :last_name_kana, value: @user.last_name_kana %>
+                        <% f.hidden_field :telephone_number, value: @user.telephone_number %>
+                        <% f.hidden_field :postal_code, value: @user.postal_code %>
+                        <% f.hidden_field :address, value: @user.address %>
+                        <% f.hidden_field :email, value: @user.email %>
+                        <% f.hidden_field :is_deleted, value: @user.is_deleted %>
+                        <% f.hidden_field :rate, value: @user.rate %>
+                    <% end %>
+                </div>
+            </div>
+            <div class="col-xs-5">
+                <div class="profile_detail">
+                
+                    <p><%= @user.first_name + @user.last_name%></p>
+                    <p><%= @user.telephone_number %></p>
+                    <p><%= @user.postal_code %></p>
+                    <p><%= @user.address %></p>
+                    <p><%= @user.email %></p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs4">
+    </div>
+</div>

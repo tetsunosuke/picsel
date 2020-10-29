@@ -1,0 +1,18 @@
+.row
+     - if user_signed_in?
+        .recommend_photographer
+        - # @photos.each do |photo|
+            .recommend_item_each
+            - #= link_to users_photo_path(photo) do
+                - #= attachment_image_tag item,:image,fallback: "noimage.png", size:'100x100'
+                - # end
+            - # end
+            |  aaa 
+    - else
+        = link_to"let's explore galleries", public_gallaries_path ,class:"btn btn-primary"
+        - # 16.times do |i|
+        .recommend_item_each
+            - #= link_to user_item_path(@photo[i].id) do
+            - #= attachment_image_tag @photo[i],:image, fallback: "noimage.png", size:'100x100'
+            - # end
+    - end

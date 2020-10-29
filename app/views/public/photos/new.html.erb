@@ -1,0 +1,22 @@
+<div class="row">
+        <h3>写真新規登録</h3>
+        <%= form_with(model: @photo, url:public_photos_path,local: true,method: :post) do |f| %>
+            <div class="col-xs-4">
+              <%= f.attachment_field :image %>
+            </div>
+            <div class="col-xs-8">
+                <h4>タイトル </h4>
+                    <%= f.text_field :title %>
+                <h4>説明</h4>
+                    <%= f.text_field :caption %>
+             <h4>ギャラリー名</h4> 
+                    <%= f.collection_select(:gallary_id, @gallaries, :id, :name ,prompt: "選択してください") %>
+                <h4>税抜価格</h4>
+                    <%= f.text_field :price %>
+                <h4>販売ステータス</h4>
+                    <%= f.select :is_active, ['有効', '無効'], {include_blank: 'ーー選択してくださいーー'}, class: 'sample' %>
+              <br>
+              <%= f.submit"新規登録",class:"btn btn-primary",style:"float:right;"%>
+         </div>
+    <% end %>
+</div>
