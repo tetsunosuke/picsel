@@ -6,7 +6,6 @@ Rails.application.routes.draw do
     registrations: "users/registrations"
   }
   namespace :public do
-    resources :photos
     resources :users, only:[:edit,:update,]
     get "user/my_page" => "users#my_page"
     get "users_unsubscribe" => "userr#unsubscribe"
@@ -17,9 +16,12 @@ Rails.application.routes.draw do
     get "orders/confirm" => "orders#confirm"
     get "orders/complete" => "orders#complete"
     resources :book_marks, only:[:index]
-    resources :likes, only:[:index]
     resources :gallaries, only:[:new,:index,:edit,:create,:update,:delete]
+    resources :photos do 
+    resources :likes, only: [:create, :destroy]
+    end
   end
+
 
   namespace :admins do
     resources :photos

@@ -12,9 +12,9 @@
               </div>   
         <% else %>
             <%= link_to"let's explore photos",  new_user_registration_path ,class:"btn btn-primary"%>
-                <% 1.times do |i|%>
+                <%2.times do |i|%>
                     <div class="recommend_item_each">
-                        <%= link_to public_photo_path(@photos[i].id) do %> 
+                        <%= link_to public_photo_path(@photos[i].id) do %>
                         <%= attachment_image_tag @photos[i],:image, fallback: "noimage.png", size:'100x100' %>
                         <% end %>
                     </div>

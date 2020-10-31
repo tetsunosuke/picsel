@@ -1,8 +1,10 @@
 class Public::PhotosController < ApplicationController
+    before_action :authenticate_user!
     def top
         @photos = Photo.all
     end
     def index
+        @user = current_user
         @photos = Photo.where(user_id: current_user.id)
     end
     def new
@@ -27,9 +29,29 @@ class Public::PhotosController < ApplicationController
     def show
         @photo = Photo.find(params[:id])
         @cart_item = CartItem.new
+        @user = User.find_by(id: @photo.user_id)
+        @like = Like.new
+    end
+    def edit
+        @photo = Photo.find(params[:id])
+        @user = User.find_by(id: @photo.user_id)
+    end
+    def update
+        @photo = Photo.find(params[:id])
+        if @photo.update(photo_params)
+            redirect_to public_photo_path(@photo)
+          else
+            render "index"
+          end
+    end
+    def destroy
+        @photo = Photo.find(params[:id])
+        @photo.destroy
+       redirect_to public_photos_path
     end
     private
-    def photo_params
-        params.require(:photo).permit(:title, :gallary_id , :image, :caption, :price, :is_active)
-    end
+        def photo_params
+            params.require(:photo).permit(:title, :gallary_id , :image, :caption, :price, :is_active)
+        end
+
 end

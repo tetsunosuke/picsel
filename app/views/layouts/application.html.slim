@@ -19,12 +19,15 @@ html lang="ja"
                     = link_to "Picsel", root_path
                     ul.nav.navbar-nav.navbar-right
                         - if user_signed_in?
-                            li style=("color:white;")
+                            li[style="margin:15px 20px 0 0;color:white;"]
+                                | ようこそ、
+                                = current_user.first_name + current_user.last_name
+                                | さん
                             | ようこそ、#{current_user.first_name + current_user.last_name}さん
                             li.nav-item= link_to "マイページ", public_user_my_page_path, class: "btn btn-light nav-link"
-                            li.nav-item= link_to "写真一覧", root_path, class: "btn btn-light nav-link"
+                            li.nav-item= link_to "写真一覧",  public_photos_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "カート", root_path, class: "btn btn-light nav-link"
-                            li.nav-item= link_to "ログアウト", user_registration_path, class: "btn btn-light nav-link",method: :delete
+                            li.nav-item= link_to "ログアウト", destroy_user_session_path, class: "btn btn-light nav-link",method: :delete
                         - elsif admin_signed_in?
                             li= link_to "商品一覧", root_path, class: "btn btn-light"
                             li= link_to "会員一覧", root_path, class: "btn btn-light"
@@ -32,11 +35,11 @@ html lang="ja"
                             li= link_to "ジャンル一覧", root_path, class: "btn btn-light"
                             li= link_to "ログアウト", admin_registration_path, class: "btn btn-light" ,method: :delete
                         - else
+                            li= link_to "ページトップ",root_path, class: "btn btn-light"
                             li= link_to "About", root_path, class: "btn btn-light"
-                            li= link_to "商品一覧",root_path, class: "btn btn-light"
                             li= link_to "新規登録",  new_user_registration_path, class: "btn btn-light"
                             li= link_to "ログイン", user_session_path, class: "btn btn-light"
         .container-fluid
             = yield
-        footer
-            hr size="1" style="color:#fbfbfbf" 
+    footer
+        hr size="1" style="color:#fbfbfbf" 

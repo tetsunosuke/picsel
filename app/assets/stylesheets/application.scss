@@ -15,6 +15,7 @@
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
+ @media screen { #filename { display: none; } }
 
  .jumbotron-extend {
     height: 30vh;
@@ -54,6 +55,91 @@
     margin:10px;
 
 }
+.profile{
+    padding:10px 80px;
+}
 .photo_profile{
     min-height:100px
+}
+.mypage_detail{
+    height:300px;
+
+    text-align: left;
+    &__parchase{
+        height:20%;
+        background-color: #2F3751;
+        padding:10px 0 10px 10px;
+    }
+    &__favorites{
+        height:20%;
+        margin:10px 0;
+        padding:10px 0 10px 10px;
+        background-color: #2F3751;
+    }
+    &__orders_button{
+        height:50%;
+        margin-top:10px;
+        padding:10px 0 10px 10px;
+        background-color:#2F3751;
+    }
+    &__orders_info{
+    border:1px solid #2F3751;
+    height:120px;
+    }
+
+}
+.about{
+    background-color: #2F3751;
+    width: 100%;
+    height: 30px;
+    margin:0px;
+    padding:10px;
+    p{
+        display: inline-block;
+    }
+    h5{
+        color:white;
+        margin:0px;
+    }
+    i{
+        size:100px;
+    }
+}
+
+.profile_detail table {
+    height: 270px;
+    width:100%;
+    
+}
+.profile_detail i{
+    padding:10px
+}
+.profile{
+    width:100%;
+    padding:10px 80px;
+    border: thin solid #2F3751;
+}
+.profile_box{
+  
+    .profile{
+    height: 270px;
+    }
+    .col-xs-5{
+        padding-right:0;
+    }
+    .col-xs-7{
+        padding-left:0;
+    }
+}
+.index_photo_wrapper {
+    display: flex;
+    width:100%;
+    padding-left:50%;
+    p{
+        margin:10px 0 0 100px ;
+        
+    }
+}
+.photo_profile{
+    margin:20px;
 }
