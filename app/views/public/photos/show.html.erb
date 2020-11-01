@@ -11,6 +11,16 @@
     <%# if current_user == @photo.user_id %>
         <div class="col-xs-4 col-xs-offset-1">
             <div class="photo_title_caption">
+                <i><%= @photo.likes.count %></i>
+                    <% if current_user.already_liked?(@photo) %>
+                        <%= link_to public_photo_like_path(@photo),method: :delete do %>
+                            <i class="fas fa-heart unlike-btn"></i>
+                        <% end %>
+                    <% else %>
+                        <%= button_to public_photo_likes_path(@photo) do %>
+                            <i class="far fa-heart like-btn" ></i>
+                        <% end %>
+                    <% end %>
                 <h4><%= @photo.title %></h4>
                 <p><%= @photo.caption %></p>
                 <h5>¥<%= @photo.price %>(税込み)</h5>
@@ -23,19 +33,15 @@
         <div class="col-xs-4 col-xs-offset-1">
             <div class="photo_title_caption">
                 <i><%= @photo.likes.count %></i>
-                <%#= form_with(model: @photo, url: public_like_path(),local: true, method: :delete ) do |f| %>
                     <% if current_user.already_liked?(@photo) %>
-                    <%= link_to public_photo_like_path(@photo),method: :delete do %>
-                     <i class="fas fa-heart unlike-btn"></i>
-                     <% end %>
-                    <% else %>
-                <%#= form_with(model: @photo, url:public_likes_path,local: true,method: :post) do |f| %>
-                        <%= button_to public_photo_likes_path(@photo) do %>
-                        <i class="far fa-heart like-btn" ></i>
+                        <%= link_to public_photo_like_path(@photo),method: :delete do %>
+                            <i class="fas fa-heart unlike-btn"></i>
                         <% end %>
-        
-                <% end %>
-                
+                    <% else %>
+                        <%= button_to public_photo_likes_path(@photo) do %>
+                            <i class="far fa-heart like-btn" ></i>
+                        <% end %>
+                    <% end %>
                 <h4><%= @photo.title %></h4>
                 <p><%= @photo.caption %></p>
                 <h5>¥<%= @photo.price %>(税込み)</h5>
@@ -58,5 +64,4 @@
                     <p><%= @user.introduce %></p>
             <% end %> 
         </div>
-
 </div>

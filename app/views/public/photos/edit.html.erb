@@ -27,8 +27,8 @@
                     <%= f.hidden_field :photo_id, :value => @photo.id %>
                     <%= f.hidden_field :user_id, :value => @photo.user_id %>
                     <%= f.submit "Save",class:"btn btn-primary btn-sm"%>
-                     <%= button_to 'Delete',public_photo_path, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: 'btn btn-danger' %>
                 <% end %>
+                     <%= button_to 'Delete',public_photo_path, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: 'btn btn-danger' %>
             </div>
         </div>
     <div class="col-xs-2">

@@ -6,10 +6,9 @@ class Public::CartItemsController < ApplicationController
     def create
 
          @cart_item = current_user.cart_items.find_by(photo_id: params[:cart_item][:photo_id])
-    
          # @cart_item = current_user.cart_items.new(cart_item_params)
         if @cart_item.presence
-         @cart_item.amount += params[:cart_item][:amount].to_i
+          @cart_item.amount += params[:cart_item][:amount].to_i
           @cart_item.update(amount:@cart_item.amount)
           @cart_item.save
           redirect_to public_cart_items_path
@@ -22,7 +21,7 @@ class Public::CartItemsController < ApplicationController
         else
           @photo = Photo.find(params[:id])
           render 'public/photos/show'
-      end
+        end
     end
   
     def update

@@ -1,22 +1,21 @@
     <% if user_signed_in? %>
              <div class="recommend_photographer">
-               <% @photos.each do |photo|%>
-                    <div class="recommend_item_each">
+                <div class="recommend_item_each">
+                    <% @photos.each do |photo|%>
                         <%= link_to public_photo_path(photo) do  %>
-                        <%#= link_to root_path do  %>
-                        <%= attachment_image_tag photo,:image,fallback: "noimage.jpg", size:'100x100' %>
+                            <%= attachment_image_tag photo,:image,fallback: "noimage.jpg", style:'width: 33%;height:33%;padding:10px;' %>
                         <% end %>
-                    </div>
-                <% end%>
-                aaa
-              </div>   
+                    <% end%>
+                </div>
+              </div>
         <% else %>
             <%= link_to"let's explore photos",  new_user_registration_path ,class:"btn btn-primary"%>
-                <%2.times do |i|%>
-                    <div class="recommend_item_each">
+                <%3.times do |i|%>
+                    <div class="recommend_item_each"> 
                         <%= link_to public_photo_path(@photos[i].id) do %>
-                        <%= attachment_image_tag @photos[i],:image, fallback: "noimage.png", size:'100x100' %>
+                            <%= attachment_image_tag @photos[i],:image, fallback: "noimage.png", style:'width: 33%;height:33%;padding:10px;'%>
                         <% end %>
-                    </div>
-                <% end %>
+                    </div> 
+                <%end %>
+
     <% end %>

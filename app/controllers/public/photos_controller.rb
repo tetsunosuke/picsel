@@ -1,11 +1,10 @@
 class Public::PhotosController < ApplicationController
     before_action :authenticate_user!
-    def top
-        @photos = Photo.all
-    end
     def index
-        @user = current_user
         @photos = Photo.where(user_id: current_user.id)
+        # user = User.find_by(user_id:params[:photo_id][:user_id])
+        # @photos_other = Photo.where(user_id: user.id)
+
     end
     def new
         @photo = Photo.new
@@ -49,6 +48,7 @@ class Public::PhotosController < ApplicationController
         @photo.destroy
        redirect_to public_photos_path
     end
+
     private
         def photo_params
             params.require(:photo).permit(:title, :gallary_id , :image, :caption, :price, :is_active)
