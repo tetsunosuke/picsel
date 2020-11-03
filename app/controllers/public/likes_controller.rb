@@ -1,6 +1,9 @@
 class Public::LikesController < ApplicationController
     before_action :authenticate_user!
-
+    def index
+      @user = User.where(id: current_user.id)
+      @likes = Like.where(user_id: current_user.id)
+    end
     def create
         # @like = Like.create(user_id: user.id, photo_id: photo.id)
         @like = current_user.likes.create(photo_id: params[:photo_id])

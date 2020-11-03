@@ -1,9 +1,18 @@
 class Public::PhotosController < ApplicationController
     before_action :authenticate_user!
     def index
-        @photos = Photo.where(user_id: current_user.id)
-        # user = User.find_by(user_id:params[:photo_id][:user_id])
-        # @photos_other = Photo.where(user_id: user.id)
+        # binding/pry
+        if params[:user_id].nil?
+            @user = current_user
+            # @photos = Photo.where(user_id: current_user.id)
+        else
+            # binding.pry
+            @user = User.find(params[:user_id])
+            
+        end
+        @photos = Photo.where(user_id: @user.id)
+        #  binding.pry
+
 
     end
     def new

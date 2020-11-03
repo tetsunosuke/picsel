@@ -1,0 +1,8 @@
+<% @user.followings.each do |user| %>
+    <table>
+        <tr>
+            <td>  <%= user.first_name %> </td>
+            <td><%= link_to '詳細', public_photos_path(user) %></td>
+        </tr>
+    </table>
+<% end %>
