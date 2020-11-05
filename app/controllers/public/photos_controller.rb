@@ -28,7 +28,7 @@ class Public::PhotosController < ApplicationController
         end
 
         if @photo.save
-            redirect_to root_path
+            redirect_to public_photo_path(@photo.id)
             # redirect_to users_photo_path(@photo.id)
         else
             render new_public_photo_path
@@ -57,10 +57,19 @@ class Public::PhotosController < ApplicationController
         @photo.destroy
        redirect_to public_photos_path
     end
-
+    def hashtag
+        @user = current_user
+        if params[:name].nil?
+          @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.photos.count}
+        else
+          @hashtag = Hashtag.find_by(hashname: params[:name])
+          @photo = @hashtag.photos.page(params[:page]).per(20).reverse_order
+          @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.photos.count}
+        end
+      end
     private
         def photo_params
-            params.require(:photo).permit(:title, :gallary_id , :image, :caption, :price, :is_active)
+            params.require(:photo).permit(:title, :gallary_id , :image, :caption, :price,:hashbody, :is_active, hashtag_ids:[])
         end
 
 end

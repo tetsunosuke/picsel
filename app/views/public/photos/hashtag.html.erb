@@ -1,0 +1,37 @@
+<div class="row">
+        <% if params[:name] == nil %>
+
+        <% else %>
+        <div class= "col-xs-12 col-lg-12 col-md-12 col-sm-12">
+            <div class="hashtag-post-box">
+                <h3 class="search-title">#<%= @hashtag.hashname %>:  <%= @photo.count %> 件 </h3>
+                <div class="flex-box">
+                <% @photo.each do |photo| %>
+                    <div class= "post-image-index-post-box">
+                        <p class="index-post-box-top">
+                            <%= photo.created_at.strftime("%Y/%m/%d") %>
+                        </p>
+                        <span class='far fa-comments index-comment-count' id='comment-count_<%= photo.id %>' style="color: #777777;">
+                            <%= render 'post_image_comments/comment-count', photo:photo %>
+                        </span>
+
+                        <span id = "favorite-button_<%= photo.id %>"class="post-box-top-favorite">
+                            <%= render 'post_image_favorites/favorite',photo: photo %>
+                        </span>
+                        <p class="hashtag-post-box-name">
+                            <%= link_to user_path(photo.user) do %>
+                                <%= attachment_image_tag photo.user, :profile_image,size:'30x30', format:'jpg',fallback:'no_image.jpg',class:'min-image' %>
+                                <span class="index-post-box-user"><%= photo.user.name %>
+                                </span>
+                            <% end %>
+                        </p>
+                        <div class="image-show-body-hash" style="padding:2%">
+                            <%= simple_format(photo.body.truncate(50))%>
+                            <% if photo.body.length > 50 %>
+                                <span class="text-prev"><%= link_to '続きを読む', public_photo_path(photo), data: {"turbolinks" => false} %>
+                                </span>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+        <% end %>

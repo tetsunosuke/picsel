@@ -9,7 +9,10 @@
                     <%= f.text_field :title %>
                 <h4>説明</h4>
                     <%= f.text_field :caption %>
-             <h4>ギャラリー名</h4> 
+                <p>ハッシュタグ入力欄</p>
+                  <%= f.text_area :hashbody, size:"55x3" %>
+                <br>
+                <h4>ギャラリー名</h4> 
                     <%= f.collection_select(:gallary_id, @gallaries, :id, :name ,prompt: "選択してください") %>
                 <h4>税抜価格</h4>
                     <%= f.text_field :price %>

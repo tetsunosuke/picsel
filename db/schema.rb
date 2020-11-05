@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_02_033541) do
+ActiveRecord::Schema.define(version: 2020_11_05_060328) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -63,12 +63,20 @@ ActiveRecord::Schema.define(version: 2020_11_02_033541) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "hashtags", force: :cascade do |t|
-    t.integer "order_id"
+  create_table "hashtag_photos", force: :cascade do |t|
     t.integer "photo_id"
-    t.string "tagname", null: false
+    t.integer "hashtag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hashtag_id"], name: "index_hashtag_photos_on_hashtag_id"
+    t.index ["photo_id"], name: "index_hashtag_photos_on_photo_id"
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hashname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
   end
 
   create_table "likes", force: :cascade do |t|
@@ -110,6 +118,7 @@ ActiveRecord::Schema.define(version: 2020_11_02_033541) do
     t.text "caption", default: "", null: false
     t.integer "price", default: 0, null: false
     t.integer "gallary_id"
+    t.string "hashbody", default: ""
     t.boolean "is_active", default: true, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

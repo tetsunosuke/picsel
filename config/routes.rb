@@ -31,7 +31,9 @@ Rails.application.routes.draw do
     resources :book_marks, only:[:index]
     resources :gallaries, only:[:new,:index,:edit,:create,:update,:delete]
     resources :photos do
-    resources :likes, only: [:index, :create, :destroy]
+      get '/hashtag/:name' => '#hashtag'
+      get '/hashtag' => '#hashtag'
+      resources :likes, only: [:index, :create, :destroy]
     end
   end
 
