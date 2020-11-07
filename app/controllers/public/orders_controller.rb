@@ -2,8 +2,10 @@ class Public::OrdersController < ApplicationController
   before_action :authenticate_user!
     
   def index
-      @orders = Order.where(_id:current_user.id)
+    
+      @orders = Order.where(user_id:current_user.id)
       cart_items = CartItem.where(user_id:current_user.id)
+      #@users = User.where(id:@orders.user_id)
   end
 
   def create

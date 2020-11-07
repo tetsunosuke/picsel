@@ -27,7 +27,7 @@
                 <h5>¥<%= @photo.price %>(税込み)</h5>
             </div>
             <div class="photo_price">
-                <%#= link_to "Edit",edit_public_photo_path,class:"btn btn-primary"%>
+                <%= link_to "Edit",edit_public_photo_path,class:"btn btn-primary"%>
             </div>
         </div>
     <% else %>
@@ -60,6 +60,7 @@
                     <% end %>
                 <h4><%= @photo.title %></h4>
                 <p><%= @photo.caption %></p>
+                 <%= render_with_hashtags(@photo.hashbody) %>
                 <h5>¥<%= @photo.price %>(税込み)</h5>
             </div>
             <div class="photo_price">

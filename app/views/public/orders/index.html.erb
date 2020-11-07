@@ -1,0 +1,28 @@
+<h3 >購入履歴一覧</h3>
+<table class="table table-hover table-inverse">
+    <tr style="background-color:lightgray">
+      <th>購入日時</th><th>購入個数</th><th>合計金額</th>
+    </tr>
+    <tbody>
+        <% @orders.each do |order|%>
+            <%= link_to public_order_path(order),method: :get do %>
+                    <tr>
+                        <% amount_sum = 0%>
+                        <td>
+                            <%= order.created_at.strftime("%Y/%m/%d %H:%M:%S")%>
+                        </td>
+                        <% order.order_details.each do |order_detail|  %>
+                            <% amount = order_detail.amount  %>
+                            <% amount_sum = amount_sum + amount  %>
+                        <% end %>
+                        <td>
+                            <%= amount_sum %>
+                        </td>
+                        <td>
+                            <%= order.total_payment %>
+                        </td>
+                    </tr>
+            <% end %>
+        <% end %>
+    </tbody>
+</table>

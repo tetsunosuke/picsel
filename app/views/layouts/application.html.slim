@@ -21,9 +21,9 @@ html lang="ja"
                         - if user_signed_in?
                             li[style="margin:15px 20px 0 0;color:white;"]
                                 | ようこそ、
-                                = current_user.first_name + current_user.last_name
+                                = current_user.nickname
                                 | さん
-                            | ようこそ、#{current_user.first_name + current_user.last_name}さん
+                            | ようこそ、#{current_user.nickname}さん
                             li.nav-item= link_to "マイページ", my_page_public_users_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "写真一覧",  public_photos_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "カート", public_cart_items_path, class: "btn btn-light nav-link"

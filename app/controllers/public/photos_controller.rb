@@ -12,8 +12,11 @@ class Public::PhotosController < ApplicationController
         end
         @photos = Photo.where(user_id: @user.id)
         #  binding.pry
-
-
+        # @Photoss = Photo.search(params[:search])
+        # @hashtag = Hashtag.find_by(hashname: params[:tag])
+        
+        # @hashtag_photos = HashtagPhoto.where(hashtag_id: @hashtag.id)
+        # @hashtag_photos = HashtagPhoto.search(params[:search])
     end
     def new
         @photo = Photo.new
@@ -58,18 +61,18 @@ class Public::PhotosController < ApplicationController
        redirect_to public_photos_path
     end
     def hashtag
-        @user = current_user
-        if params[:name].nil?
-          @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.photos.count}
-        else
-          @hashtag = Hashtag.find_by(hashname: params[:name])
-          @photo = @hashtag.photos.page(params[:page]).per(20).reverse_order
-          @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.photos.count}
-        end
+        @hashtag = Hashtag.find_by(hashname: params[:tag])
+        @hashtag_photos = HashtagPhoto.where(hashtag_id: @hashtag.id)
+         #   @photo = @hashtag.photo.page(params[:page]).per(20).reverse_order
+        @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.photos.count}
+        
+      end
+      def search
+        #Viewのformで取得したパラメータをモデルに渡す
+        @Photoss = Photo.search(params[:search])
       end
     private
         def photo_params
             params.require(:photo).permit(:title, :gallary_id , :image, :caption, :price,:hashbody, :is_active, hashtag_ids:[])
         end
-
 end

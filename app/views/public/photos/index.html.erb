@@ -10,7 +10,7 @@
                 <div id="follow_form">
                     <% if current_user.following?(@user) %>
                         <%#= form_for(current_user.following_relationships.find_by(following_id: @user.id), public_relationship_path(@user),method: :delete) do |f| %>
-                        <%= form_for(current_user.following_relationships.find_by(following_id: @user.id), html: { method: :delete }) do |f| %>
+                        <%= form_for(current_user.following_relationships.find_by(following_id: @user.id), url:public_relationship_path(@user),method: :delete) do |f| %>
                             <%= f.submit "Unfollow", class: "btn btn-large follow-btn" %>
                         <% end %>
                     <% else %>
@@ -23,6 +23,14 @@
             <% end %>
         </div>
         <div class="photo_index_images">
+<p>検索</p>
+<%#= form_with(public_photo_search_path(@hashtag_photos.photo.id),:method => 'get') do %>
+  <%#= text_field_tag :search %>
+  <%#= submit_tag 'Search', :name => nil %>
+<%# end %>
+<%# @hashtag_photos.each do |hashtag_photo| %>
+    <%#= hashtag_photo.photo.title %>
+<%# end %>
             <% @photos.each do |photo| %>
                 <%= link_to public_photo_path(photo) do  %>
                      <%= attachment_image_tag photo,:image,fallback: "noimage.jpg", style:'width: 33%;height:33%;padding:10px;' %>

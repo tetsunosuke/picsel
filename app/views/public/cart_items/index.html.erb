@@ -3,7 +3,7 @@
         <div class="txt-heading">Shopping Cart</div>
     </div>
     <div class="col-xs-9">
-          <%= button_to 'カートを空にする', public_cart_items_delete_all_path, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: 'btn btn-danger',style:"float:right;margin:10px;" %></td>
+          <%= button_to 'カートを空にする', delete_all_public_cart_items_path, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: 'btn btn-danger',style:"float:right;margin:10px;" %></td>
             <div class="cart_item_table">
                 <table class="tbl-cart" cellpadding="10" cellspacing="1" width=100%;>
                     <tbody>

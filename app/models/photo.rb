@@ -30,4 +30,11 @@ class Photo < ApplicationRecord
           photo.hashtags << tag
         end
       end
+      def self.search(search)
+        if search
+          HashtagPhoto.where(['hashname LIKE ?', "%#{search}%"])
+        else
+          HashtagPhoto.all
+        end
+      end
 end

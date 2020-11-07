@@ -44,7 +44,7 @@ class Public::CartItemsController < ApplicationController
     end
    
        def delete_all
-         @cart_item_all = current_customer.cart_items
+         @cart_item_all = current_user.cart_items
          @cart_item_all.destroy_all
          redirect_to root_path, notice: 'カートが空になりました。'
        end

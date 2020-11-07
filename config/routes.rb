@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  namespace :public do
+    get 'order_details/index'
+    get 'order_details/edit'
+    get 'order_details/update'
+  end
+  namespace :public do
+    get 'credits/new'
+    get 'credits/create'
+  end
   namespace :public do
     get 'orders/new'
   end
@@ -15,14 +25,20 @@ Rails.application.routes.draw do
       end
         collection do
       get "my_page"
+      get "search"
       get "users_unsubscribe" => "userr#unsubscribe"
       delete "users_withdraw" => "users#withdraw"
     end
   end
     resources :relationships, only: [:create, :destroy]
-    resources :cart_items, only:[:index,:create,:update,:destroy]
-    delete "cart_items/delete_all" => "cart_items#delete_all"
+    resources :cart_items, only:[:index,:create,:update,:destroy]do
+    collection do
+    delete "delete_all"
+    end
+    end
+    resources :order_details ,only:[:index, :edit ,:update]
     resources :orders, only:[:new,:index,:create,:show] do
+    
     collection do
     get "confirm" 
     get "complete" 
@@ -31,10 +47,13 @@ Rails.application.routes.draw do
     resources :book_marks, only:[:index]
     resources :gallaries, only:[:new,:index,:edit,:create,:update,:delete]
     resources :photos do
-      get '/hashtag/:name' => '#hashtag'
-      get '/hashtag' => '#hashtag'
+      get 'search'
+      get '/hashtag/:name_id' => '#hashtag'
       resources :likes, only: [:index, :create, :destroy]
     end
+    post "/credits" => "credits#create"
+    get "/credit/new" => "credits#new"
+    get '/hashtag' => 'photos#hashtag'
   end
 
 

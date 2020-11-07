@@ -5,7 +5,9 @@ class Public::RelationshipsController < ApplicationController
         redirect_to public_photos_path
       end
       def destroy
-        @user = Relationship.find(params[:id]).following
+        # byebug
+        # relationship = Relationship.find(params[:id])
+        @user = User.find(id: [:relationship][:following_id])
         current_user.unfollow!(@user)
         redirect_to public_photos_path
       end
