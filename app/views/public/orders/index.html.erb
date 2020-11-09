@@ -5,24 +5,22 @@
     </tr>
     <tbody>
         <% @orders.each do |order|%>
-            <%= link_to public_order_path(order),method: :get do %>
-                    <tr>
-                        <% amount_sum = 0%>
-                        <td>
-                            <%= order.created_at.strftime("%Y/%m/%d %H:%M:%S")%>
-                        </td>
-                        <% order.order_details.each do |order_detail|  %>
-                            <% amount = order_detail.amount  %>
-                            <% amount_sum = amount_sum + amount  %>
-                        <% end %>
-                        <td>
-                            <%= amount_sum %>
-                        </td>
-                        <td>
-                            <%= order.total_payment %>
-                        </td>
-                    </tr>
-            <% end %>
+            <tr onclick='window.location="<%= '/public/orders/' + order.id.to_s %>"' role="link">
+                <% amount_sum = 0%>
+                <td>
+                    <%= order.created_at.strftime("%Y/%m/%d %H:%M:%S")%>
+                </td>
+                <% order.order_details.each do |order_detail|  %>
+                    <% amount = order_detail.amount  %>
+                    <% amount_sum = amount_sum + amount  %>
+                <% end %>
+                <td>
+                    <%= amount_sum %>
+                </td>
+                <td>
+                    <%= order.total_payment %>
+                </td>
+            </tr>
         <% end %>
     </tbody>
 </table>

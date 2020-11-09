@@ -1,0 +1,36 @@
+<h3 >販売履歴一覧</h3>
+<table class="table table-hover table-inverse">
+    <tr style="background-color:lightgray">
+      <th>販売日時</th><th>購入者</th><th>販売個数</th><th>合計金額</th>
+    </tr>
+    <tbody>
+    <%= @seller %>
+        <% @order_details.each do |order_detail|%>
+            <%# <tr onclick='window.location="<%= '/public/order_details/' + order_detail.id.to_s + '/solddetail'%>
+           
+                <% amount_sum = 0%>
+                <td>
+                <%= link_to  sold_public_order_detail_path(order_detail) do  %>
+                    <%= order_detail.created_at.strftime("%Y/%m/%d %H:%M:%S")%>
+                    <% end %>
+                </td>
+                <%#  @order_details.each do |order_detail|  %>
+                    <%# amount = order_detail.amount  %>
+                    <%# amount_sum = amount_sum + amount  %>
+                <%# end %>
+                   <td>
+                    <%= order_detail.order.user.first_name + order_detail.order.user.last_name%>
+                </td>
+                <td>
+                    <%= order_detail.price %>
+                </td>
+                <td>
+                    <%= order_detail.amount %>
+                </td>
+                   <td>
+                    <%= order_detail.shipping_status %>
+                </td>
+            </tr>
+        <% end %>
+    </tbody>
+</table>

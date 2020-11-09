@@ -73,3 +73,6 @@ gem "refile-mini_magick"
 gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 gem 'pry-byebug'
 gem 'payjp'
+gem 'ransack'
+gem "gretel"
+gem 'dotenv-rails'

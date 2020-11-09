@@ -13,7 +13,8 @@ class Public::PhotosController < ApplicationController
         @photos = Photo.where(user_id: @user.id)
         #  binding.pry
         # @Photoss = Photo.search(params[:search])
-        # @hashtag = Hashtag.find_by(hashname: params[:tag])
+        @hashtag = Hashtag.find_by(hashname: params[:tag])
+        @hashtag_photos = @hashtag.photos if @hashtag.present?
         
         # @hashtag_photos = HashtagPhoto.where(hashtag_id: @hashtag.id)
         # @hashtag_photos = HashtagPhoto.search(params[:search])

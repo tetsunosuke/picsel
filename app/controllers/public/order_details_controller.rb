@@ -1,4 +1,5 @@
 class Public::OrderDetailsController < ApplicationController
+  before_action :set_search
   def index
 
   end
@@ -32,10 +33,16 @@ def update
           render 'edit'
     end
 end
+def sold
+  @order_detail = OrderDetail.find(params[:id])
+@order_payment = "クレジット"
+  @order = Order.find(@order_detail.order.id)
+  @order_details = OrderDetail.where(order_id:@order.id)
+  @user = User.find(@order_detail.order.user.id)
+end
 private
 def order_detail_params
     params.require(:order_detail).permit(:making_status)
 end
 end
 
-end

@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
     before_action :authenticate_user!, except: [:top]
+    before_action :set_search
     def top
         # ランキング表示
         # photo_like_count = Photo.joins(:likes).group(:photo_id).count

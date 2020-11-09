@@ -10,6 +10,7 @@ html lang="ja"
     script crossorigin="anonymous" src="https://kit.fontawesome.com/a1965c550c.js" 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    script src="https://js.pay.jp/" type="text/javascript"
   body
     .wrapper
         header
@@ -28,6 +29,11 @@ html lang="ja"
                             li.nav-item= link_to "写真一覧",  public_photos_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "カート", public_cart_items_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "ログアウト", destroy_user_session_path, class: "btn btn-light nav-link",method: :delete
+                            li.nav-item
+                                 =search_form_for @q, url: search_public_users_path do |f|
+                                    = f.label :hashname_cont, "商品名を含む"
+                                    =f.search_field :hashname_cont
+                                    =f.submit"検索"
                         - elsif admin_signed_in?
                             li= link_to "商品一覧", root_path, class: "btn btn-light"
                             li= link_to "会員一覧", root_path, class: "btn btn-light"
@@ -43,3 +49,4 @@ html lang="ja"
             = yield
     footer
         hr size="1" style="color:#fbfbfbf" 
+        = link_to "お問い合わせ",inquiry_index_path

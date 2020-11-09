@@ -60,7 +60,7 @@
              <%= link_to"買い物を続ける",root_path,class:"btn btn-primary",style:"float:left;margin:10px;"%>
              <%#= form_with(model:@order,url: public_orders_path,method: :get ,local:true) do |f| %>
             <%#= f.hidden_field :cart_item_id, :value => @cart_item.id %>
-                <%= link_to"情報入力にすすむ",new_public_order_path,class:"btn btn-success",style:"float:right;margin:10px;"%>
+                <%= link_to"情報入力にすすむ",new_public_order_path,class:"btn btn-success",style:"float:right;margin:10px;", data: {"turbolinks" => false} %>
             <%# end%>
     </div>
 </div>

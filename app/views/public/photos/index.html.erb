@@ -1,15 +1,16 @@
+<% breadcrumb :user,@user %>
+<%= breadcrumbs separator: " &rsaquo; " %>
 <div class="row">
-    <% if user_signed_in? %>
-        <div class="index_photo_wrapper">
-            <h3><%= @user.first_name %></h3>
-            <%= link_to new_public_photo_path do %>
-                <p class="fas fa-plus-circle fa-3x"></p>
-            <% end %>
-            <%#@user ||= current_user %>
-            <% unless current_user?(@user) %>
+        <% if user_signed_in? %>
+            <div class="index_photo_wrapper">
+                <h3><%= @user.first_name %></h3>
+                <%= link_to new_public_photo_path do %>
+                    <p class="fas fa-plus-circle fa-3x"></p>
+                <% end %>
+            </div>
+        <% unless current_user?(@user) %>
                 <div id="follow_form">
                     <% if current_user.following?(@user) %>
-                        <%#= form_for(current_user.following_relationships.find_by(following_id: @user.id), public_relationship_path(@user),method: :delete) do |f| %>
                         <%= form_for(current_user.following_relationships.find_by(following_id: @user.id), url:public_relationship_path(@user),method: :delete) do |f| %>
                             <%= f.submit "Unfollow", class: "btn btn-large follow-btn" %>
                         <% end %>
@@ -20,20 +21,22 @@
                         <% end %>
                     <% end %>
                 </div>
-            <% end %>
-        </div>
+        <% end %>
         <div class="photo_index_images">
-<p>検索</p>
-<%#= form_with(public_photo_search_path(@hashtag_photos.photo.id),:method => 'get') do %>
-  <%#= text_field_tag :search %>
-  <%#= submit_tag 'Search', :name => nil %>
-<%# end %>
-<%# @hashtag_photos.each do |hashtag_photo| %>
-    <%#= hashtag_photo.photo.title %>
-<%# end %>
+            <% if @hashtag_photos.present? %>
+            <p>検索</p>
+                <%= form_with(public_photo_search_path(),:method => 'get') do %>
+                    <%= text_field_tag :search %>
+                    <%= hidden_field :hashtag_photos.hashname %>
+                    <%= submit_tag 'Search', :name => nil %>
+                <% end %>
+                <% @hashtag_photos.each do |hashtag_photo| %>
+                    <%= hashtag_photo.photo.title %>
+                <% end %>
+            <% end %>
             <% @photos.each do |photo| %>
                 <%= link_to public_photo_path(photo) do  %>
-                     <%= attachment_image_tag photo,:image,fallback: "noimage.jpg", style:'width: 33%;height:33%;padding:10px;' %>
+                        <%= attachment_image_tag photo,:image,fallback: "noimage.jpg", style:'width: 33%;height:33%;padding:10px;' %>
                 <% end %>
             <% end %>
         </div>

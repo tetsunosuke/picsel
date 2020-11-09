@@ -1,4 +1,5 @@
 class Public::CartItemsController < ApplicationController
+  before_action :set_search
     def index
         @cart_items = current_user.cart_items
         @order = Order.new

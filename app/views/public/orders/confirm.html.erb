@@ -1,77 +1,70 @@
-<h3>注文情報確認</h3>
-    <%= form_with(model: @order, url:public_orders_path,local: true, method: :post) do |f| %>  
-    <div class="row">
-        <div class="col-xs-8">
-            <div class="left_box">
-                <table border="2">
-                    <tr style="background-color:lightgray">
-                        <th>商品名</th><th>単価(税込)</th><th>数量</th><th>小計</th>
-                    </tr>
-                        <% sum = 0 %>
-                        <% @cart_items.each do |cart_item|%>
-                            <tr>
-                                <td><%= cart_item.photo.title %></td>
-                                <td><%= (cart_item.photo.price*1.08).round %></td>
-                                <td><%= cart_item.amount %></td>
-                                <td><%= (cart_item.photo.price*1.08).round*(cart_item.amount) %></td>
-                                    <% cart_item_price = (cart_item.photo.price*1.08*cart_item.amount).round %>
-                                        <% cart_item_price %>
-                                        <% sum = sum + cart_item_price %>
-                            </tr>
-                        <% end%>
-                </table> 
-            </div>
-        </div>
-        <div class="col-xs-3">
-            <div class="right_box">
-                <table border="2">
-        
-                    <tr>
-                        <td style="background-color:lightgray">商品合計</td>
-                        <td><%= sum.round.to_s(:delimited)  %></td>
-                    </tr>
-                    <tr>
-                        <td style="background-color:lightgray">請求金額</td>
-                        <td><%= (sum + 800).round .to_s(:delimited) %></td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+
+<div class="row">
+    <div class="col-xs-3">
+        <div class="txt-heading">confirm order</div>
     </div>
-            <div class="payment_address_box",style="margin-left:150px;">
-                <div class="row">
-                        <div class="col-xs-3">
-                            <h5>支払い方法</h5>
-                        </div>
-                        <div class="col-xs-9">
-                          <%= @order_payment %>
-                        </div>
+        <%= form_with(model: @order, url:public_orders_path,local: true, method: :post) do |f| %>  
+            <div class="col-xs-9">
+                <div class="cart_item_table">
+                    <table class="tbl-cart" cellpadding="10" cellspacing="1" width=100%;>
+                        <tbody>
+                            <tr class="cart_item_header"style="border:solid 1px black">
+                                <th style="width:40%;"></th>
+                                <th style="width:20%;">title</th>
+                                <th style="width:20%;">Quantity</th>
+                                <th style="width:10%;">Price</th>
+                                <th style="width:10%;">Remove</th>
+                            </tr>
+                            <% @cart_items.each do |cart_item| %>
+                                <tr style="height:100px;" >
+                                    <td><%= attachment_image_tag cart_item.photo,:image ,fallback: "noimage.jpg", style:'height:100px;%;padding:3%;'%></td>
+                                    <td><%= cart_item.photo.title %></td>
+                                    <td>
+                                        <%= cart_item.amount  %>
+                                    </td>
+                                    <td>
+                                        <%= (cart_item.photo.price*1.08).round.to_s(:delimited)  %>
+                                    </td>
+                                    <td>
+                                        <%= ((cart_item.photo.price*1.08) * (cart_item.amount)).round.to_s(:delimited) %>
+                                    </td>
+                                </tr>
+                            <% end %>
+                            <% sum_price = 0 %>
+                                <% @cart_items.each do |cart_item| %> 
+                                    <%  cart_item_price =(cart_item.photo.price*1.08).round*(cart_item.amount) %>
+                                    <% cart_item_price %>
+                                    <% sum_price = sum_price + cart_item_price %>
+                                <% end %>
+                            <% sum_amount = 0 %>
+                                <% @cart_items.each do |cart_item| %> 
+                                    <% sum_amount = sum_amount + cart_item.amount %>
+                                <% end %>
+                                <tr style="font-size:20px;">
+                                    <td colspan="2" align="right">Total:</td>
+                                    <td align="right"><%= sum_amount %></td>
+                                    <td align="right" colspan="2">
+                                        <%= sum_price.to_s(:delimited)  %>
+                                    </td>
+                                </tr>
+                        </tbody>
+                    </table>
                 </div>
-                    <div class="row">
-                        <div class="col-xs-3">
-                            <h5>お届け先</h5>
-                        </div>
-                        <div class="col-xs-9">
-                            <%= @order_address.postal_code%>
-                            <%= @order_address.address%>
-                            <br>
-                            <%= @order_address.name%>
-                        </div>
-                    </div>
+                <div class="user_details"style="height:20px;width:100%;background-color:black;margin-top:10px;" >お客様情報</div>
+                    <h5> <%= @order_payment %>払い</h5>
+                       
+                    <h5>〒<%= @order_address.postal_code%></h5>
+                    <h5> <%= @order_address.address%></h5>
+                    <h5><%= @order_address.name%>様</h5>
+                
+                        <%= f.hidden_field :payment_method, value: @order_payment %>
+                        <%= f.hidden_field :postal_code, value: @order_address.postal_code %>
+                        <%= f.hidden_field :address, value: @order_address.address %>
+                        <%= f.hidden_field :name, value: @order_address.name %>
+                        <%= f.hidden_field :total_payment, value: (sum_price + 800).round %>
+                            <center>
+                                <%= f.submit '情報を確定する',class:"btn btn-success"%>
+                            </center>
             </div>
-          <%#addressオプションをローカルでエラーでたのでインスタンス変数にした%>
-        
-        <%= f.hidden_field :payment_method, value: @order_payment %>
-        <%= f.hidden_field :postal_code, value: @order_address.postal_code %>
-        <%= f.hidden_field :address, value: @order_address.address %>
-        <%= f.hidden_field :name, value: @order_address.name %>
-        <%= f.hidden_field :total_payment, value: (sum + 800).round %>
-        <%#= f.hidden_field :buyer_id, value: current_user %>
-        <%#= f.hidden_field :status, value: @status  %>
-        <%#= f.hidden_field :status, value: true  %>
-         <%#= form.submit '情報を確定する',customers_orders_complete_path,class:"btn btn-primary"%>
-        <br>
-        <center>
-            <%= f.submit '情報を確定する',class:"btn btn-success"%>
-        </center>
-    <% end %>
+        <% end %>
+</div>
