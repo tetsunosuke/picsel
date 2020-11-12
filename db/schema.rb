@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
     t.string "name", default: "", null: false
     t.integer "user_id"
     t.integer "total_payment", default: 0, null: false
-    t.integer "payment_method", null: false
+    t.integer "R", null: false
     t.integer "status", null: false
     t.integer "buyer_id", null: false
     t.datetime "created_at", null: false

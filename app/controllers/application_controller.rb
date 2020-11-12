@@ -1,6 +1,17 @@
 class ApplicationController < ActionController::Base
     before_action :configure_permitted_parameters, if: :devise_controller?
-    before_action :set_hashtag_search
+     before_action :set_hashtag_search
+    def after_sign_in_path_for(resource)
+      # byebug
+      case resource
+      when Admin
+        # byebug
+        top_admins_photos_path
+      when User
+        # byebug
+        root_path
+      end
+    end
     def set_search
       @search = User.ransack(params[:q])
       @users = @search.result
@@ -14,10 +25,8 @@ class ApplicationController < ActionController::Base
     def set_hashtag_search
       # 検索オブジェクト
       @q = Hashtag.ransack(params[:q])
-      # 検索結果
+  
       @hashtags = @q.result
-      # if @hashtags.present?
-      #   redirect_to hoge_path(hashname: params[:q])
-      # end
+     
     end
 end

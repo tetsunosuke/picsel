@@ -52,7 +52,7 @@
     padding:0px;
 }
 .photo_wrapper{
-    margin:10px;
+    padding-top:30px;
 
 }
 .profile{
@@ -131,15 +131,20 @@
         padding-left:0;
     }
 }
-.index_photo_wrapper {
-    display: flex;
-    width:100%;
-    padding-left:50%;
-    p{
-        margin:10px 0 0 100px ;
-        
+.index_photo{
+    display:flex;
+    &_wrapper {
+        display: flex;
+        padding-left:40%;
+        p{
+            margin:15px 0 0 10px ;
+        }
+    }
+    &_follow_form{
+        margin:15px;
     }
 }
+
 .photo_profile{
     margin:20px;
 }
@@ -180,5 +185,17 @@ tr td{
     }
     td{
         text-align:center;
+    }
+}
+.follow_view{
+   display:block;
+   margin-left:40%;
+   margin-top:10px;
+    &_detail{
+        display:flex;
+        width:30%;
+    }
+    &_form{
+        margin:10px 0 0 10px;
     }
 }

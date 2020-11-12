@@ -1,7 +1,22 @@
 class Public::OrdersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_search
-
+  def update
+    # @order_detail = OrderDetail.find(params[:id])
+    @order = Order.find(params[:id])
+    #  binding.pry
+    if @order.update(status: order_params[:status].to_i)
+        if params[:order][:status] == "1"
+            @order.order_details.each do |order_detail|
+                order_detail.shipping_status = 1
+                order_detail.save
+            end
+        end
+      redirect_to sold_detail_public_order_path(@order)
+    else
+      render 'index'
+    end
+  end
   def index
     # Payjp.api_key = Rails.application.credentials.payjp[:secret_key]
       @orders = Order.where(user_id:current_user.id)
@@ -52,20 +67,7 @@ end
       # @sum = @sum + (order_detail.item.price*1.08*order_detail.amount).round
       # end
       # @sum
-  def upddate
-    @order = Order.find(params[:id])
-    if @order.update(status: order_params[:status].to_i)
-        if params[:order][:status] == "1"
-            @order.order_details.each do |order_detail|
-                order_detail.making_status = 1
-                order_detail.save
-            end
-        end
-      redirect_to edit_public_order_detail_path(@order)
-    else
-      render 'index'
-    end
-  end
+
 
   def destroy
   end
@@ -104,10 +106,14 @@ end
     #uyer_idはorderに紐づくuser_idを取得したい
     # @orders = Order.find(id).user_id
     # Photosからじぶんが出品したphoto一覧を取ってくる
-    @photo = Photo.find_by(user_id: current_user.id)
+    user = User.find(params[:id])
+    @order_details = OrderDetail.where(photo_id: user.photos).pluck(:order_id)
+    @orders = Order.where(id: @order_details)
+    # @order_details = @order.order_detail
+  # @order = Order.find(params[:id])
+  #@photo = Photo.find_by(user_id: current_user.id)
     # 購入詳細から注文一覧を取ってくる
-    @order_details = @photo.order_details
-    
+  # @order_details = @photo.order_details
     #販売日時
     # @order_details.created_at
     #購入者
@@ -120,7 +126,23 @@ end
     # @orders = Order.find_by(user_id: )
     # @orders = Order.where(user_id:current_user.id)
     #   cart_items = CartItem.where(user_id:current_user.id)
-
+  end
+    def sold_detail
+      # @user = current_user
+      order = Order.find(params[:id])
+      # @order_detail = OrderDetail.find(params[:id])
+      #  byebug
+      @order_details = OrderDetail.where(id: order.order_details)
+      # binding.pry
+      @order = Order.find_by(id: @order_detail.order.id)
+      #  binding.pry
+      @order_payment = "クレジット"
+      # @order = Order.find(@order_detail.order.id)
+      #current_userのphoto.idとorder_detailsのphoto.idが一致するものが今回表示させたいorder_detail
+      @order_details = @order.order_details.where(photo_id:current_user.photos.pluck(:id))
+      #  @order_details = OrderDetail.where(order_id:@order.id)
+      # binding.pry
+      # @user = User.where(user_id: @order.order_details.user.pluck(:id))
   end
   private
   def order_params

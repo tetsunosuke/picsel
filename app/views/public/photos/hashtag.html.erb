@@ -1,4 +1,10 @@
-<%= @hashtag.hashname %>
+<center>
+<h3>#
+<%= @hashtag.try(:hashname) || @hashname %>
+投稿
+<%= @hashtag_photos.count %>
+件</h3>
+</center>
         <div class="index_photo_wrapper">
    
             <%#@user ||= current_user %>

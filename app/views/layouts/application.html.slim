@@ -24,22 +24,19 @@ html lang="ja"
                                 | ようこそ、
                                 = current_user.nickname
                                 | さん
-                            | ようこそ、#{current_user.nickname}さん
                             li.nav-item= link_to "マイページ", my_page_public_users_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "写真一覧",  public_photos_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "カート", public_cart_items_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "ログアウト", destroy_user_session_path, class: "btn btn-light nav-link",method: :delete
-                            li.nav-item
-                                 =search_form_for @q, url: search_public_users_path do |f|
-                                    = f.label :hashname_cont, "商品名を含む"
-                                    =f.search_field :hashname_cont
+                            li.nav-item[style="margin:15px 20px 0 0;"]
+                                 =search_form_for @q, url: public_hashtag_path do |f|
+                                    =f.search_field :hashname_cont, placeholder: "タグを入力して下さい"
                                     =f.submit"検索"
                         - elsif admin_signed_in?
-                            li= link_to "商品一覧", root_path, class: "btn btn-light"
-                            li= link_to "会員一覧", root_path, class: "btn btn-light"
-                            li= link_to "注文履歴一覧", root_path, class: "btn btn-light"
-                            li= link_to "ジャンル一覧", root_path, class: "btn btn-light"
-                            li= link_to "ログアウト", admin_registration_path, class: "btn btn-light" ,method: :delete
+                            li= link_to "写真一覧", admins_photos_path, class: "btn btn-light"
+                            li= link_to "会員一覧", admins_users_path, class: "btn btn-light"
+                            li= link_to "注文履歴一覧", admins_order_index_path, class: "btn btn-light"
+                            li= link_to "ログアウト", destroy_admin_session_path, class: "btn btn-light" ,method: :delete
                         - else
                             li= link_to "ページトップ",root_path, class: "btn btn-light"
                             li= link_to "About", root_path, class: "btn btn-light"
@@ -49,4 +46,4 @@ html lang="ja"
             = yield
     footer
         hr size="1" style="color:#fbfbfbf" 
-        = link_to "お問い合わせ",inquiry_index_path
+        = link_to "お問い合わせ",public_inquiry_index_path

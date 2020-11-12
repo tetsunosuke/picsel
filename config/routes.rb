@@ -1,8 +1,14 @@
 Rails.application.routes.draw do
-
-  get 'inquiry/index'
-  get 'inquiry/confirm'
-  get 'inquiry/thanks'
+  namespace :admins do
+    get 'likes/create'
+    get 'likes/delete'
+    get 'likes/indexexit'
+  end
+  namespace :admins do
+    get 'likes/create'
+    get 'likes/delete'
+    get 'likes/index'
+  end
   namespace :public do
     get 'inquiry/index'
     get 'inquiry/confirm'
@@ -30,7 +36,17 @@ Rails.application.routes.draw do
   #   get 'orders/new'
   # end
   root 'public/users#top'
-  devise_for :admins
+  devise_for :admins 
+
+  namespace :admins do
+    resources :photos, only: [:index, :create, :destroy,:update,:edit]do
+      collection do
+        get "top"
+      end
+    end
+    resources :likes, only: [:index, :create, :destroy]
+  end
+
   devise_for :users, controllers: {
     sessions: "users/sessions" ,
     registrations: "users/registrations"
@@ -62,14 +78,14 @@ Rails.application.routes.draw do
     delete "delete_all"
     end
     end
-    resources :order_details ,only:[:index, :create,:edit ,:update]do
-    member do
-      get "sold"
-    end
-  end
-    resources :orders, only:[:new,:index,:create,:show] do
-    collection do
-    get "sold"
+    resources :order_details ,only:[:index, :create,:edit ,:update]
+    
+    resources :orders, only:[:new,:index,:create,:show,:update] do
+      member do
+        get "sold"
+        get "sold_detail"
+      end
+      collection do
     get "confirm"
     get "complete"
     end
@@ -79,7 +95,9 @@ Rails.application.routes.draw do
     resources :gallaries, only:[:new,:index,:edit,:create,:update,:delete]
     resources :photos do
       get 'search'
-      get '/hashtag/:name_id' => '#hashtag'
+      collection do 
+      get 'hashtag'
+      end
       resources :likes, only: [:index, :create, :destroy]
     end
     get "/credits" => "credits#index"

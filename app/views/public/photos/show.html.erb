@@ -8,9 +8,7 @@
             </div>
         </div>
     </div>
-    
     <% if user_signed_in? && current_user.id == @photo.user_id %>
-    <%# if current_user == @photo.user_id %>
         <div class="col-xs-4 col-xs-offset-1">
             <div class="photo_title_caption">
                 <i><%= @photo.likes.count %></i>
@@ -79,8 +77,10 @@
             <%= link_to public_photos_path(user_id: @user.id) do %>
                 <%# <%= hidden_field_tag :user_id, @user.id %>
                 <%= attachment_image_tag @user,:profile_image,fallback: "noimage.jpg", style: 'border-radius: 50%; width: 100px;height: 100px;object-fit: cover;' %>
-                    <p><%= @user.first_name %></p>
+                    <center>
+                    <p><%= @user.nickname %></p>
                     <p><%= @user.introduce %></p>
+                    </center>
             <% end %>
         </div>
 </div>

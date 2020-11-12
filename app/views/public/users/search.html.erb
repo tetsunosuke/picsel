@@ -1,6 +1,6 @@
 <% if @hashtags.present? %>
-    <%- @hashtags.each do |hashtag| %>
-        <%= hashtag.hashname %>
+    <%= @hashtags.each do |hashtag| %>
+    <%= hashtag.hashname %>
     <%end%>
 <% else %>
     nothing
