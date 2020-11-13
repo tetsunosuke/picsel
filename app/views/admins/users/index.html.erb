@@ -1,0 +1,20 @@
+<center>
+    <h3>User index</h3>
+</center>
+<div class="row">
+    <div class=".col-xs-10 col-xs-offset-1">   
+        <div class="user_index">
+            <% @users.each do |user| %>
+                <%= link_to edit_admins_user_path(user) do  %>
+                    <div class="user_index_box">
+                        <%= attachment_image_tag user,:profile_image,fallback: "noimage.jpg", style: 'border-radius: 50%; width: 100%;height:100%;object-fit: cover;' %>
+                        <center>
+                        <p><%= user.nickname %></p>
+                    </center>
+
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    </div> 
+</div>

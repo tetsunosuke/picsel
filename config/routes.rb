@@ -1,14 +1,4 @@
 Rails.application.routes.draw do
-  namespace :admins do
-    get 'likes/create'
-    get 'likes/delete'
-    get 'likes/indexexit'
-  end
-  namespace :admins do
-    get 'likes/create'
-    get 'likes/delete'
-    get 'likes/index'
-  end
   namespace :public do
     get 'inquiry/index'
     get 'inquiry/confirm'
@@ -36,7 +26,7 @@ Rails.application.routes.draw do
   #   get 'orders/new'
   # end
   root 'public/users#top'
-  devise_for :admins 
+  devise_for :admins
 
   namespace :admins do
     resources :photos, only: [:index, :create, :destroy,:update,:edit]do
@@ -45,6 +35,9 @@ Rails.application.routes.draw do
       end
     end
     resources :likes, only: [:index, :create, :destroy]
+    resources :users, only: [:index,:edit,:destroy,:update]
+    resources :orders, only: [:index,:show]
+
   end
 
   devise_for :users, controllers: {

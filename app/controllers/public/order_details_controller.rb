@@ -29,7 +29,7 @@ def update
             end
           # elsif params[:order_detail][:shipping_status] == "4"
           end
-          redirect_to  sold_detail_public_order_path(@order_detail)
+          redirect_to  sold_detail_public_order_path(@order)
         else
           render 'edit'
     end

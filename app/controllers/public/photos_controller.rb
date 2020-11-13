@@ -63,17 +63,32 @@ class Public::PhotosController < ApplicationController
     end
     def hashtag
         # @q = Hashtag.find(hashname: params[@q])
-        @hashname = params[:tag] || params[:q][:hashname_cont]
-        @hashtag = Hashtag.find_by("hashname like '%#{@hashname}%'")
-        @hashtag_photos = if @hashtag.present?
-            #   @photo = @hashtag.photo.page(params[:page]).per(20).reverse_order
-            HashtagPhoto.where(hashtag_id: @hashtag.id)
-        else
-            []
+        #  binding.pry
+        @hashname =  params[:hashname_cont]
+        # @hashtag = Hashtag.find_by(hashname: @hashname)
+        @hashtags = Hashtag.where(['hashname LIKE ?', "%#{params[:hashname_cont]}%"])
+        hashtag_photo_ids = []
+        @hashtags.each do |hashtag| 
+            # binding.pry
+            hashtag.hashtag_photos.each do |hashtag_photo|
+            hashtag_photo_ids << hashtag_photo.id
+            # binding.pry
+            end
         end
+        # @hashtag_photos = if @hashtag.present?
+            #   @photo = @hashtag.photo.page(params[:page]).per(20).reverse_order
+        #  binding.pry
+        if @hashname == ""
+            @hashtag_photos =  []
+            @hashtag_photos_count = 0
+        else
+            @hashtag_photos = HashtagPhoto.where(id: hashtag_photo_ids.uniq)
+            @hashtag_photos_count = @hashtag_photos.count
+        end
+        # else
+        # end
         # binding.pry
-        pp @hashtag
-        @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.photos.count}
+        # @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.photos.count}
       end
       def search
         #Viewのformで取得したパラメータをモデルに渡す

@@ -5,6 +5,8 @@ class Admins::PhotosController < ApplicationController
       # @photos = Photo.where(user_id: current_user.id)
   end
   def index
+    # binding.pry
+    @user = User.find(params[:user_id])
     @photos = Photo.where(user_id: @user.id)
   end
   def edit  
@@ -30,7 +32,7 @@ end
 
   def show
     @photo = Photo.find(params[:id])
-    @user = User.find_by(id: @photo.user_id)
+    @user = User.find_by(id: @photo.user)
     @like = Like.new
   end
   def photo_params

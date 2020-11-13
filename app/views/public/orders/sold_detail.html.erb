@@ -30,7 +30,7 @@
                     <%#= "order#{@order.id}" %>
                     <%#= @order_details.pluck(:id) %>
                     <%= form_with(model:@order, url:public_order_path(@order),local: true,method: :patch) do |f| %>
-                    <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["発送準備中", 2], ["受領確認待ち", 3], ["取引終了", 4]],:selected => Order.statuses[@order.status] %>
+                    <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["発送準備中", 2], ["受領確認待ち", 3]],:selected => Order.statuses[@order.status] %>
                     <%= f.submit "更新",class:"btn btn-primary"%>
                     <% end %>
                 </div>
@@ -54,6 +54,9 @@
                         <%= f.submit "更新",class:"btn btn-primary"%>
                         <%#= f.select :making_status, options_for_select(OrderDetail.making_status.keys.map {|k| [k, k]}, selected: order_detail.making_status)%>
                         <% end %>
+                    </td>
+                    <td>
+                        <%= order_detail.id %>
                     </td>
                 </tr>
                 <% end %>

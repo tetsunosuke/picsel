@@ -128,18 +128,22 @@ end
     #   cart_items = CartItem.where(user_id:current_user.id)
   end
     def sold_detail
-      # @user = current_user
-      order = Order.find(params[:id])
+      # @user = current_userfind_byはテーブル
+      @order = Order.find(params[:id])
       # @order_detail = OrderDetail.find(params[:id])
-      #  byebug
-      @order_details = OrderDetail.where(id: order.order_details)
+        # byebug
+        #まずはidを取得して
+      # order_details = OrderDetail.where(id: @order.order_details)
+      #今回売れた自分の商品の詳細を取得
+      # @order_details = order_details.where(photo_id: current_user.photos.pluck(:id))
+      @order_details = @order.order_details.where(photo_id:current_user.photos.pluck(:id))
+      # byebug
       # binding.pry
-      @order = Order.find_by(id: @order_detail.order.id)
+      # @order = Order.find_by(id: @order_detail.order.id)
       #  binding.pry
       @order_payment = "クレジット"
       # @order = Order.find(@order_detail.order.id)
       #current_userのphoto.idとorder_detailsのphoto.idが一致するものが今回表示させたいorder_detail
-      @order_details = @order.order_details.where(photo_id:current_user.photos.pluck(:id))
       #  @order_details = OrderDetail.where(order_id:@order.id)
       # binding.pry
       # @user = User.where(user_id: @order.order_details.user.pluck(:id))
