@@ -49,7 +49,8 @@ Rails.application.routes.draw do
       member do
         get :following, :followers
       end
-        collection do
+       collection do
+      get "about"
       get "my_page"
       get "search"
       get "users_unsubscribe" => "userr#unsubscribe"
@@ -90,6 +91,7 @@ Rails.application.routes.draw do
       get 'search'
       collection do 
       get 'hashtag'
+      
       end
       resources :likes, only: [:index, :create, :destroy]
     end

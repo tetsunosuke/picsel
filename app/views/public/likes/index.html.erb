@@ -1,7 +1,7 @@
 <center>
     <h3>Your favoites photos</h3>
 </center>
-<div class="photo_index_images">
+<div class="photo_image_each">
     <% @likes.each do |like| %>
         <% photo = Photo.find_by(id: like.photo_id) %>
            <%= link_to public_photo_path(photo) do  %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_07_055014) do
+ActiveRecord::Schema.define(version: 2020_11_13_033022) do
 
   create_table "addresses", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -112,7 +112,7 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
     t.string "name", default: "", null: false
     t.integer "user_id"
     t.integer "total_payment", default: 0, null: false
-    t.integer "R", null: false
+    t.integer "payment_method", null: false
     t.integer "status", null: false
     t.integer "buyer_id", null: false
     t.datetime "created_at", null: false
@@ -146,6 +146,12 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
     t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
     t.index ["following_id"], name: "index_relationships_on_following_id"
+  end
+
+  create_table "trading_statuses", force: :cascade do |t|
+    t.integer "trading_status", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

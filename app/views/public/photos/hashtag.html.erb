@@ -6,14 +6,11 @@
 件</h3>
 </center>
         <div class="index_photo_wrapper">
-   
-            <%#@user ||= current_user %>
-            
         </div>
-        <div class="photo_index_images">
+        <div class="photo_image_each">
             <% @hashtag_photos.each do |hashtag_photo| %>
                 <%= link_to public_photo_path(hashtag_photo.photo) do  %>
-                     <%= attachment_image_tag hashtag_photo.photo,:image,fallback: "noimage.jpg", style:'width: 33%;height:33%;padding:10px;' %>
+                     <%= attachment_image_tag hashtag_photo.photo,:image,fallback: "noimage.jpg", style:'width: 30%;height:33%;padding:1%;' %>
                 <% end %>
             <% end %>
         </div>

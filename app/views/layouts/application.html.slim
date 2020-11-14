@@ -17,8 +17,8 @@ html lang="ja"
         .jumbotron.jumbotron-extend.jumbotron-fluid.padding_margin_0 
                 .navbar.navbar-inverse.opacity.margin
                     nav.nav.navbar-nav.navbar-left
-                    = link_to "PICSELL", root_path
-                    / = image_tag 'アートボード1.png'
+                    = link_to root_path do
+                        = image_tag('picsel.png', :width => "10%", style:"margin-left:10px;" )
                     ul.nav.navbar-nav.navbar-right
                         - if user_signed_in?
                             li[style="margin:15px 20px 0 0;color:white;"]
@@ -40,11 +40,11 @@ html lang="ja"
                             li= link_to "ログアウト", destroy_admin_session_path, class: "btn btn-light" ,method: :delete
                         - else
                             li= link_to "ページトップ",root_path, class: "btn btn-light"
-                            li= link_to "About", root_path, class: "btn btn-light"
+                            li= link_to "About", about_public_users_path, class: "btn btn-light"
                             li= link_to "新規登録",  new_user_registration_path, class: "btn btn-light"
                             li= link_to "ログイン", user_session_path, class: "btn btn-light"
         .container-fluid
             = yield
     footer
-        hr size="1" style="color:#fbfbfbf" 
+        hr size="2" style="color:#fbfbfbf" 
         = link_to "お問い合わせ",public_inquiry_index_path

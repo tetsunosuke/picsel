@@ -56,7 +56,7 @@
                     <h5>〒<%= @order_address.postal_code%></h5>
                     <h5> <%= @order_address.address%></h5>
                     <h5><%= @order_address.name%>様</h5>
-                
+                        <%= f.hidden_field :trading_status, value: @trading_status %>
                         <%= f.hidden_field :payment_method, value: @order_payment %>
                         <%= f.hidden_field :postal_code, value: @order_address.postal_code %>
                         <%= f.hidden_field :address, value: @order_address.address %>

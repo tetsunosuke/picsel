@@ -1,6 +1,7 @@
 <%# breadcrumb :photo_show %>
 <%#= breadcrumbs separator: " &rsaquo; " %>
 <div class="row">
+    <div class="content_all_box">
     <div class="col-xs-4 col-xs-offset-1">
         <div class="photo_wrapper">
             <div class="photo_wrapper_image" style="height:95%; width: 100%;">
@@ -11,20 +12,22 @@
     <% if user_signed_in? && current_user.id == @photo.user_id %>
         <div class="col-xs-4 col-xs-offset-1">
             <div class="photo_title_caption">
-                <i><%= @photo.likes.count %></i>
+                <div class="like_function">
+                    <h4><%= @photo.likes.count %></h4>
                     <% if current_user.already_liked?(@photo) %>
                         <%= link_to public_photo_like_path(@photo),method: :delete do %>
-                            <i class="fas fa-heart unlike-btn"></i>
+                            <h4 class="fas fa-heart unlike-btn"></h4>
                         <% end %>
                     <% else %>
                         <%= button_to public_photo_likes_path(@photo) do %>
-                            <i class="far fa-heart like-btn" ></i>
+                            <h4 class="far fa-heart like-btn" ></h4>
                         <% end %>
                     <% end %>
+                </div>
                 <h4><%= @photo.title %></h4>
                 <p><%= @photo.caption %></p>
                 <%= render_with_hashtags(@photo.hashbody) %>
-                <h5>¥<%= @photo.price %>(税込み)</h5>
+                <h5>A4サイズ　：　¥<%= @photo.price %>(税込)</h5>
             </div>
             <div class="photo_price">
                 <%= link_to "Edit",edit_public_photo_path,class:"btn btn-primary"%>
@@ -33,35 +36,22 @@
     <% else %>
         <div class="col-xs-4 col-xs-offset-1">
             <div class="photo_title_caption">
-               <%# @user ||= current_user %>
-    <%# unless current_user?(@user) %>
-         <div id="follow_form">
-            <%# if current_user.following?(@user) %>
-                <%#= form_for(current_user.following_relationships.find_by(following_id: @user.id), html: { method: :delete }) do |f| %>
-                    <%#= f.submit "Unfollow",following_public_user_path(@user) ,class: "btn btn-large follow-btn" %>
-                <%# end %>
-            <%# else %>
-                <%#= form_for(current_user.following_relationships.build(following_id: @user.id)) do |f| %>
-                    <div><%#= f.hidden_field :following_id %></div>
-                    <%#= f.submit "Follow",following_public_user_path(@user), class: "btn btn-large btn-primary follow-btn" %>
-                <%# end %>
-            <%# end %>
-        </div>
-    <%# end %>
-                <i><%= @photo.likes.count %></i>
+                <div class="like_function">
+                    <h4><%= @photo.likes.count %></h4>
                     <% if current_user.already_liked?(@photo) %>
                         <%= link_to public_photo_like_path(@photo),method: :delete do %>
-                            <i class="fas fa-heart unlike-btn"></i>
+                            <h4 class="fas fa-heart unlike-btn"></h4>
                         <% end %>
                     <% else %>
                         <%= button_to public_photo_likes_path(@photo) do %>
-                            <i class="far fa-heart like-btn" ></i>
+                            <h4 class="far fa-heart like-btn" ></@>
                         <% end %>
                     <% end %>
+                </div>
                 <h4><%= @photo.title %></h4>
                 <p><%= @photo.caption %></p>
                  <%= render_with_hashtags(@photo.hashbody) %>
-                <h5>¥<%= @photo.price %>(税込み)</h5>
+                <h5>A4サイズ　：　¥<%= @photo.price %>(税込)</h5>
             </div>
             <div class="photo_price">
                 <%= form_with(model: @cart_item,url:public_cart_items_path, local: true, method: :post) do |f| %>
@@ -83,4 +73,5 @@
                     </center>
             <% end %>
         </div>
+</div>
 </div>
