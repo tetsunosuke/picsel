@@ -1,4 +1,4 @@
-   <h3 >販売履歴詳細</h3>
+   <h3 >販売履歴詳細aaaaa</h3>
     <div class="row">
         <div class="field">
                 <div class="col-xs-3"> 購入者</div>
@@ -49,7 +49,7 @@
                     <td><%= order_detail.amount %></td>
                     <td>
                         <%= form_with(model: order_detail, url:public_order_detail_path(order_detail),local: true,method: :patch) do |f| %>
-                        <%= f.select :shipping_status, [["未着手", 0], ["プリント開始",1], ["発送準備中", 2], ["発送済み", 3]],:selected => OrderDetail.shipping_statuses[order_detail.shipping_status]%>
+                        <%= f.select :shipping_status, [["プリント開始", 0], ["発送済み",1]]],:selected => OrderDetail.shipping_statuses[order_detail.shipping_status]%>
         
                         <%= f.submit "更新",class:"btn btn-primary"%>
                         <%#= f.select :making_status, options_for_select(OrderDetail.making_status.keys.map {|k| [k, k]}, selected: order_detail.making_status)%>

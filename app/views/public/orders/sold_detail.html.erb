@@ -29,10 +29,11 @@
                 <div class="col-xs-7">
                     <%#= "order#{@order.id}" %>
                     <%#= @order_details.pluck(:id) %>
-                    <%= form_with(model:@order, url:public_order_path(@order),local: true,method: :patch) do |f| %>
-                    <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["発送準備中", 2], ["受領確認待ち", 3]],:selected => Order.statuses[@order.status] %>
-                    <%= f.submit "更新",class:"btn btn-primary"%>
-                    <% end %>
+                  <%#= form_with(model:@order, url:public_order_path(@order),local: true,method: :patch) do |f| %>
+                    <%= @order.status %>
+                    <%#= f.select :status, [["入金完了", 0]],:selected => Order.statuses[@order.status] %>
+                    <%#= f.submit "更新",class:"btn btn-primary"%>
+                    <%# end %>
                 </div>
             </div>
     </div>
@@ -48,10 +49,12 @@
                     <td><%= order_detail.photo.price %></td>
                     <td><%= order_detail.amount %></td>
                     <td>
-                        <%= form_with(model: order_detail, url:public_order_detail_path(order_detail),local: true,method: :patch) do |f| %>
-                        <%= f.select :shipping_status, [["未着手", 0], ["プリント開始",1], ["発送準備中", 2], ["発送済み", 3]],:selected => OrderDetail.shipping_statuses[order_detail.shipping_status]%>
-        
-                        <%= f.submit "更新",class:"btn btn-primary"%>
+                        <%# if order_detail.shipping_status == "shipped" %>
+                            <%= form_with(model: order_detail, url:public_order_detail_path(order_detail),local: true,method: :patch) do |f| %>
+                            <%= f.select :shipping_status, [["プリント開始","print"],["発送済み","shipped" ]]%>
+                        <%# else %>
+                            <%= f.submit "更新",class:"btn btn-primary"%>
+                            <%# end %>
                         <%#= f.select :making_status, options_for_select(OrderDetail.making_status.keys.map {|k| [k, k]}, selected: order_detail.making_status)%>
                         <% end %>
                     </td>

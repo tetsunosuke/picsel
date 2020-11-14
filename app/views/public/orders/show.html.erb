@@ -34,7 +34,7 @@
                                         <%= ((order_detail.photo.price*1.08) * (order_detail.amount)).round.to_s(:delimited) %>
                                     </td>
                                      <td>
-                                        <% if order_detail.shipping_status_before_type_cast == 3 %>
+                                        <% if order_detail.shipping_status == "shipped"  %>
                                             <%= form_with(model:@order_detail,url:public_order_detail_path(order_detail),local: true,method: :patch) do  |f| %>
                                                 <% f.hidden_field :shipping_status, value: 4%>
                                                 <%= f.submit "受取完了",class:"btn btn-primary"%>
