@@ -76,3 +76,4 @@ gem 'payjp'
 gem 'ransack'
 gem "gretel"
 gem 'dotenv-rails'
+gem 'enum_help'

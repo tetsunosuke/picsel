@@ -49,12 +49,14 @@
                     <td><%= order_detail.photo.price %></td>
                     <td><%= order_detail.amount %></td>
                     <td>
-                        <%# if order_detail.shipping_status == "shipped" %>
                             <%= form_with(model: order_detail, url:public_order_detail_path(order_detail),local: true,method: :patch) do |f| %>
-                            <%= f.select :shipping_status, [["プリント開始","print"],["発送済み","shipped" ]]%>
-                        <%# else %>
-                            <%= f.submit "更新",class:"btn btn-primary"%>
-                            <%# end %>
+                                <% unless order_detail.shipping_status == "received" %>
+                                    <%# f.select :shipping_status, OrderDetail.shipping_statuses.keys.map{|k| [I18n.t[["プリント開始","print"],["発送済み","shipped" ]],{selected: order_detail.shipping_status}%>
+                                    <%= f.select :shipping_status,[["プリント開始","print"],["発送済み","shipped" ]],{selected: order_detail.shipping_status}%>
+                                    <%= f.submit "更新",class:"btn btn-primary"%>
+                                <% else %>
+                                <h5>発送済み</h5>
+                                <% end %>
                         <%#= f.select :making_status, options_for_select(OrderDetail.making_status.keys.map {|k| [k, k]}, selected: order_detail.making_status)%>
                         <% end %>
                     </td>
