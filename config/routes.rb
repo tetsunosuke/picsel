@@ -55,7 +55,7 @@ Rails.application.routes.draw do
       get "users_unsubscribe" => "userr#unsubscribe"
       delete "users_withdraw" => "users#withdraw"
     end
-  en
+  end
     resources :credit_cards, only: [:edit,:create,:show]do
     member do
       get "confirmation"
