@@ -1,0 +1,66 @@
+<div class="row">
+    <div class="col-xs-3">
+        <div class="txt-heading">Shopping Cart</div>
+    </div>
+    <div class="col-xs-9">
+          <%= button_to 'カートを空にする', public_cart_items_delete_all_path, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: 'btn btn-danger',style:"float:right;margin:10px;" %></td>
+            <div class="cart_item_table">
+                <table class="tbl-cart" cellpadding="10" cellspacing="1" width=100%;>
+                    <tbody>
+                        <tr class="cart_item_header"style="border:solid 1px black">
+                            <th style="width:40%;"></th>
+                            <th style="width:20%;">title</th>
+                            <th style="width:20%;">Quantity</th>
+                            <th style="width:10%;">Price</th>
+                            <th style="width:10%;">Remove</th>
+                        </tr>
+                        <% @cart_items.each do |cart_item| %>
+                            <tr style="height:100px;" >
+                                <td><%= attachment_image_tag cart_item.photo,:image ,fallback: "noimage.jpg", style:'height:100px;%;padding:3%;'%></td>
+                                <td><%= cart_item.photo.title %></td>
+                                <td>
+                                    <%= form_for(cart_item,url:public_cart_item_path(cart_item.id),method: :patch) do |f| %>
+                                        <%= f.number_field :amount,{min: 0, max: 5} %>
+                                        <%= button_to public_cart_item_path(cart_item), method: :pacth do%>
+                                            <a class="fas fa-redo-alt"></a>
+                                        <% end %>
+                                    <% end %>
+                                </td>
+                                <td>
+                                    <%= (cart_item.photo.price*1.08).round.to_s(:delimited)  %>
+                                </td>
+                                <td>
+                                    <%= button_to public_cart_item_path(cart_item), method: :delete do%>
+                                        <i class="fas fa-trash-alt"></i>
+                                    <% end %>
+                                </td>
+                            </tr>
+                        <% end %>
+                            <% sum_price = 0 %>
+                            <% @cart_items.each do |cart_item| %> 
+                                <%  cart_item_price =(cart_item.photo.price*1.08).round*(cart_item.amount) %>
+                                <% cart_item_price %>
+                                <% sum_price = sum_price + cart_item_price %>
+                            <% end %>
+                            <% sum_amount = 0 %>
+                            <% @cart_items.each do |cart_item| %> 
+        
+                                <% sum_amount = sum_amount + cart_item.amount %>
+                            <% end %>
+                            <tr style="font-size:20px;">
+                                    <td colspan="2" align="right">Total:</td>
+                                    <td align="right"><%= sum_amount %></td>
+                                    <td align="right" colspan="2">
+                                        <%= sum_price.to_s(:delimited)  %>
+                                    </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+             <%= link_to"買い物を続ける",root_path,class:"btn btn-primary",style:"float:left;margin:10px;"%>
+             <%#= form_with(model:@order,url: public_orders_path,method: :get ,local:true) do |f| %>
+            <%#= f.hidden_field :cart_item_id, :value => @cart_item.id %>
+                <%= link_to"情報入力にすすむ",new_public_order_path,class:"btn btn-success",style:"float:right;margin:10px;"%>
+            <%# end%>
+    </div>
+</div>

@@ -1,0 +1,88 @@
+<h3>My page</h3>
+    <div class="row">
+        <div class="col-xs-1"></div>
+            <div class="col-xs-6" style="padding:0px;">
+                <div class="about">
+                    <h5>About <%= @user.first_name %></h5>
+                </div>
+                <%= form_with(model: @user, url:public_user_path(@user),method: :patch ,local: true ) do |f|%>
+                    <div class="row">
+                        <div class="profile_box">
+                            <div class="col-xs-5">
+                                <div class="profile">
+                                        <%= f.attachment_field :profile_image %>
+                                        <br>
+                                        <%= f.text_area :introduce %>
+                                        <%# f.hidden_field :first_name, value: @user.first_name %>
+                                        <%# f.hidden_field :last_name, value: @user.last_name %>
+                                        <%# f.hidden_field :first_name_kana, value: @user.first_name_kana %>
+                                        <%# f.hidden_field :last_name_kana, value: @user.last_name_kana %>
+                                        <%# f.hidden_field :telephone_number, value: @user.telephone_number %>
+                                        <%# f.hidden_field :postal_code, value: @user.postal_code %>
+                                        <%# f.hidden_field :address, value: @user.address %>
+                                        <%# f.hidden_field :email, value: @user.email %>
+                                        <%# f.hidden_field :is_deleted, value: @user.is_deleted %>
+                                        <%# f.hidden_field :rate, value: @user.rate %>
+                                        <p><%= f.submit"Update",class:"btn btn-primary" %></p>
+                                </div>
+                            </div>
+                            <div class="col-xs-7">
+                                <div class="profile_detail">
+                                    <table border="1 #2F3751" style="color:border: #2F3751">
+                                        <tr>
+                                            <td>
+                                            <i class="fas fa-user"></i>
+                                            <%= @user.first_name + @user.last_name %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <i class="fas fa-phone"></i>
+                                                <%= f.text_field :telephone_number  %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <i class="fas fa-envelope"></i>
+                                            <%= f.text_field :email  %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <i class="fas fa-home"></i>
+                                               <%= f.text_area :address  %>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            <i class="fas fa-map-marker-alt"></i>
+                                                <%= f.text_field :postal_code  %>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <% end %>
+            </div>
+            <div class="col-xs-4">
+                <div class="mypage_detail">
+                    <div class="mypage_detail__parchase">
+                        <%= link_to"Your Parchase Histories",root_path %>
+                    </div>
+                    <div class="mypage_detail__favorites">
+                        <%= link_to"Your Favorite Photes",root_path %>
+                    </div>
+                    <div class="mypage_detail__orders">
+                        <div class="mypage_detail__orders_button">
+                            <%= link_to"Your Orders",root_path  %>
+                        </div>
+                        <div class="mypage_detail__orders_info">
+                            <p>You got xxx orders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1"></div>
+</div>

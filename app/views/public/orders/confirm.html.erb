@@ -1,0 +1,77 @@
+<h3>注文情報確認</h3>
+    <%= form_with(model: @order, url:public_orders_path,local: true, method: :post) do |f| %>  
+    <div class="row">
+        <div class="col-xs-8">
+            <div class="left_box">
+                <table border="2">
+                    <tr style="background-color:lightgray">
+                        <th>商品名</th><th>単価(税込)</th><th>数量</th><th>小計</th>
+                    </tr>
+                        <% sum = 0 %>
+                        <% @cart_items.each do |cart_item|%>
+                            <tr>
+                                <td><%= cart_item.photo.title %></td>
+                                <td><%= (cart_item.photo.price*1.08).round %></td>
+                                <td><%= cart_item.amount %></td>
+                                <td><%= (cart_item.photo.price*1.08).round*(cart_item.amount) %></td>
+                                    <% cart_item_price = (cart_item.photo.price*1.08*cart_item.amount).round %>
+                                        <% cart_item_price %>
+                                        <% sum = sum + cart_item_price %>
+                            </tr>
+                        <% end%>
+                </table> 
+            </div>
+        </div>
+        <div class="col-xs-3">
+            <div class="right_box">
+                <table border="2">
+        
+                    <tr>
+                        <td style="background-color:lightgray">商品合計</td>
+                        <td><%= sum.round.to_s(:delimited)  %></td>
+                    </tr>
+                    <tr>
+                        <td style="background-color:lightgray">請求金額</td>
+                        <td><%= (sum + 800).round .to_s(:delimited) %></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+            <div class="payment_address_box",style="margin-left:150px;">
+                <div class="row">
+                        <div class="col-xs-3">
+                            <h5>支払い方法</h5>
+                        </div>
+                        <div class="col-xs-9">
+                          <%= @order_payment %>
+                        </div>
+                </div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <h5>お届け先</h5>
+                        </div>
+                        <div class="col-xs-9">
+                            <%= @order_address.postal_code%>
+                            <%= @order_address.address%>
+                            <br>
+                            <%= @order_address.name%>
+                        </div>
+                    </div>
+            </div>
+          <%#addressオプションをローカルでエラーでたのでインスタンス変数にした%>
+        
+        <%= f.hidden_field :payment_method, value: @order_payment %>
+        <%= f.hidden_field :postal_code, value: @order_address.postal_code %>
+        <%= f.hidden_field :address, value: @order_address.address %>
+        <%= f.hidden_field :name, value: @order_address.name %>
+        <%= f.hidden_field :total_payment, value: (sum + 800).round %>
+        <%#= f.hidden_field :buyer_id, value: current_user %>
+        <%#= f.hidden_field :status, value: @status  %>
+        <%#= f.hidden_field :status, value: true  %>
+         <%#= form.submit '情報を確定する',customers_orders_complete_path,class:"btn btn-primary"%>
+        <br>
+        <center>
+            <%= f.submit '情報を確定する',class:"btn btn-success"%>
+        </center>
+    <% end %>

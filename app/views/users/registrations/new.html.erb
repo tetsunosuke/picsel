@@ -1,0 +1,115 @@
+    <%= form_for(resource, as: resource_name, url: user_registration_path) do |f| %>
+      <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="row">
+          <div class="col-xs-3">
+            <h3>Sign Up</h3>
+          </div>
+            <div class="col-xs-9">
+              <div class="row">
+                <div class="field">
+                    <div class=" col-xs-4">
+                        <%= f.label :"名前" %>
+                    </div>
+                    <div class="name_box">
+                      <div class="col-xs-8">
+                        <%= f.label  :"姓" %>
+                        <%= f.text_field :first_name , autofocus: true, autocomplete: "first_name",style:"margin-left:15px;" %>
+                        <%= f.label  :"名" %>
+                        <%= f.text_field :last_name , autofocus: true, autocomplete: "last_name",style:"margin-left:15px;" %>
+                      </div>
+                    </div>
+                </div>
+              </div>
+                <div class="row">
+                  <div class="field">
+                    <div class=" col-xs-4">
+                      <%= f.label :"フリガナ" %>
+                    </div>
+                    <div class="col-xs-8">
+                      <%= f.label  :"セイ" %>
+                      <%= f.text_field :first_name_kana , autofocus: true, autocomplete: "first_name" %>
+                      <%= f.label  :"メイ" %>
+                      <%= f.text_field :last_name_kana , autofocus: true, autocomplete: "last_name" %>
+                    </div>
+                  </div>
+                </div>
+              <div class="row">
+                <div class="field">
+                  <div class=" col-xs-4">
+                    <%= f.label :"メールアドレス" %>
+                    </div>
+                    <div class="col-xs-8">
+                        <%= f.email_field :email, autofocus: true, autocomplete: "email",style:"margin-left:30px;" %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <div class=" col-xs-4">
+                    <%= f.label :"郵便番号(ハイフンなし)" %>
+                  </div>
+                  <div class="col-xs-8">
+                      <%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code",style:"margin-left:30px;" %>
+                  </div>
+                </div>
+              </div>
+               <div class="row">
+                <div class="field">
+                  <div class="col-xs-4">
+                    <%= f.label :"住所" %>
+                  </div>
+                  <div class="col-xs-8">
+                    <%= f.text_field :address, autofocus: true, :size=>"48", autocomplete: "address" ,style:"margin-left:30px;"%>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <div class=" col-xs-4">
+                    <%= f.label :"電話番号" %>
+                  </div>
+                  <div class="col-xs-8 ">
+                    <%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number" ,style:"margin-left:30px;"%>
+                  </div>
+                </div>
+              </div>
+              <div class="row"> 
+                <div class="field">
+                  <div class=" col-xs-4">
+                    <%= f.label :"パスワード" %>
+                    <% if @minimum_password_length %>
+                      <em>（<%= @minimum_password_length %>文字以上）</em>
+                    <% end %><br />
+                  </div>
+                  <div class="col-xs-8">
+                    <%= f.password_field :password, autocomplete: "new-password",style:"margin-left:30px;" %>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+              <div class="field">
+                <div class=" col-xs-4">
+                  <%= f.label :"パスワード（確認用）" %>
+                </div>
+                <div class="col-xs-8">
+                  <%= f.password_field :password_confirmation, autocomplete: "new-password" ,style:"margin-left:30px;"%>
+                </div>
+              </div>
+            </div>
+            </div>
+        </div>
+
+          <br>
+        <center>
+          <div class="actions">
+            <%= f.submit "新規登録",class:"btn  btn-success",style:"width:200px;" ,style:"margin-left:30px;"%>
+          </div>
+        </center>
+    <% end %>
+
+    <div class="login_view">
+        <h2 style="background-color:gray;display:inline-block">既に登録済みの方</h2>
+        <br>
+        <%= link_to"こちら",new_user_session_path%><span>からログインしてください</span>
+      </div>
+    <%# <%= render "customers/shared/links" %> 

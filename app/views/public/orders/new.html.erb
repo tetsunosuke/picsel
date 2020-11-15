@@ -1,0 +1,52 @@
+    <h3>注文情報入力</h3>
+   <div class="order_info">
+    <%= form_with(model: @order,url:confirm_public_orders_path,local: true, method: :get) do |f| %>
+            <h2>支払方法</h2>
+            <div class="payment">
+                <%= f.radio_button :payment_method, :"クレジット" %>
+                <%= f.label :payment_method,"クレジット",{style: "display: inline-block;"}%>
+               <p> <%= f.radio_button :payment_method, :"銀行振込" %>
+                <%= f.label :payment_method,"銀行振込",{style: "display: inline-block;"}%></p>
+            </div>
+            <h2>お届け先</h2>
+        <div class="address">
+            <div class="address_button">
+                <%= f.radio_button :address_option, 0 %>
+                <%= f.label :address_option,"ご自身の住所"%>
+                <br>
+                <%= f.label :address_option,""+(current_user.address),{value: 0,style: "display: inline-block;"}%>
+            </div>
+            </div>
+            <div class="address_button">
+                <%= f.radio_button :address_option, 1 %>
+                <%= f.label :address_option,"新しいお届け先",{value: 1,style: "display: inline-block;"}%>
+            </div>
+             <div class="row">
+                <div class="col-xs-4">
+                     <h4>郵便番号(ハイフンなし)</h4>
+                </div>
+                <div class="col-xs-8">
+                    <%= f.text_field :postal_code %>
+                </div>
+            </div>
+            <div class="row"> 
+                <div class="col-xs-4">
+                    <h4>住所</h4>
+                </div>
+                <div class="col-xs-8">
+                    <%= f.text_field :address,:size=>"40" %>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <h4>宛名</h4>
+                </div>
+                <div class="col-xs-8">
+                    <%= f.text_field :name %>
+                </div>
+            </div>
+      </div>
+      <br>
+      <%= f.submit "確認画面へ進む",class:"btn btn-primary",style:"margin-left:200px;"%>
+    </div>
+    <% end %>

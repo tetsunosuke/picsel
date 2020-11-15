@@ -1,0 +1,82 @@
+<h3>My page</h3>
+    <div class="row">
+        <div class="col-xs-1"></div>
+            <div class="col-xs-6" style="padding:0px;">
+                <div class="about" style="color:white;">
+                    <p>About <%= @user.first_name %></p>
+                    <p style="margin-left:60%;">
+                        <%= link_to edit_public_user_path(@user)do%>
+                        <i class="fas fa-user-edit"></i>
+                        <% end %>
+                    </p>
+                </div>
+                <div class="row">
+                    <div class="profile_box">
+                        <div class="col-xs-5">
+                            <div class="profile">
+                                <%= attachment_image_tag @user,:profile_image,fallback: "noimage.jpg", style: 'border-radius: 50%; width: 100px;height: 100px;object-fit: cover;' %>
+                                <%= render 'follow_form' %>
+　　　                              <%= render 'stats' %>
+                                <p>★★★★☆</p> 
+                                <p><%= @user.introduce %></p> 
+                            </div>
+                        </div>
+                        <div class="col-xs-7">
+                            <div class="profile_detail">
+                                <table border="1 #2F3751" style="color:border: #2F3751">
+                                    <tr>
+                                        <td>
+                                        <i class="fas fa-user"></i>
+                                            <%= @user.first_name + @user.last_name%>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <i class="fas fa-phone"></i>
+                                            <%= @user.telephone_number %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <i class="fas fa-envelope"></i>
+                                            <%= @user.email %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <i class="fas fa-home"></i>
+                                            <%= @user.address %>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                        <i class="fas fa-map-marker-alt"></i>
+                                            <%= @user.postal_code %>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-4">
+                <div class="mypage_detail">
+                    <div class="mypage_detail__parchase">
+                        <%= link_to"Your Purchase Histories",public_photo_likes_path(@user) %>
+                    </div>
+                    <div class="mypage_detail__favorites">
+                        <%= link_to"Your Favorite Photos",public_photo_likes_path(@user) %>
+                    </div>
+                    <div class="mypage_detail__orders">
+                        <div class="mypage_detail__orders_button">
+                            <%= link_to"Your Orders",root_path  %>
+                        </div>
+                        <div class="mypage_detail__orders_info">
+                            <p>You got xxx orders</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-1"></div>
+</div>
