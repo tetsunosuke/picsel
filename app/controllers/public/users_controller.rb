@@ -1,5 +1,6 @@
 class Public::UsersController < ApplicationController
     before_action :authenticate_user!, except: [:top]
+    before_action :set_search
     def top
         # ランキング表示
         # photo_like_count = Photo.joins(:likes).group(:photo_id).count
@@ -45,7 +46,7 @@ class Public::UsersController < ApplicationController
 
     private
     def user_params
-      params.require(:user).permit(:last_name,:first_name,:first_name_kana,:last_name_kana,:email,:postal_code,:address,:telephone_number,:is_deleted,:rate,:profile_image,:introduce)
+      params.require(:user).permit(:last_name,:first_name,:first_name_kana,:last_name_kana,:email,:postal_code,:address,:telephone_number,:is_deleted,:rate,:profile_image,:introduce,:nickname)
     end
 
 end

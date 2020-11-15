@@ -13,8 +13,12 @@ class Public::PhotosController < ApplicationController
         end
         @photos = Photo.where(user_id: @user.id)
         #  binding.pry
-
-
+        # @Photoss = Photo.search(params[:search])
+        @hashtag = Hashtag.find_by(hashname: params[:tag])
+        @hashtag_photos = @hashtag.photos if @hashtag.present?
+        
+        # @hashtag_photos = HashtagPhoto.where(hashtag_id: @hashtag.id)
+        # @hashtag_photos = HashtagPhoto.search(params[:search])
     end
     def new
         @photo = Photo.new
@@ -37,12 +41,13 @@ class Public::PhotosController < ApplicationController
             @photo.is_active = false
         end
 
-        # if @photo.save
-        #     redirect_to root_path
-        #     # redirect_to users_photo_path(@photo.id)
-        # else
-        #     render new_public_photo_path
-        # end
+        if @photo.save
+            redirect_to public_photo_path(@photo.id)
+            # redirect_to users_photo_path(@photo.id)
+        else
+            render new_public_photo_path
+        end
+
     end
     def show
         @photo = Photo.find(params[:id])
@@ -69,14 +74,42 @@ class Public::PhotosController < ApplicationController
         @photo.destroy
        redirect_to public_photos_path
     end
-    def search
-        @tag_list = Tag.all  #こっちの投稿一覧表示ページでも全てのタグを表示するために、タグを全取得
-        @tag = Tag.find(params[:tag_id])  #クリックしたタグを取得
-        @photos = @tag.photos.all           
-    end
+    def hashtag
+        # @q = Hashtag.find(hashname: params[@q])
+        #  binding.pry
+        @hashname =  params[:hashname_cont]
+        # @hashtag = Hashtag.find_by(hashname: @hashname)
+        @hashtags = Hashtag.where(['hashname LIKE ?', "%#{params[:hashname_cont]}%"])
+        hashtag_photo_ids = []
+        @hashtags.each do |hashtag| 
+            # binding.pry
+            hashtag.hashtag_photos.each do |hashtag_photo|
+            hashtag_photo_ids << hashtag_photo.id
+            # binding.pry
+            end
+        end
+        # @hashtag_photos = if @hashtag.present?
+            #   @photo = @hashtag.photo.page(params[:page]).per(20).reverse_order
+        #  binding.pry
+        if @hashname == ""
+            @hashtag_photos =  []
+            @hashtag_photos_count = 0
+        else
+            @hashtag_photos = HashtagPhoto.where(id: hashtag_photo_ids.uniq)
+            @hashtag_photos_count = @hashtag_photos.count
+        end
+        # else
+        # end
+        # binding.pry
+        # @hashtags = Hashtag.all.to_a.group_by{ |hashtag| hashtag.photos.count}
+      end
+      def search
+        #Viewのformで取得したパラメータをモデルに渡す
+        @Photoss = Photo.search(params[:search])
+      end
+
     private
         def photo_params
-            params.require(:photo).permit(:title, :gallary_id , :image, :caption, :price, :is_active)
+            params.require(:photo).permit(:title, :gallary_id , :image, :caption, :price,:hashbody, :is_active, hashtag_ids:[])
         end
-
 end

@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_05_014033) do
+ActiveRecord::Schema.define(version: 2020_11_07_055014) do
+
 
   create_table "addresses", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -40,6 +41,14 @@ ActiveRecord::Schema.define(version: 2020_11_05_014033) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "cards", force: :cascade do |t|
+    t.string "customer_token", null: false
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_cards_on_user_id"
+  end
+
   create_table "cart_items", force: :cascade do |t|
     t.integer "amount", default: 0
     t.integer "photo_id"
@@ -63,12 +72,20 @@ ActiveRecord::Schema.define(version: 2020_11_05_014033) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "hashtags", force: :cascade do |t|
-    t.integer "order_id"
+  create_table "hashtag_photos", force: :cascade do |t|
     t.integer "photo_id"
-    t.string "tagname", null: false
+    t.integer "hashtag_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["hashtag_id"], name: "index_hashtag_photos_on_hashtag_id"
+    t.index ["photo_id"], name: "index_hashtag_photos_on_photo_id"
+  end
+
+  create_table "hashtags", force: :cascade do |t|
+    t.string "hashname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hashname"], name: "index_hashtags_on_hashname", unique: true
   end
 
   create_table "likes", force: :cascade do |t|
@@ -96,7 +113,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_014033) do
     t.string "name", default: "", null: false
     t.integer "user_id"
     t.integer "total_payment", default: 0, null: false
-    t.integer "payment_method", null: false
+    t.integer "R", null: false
     t.integer "status", null: false
     t.integer "buyer_id", null: false
     t.datetime "created_at", null: false
@@ -110,7 +127,14 @@ ActiveRecord::Schema.define(version: 2020_11_05_014033) do
     t.text "caption", default: "", null: false
     t.integer "price", default: 0, null: false
     t.integer "gallary_id"
+    t.string "hashbody", default: ""
     t.boolean "is_active", default: true, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "public_cards", force: :cascade do |t|
+    t.string "index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -160,7 +184,7 @@ ActiveRecord::Schema.define(version: 2020_11_05_014033) do
     t.datetime "datetime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "name"
+    t.string "nickname", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

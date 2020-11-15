@@ -5,6 +5,16 @@
             <h3>Sign Up</h3>
           </div>
             <div class="col-xs-9">
+               <div class="row">
+                <div class="field">
+                  <div class=" col-xs-4">
+                    <%= f.label :"ニックネーム" %>
+                    </div>
+                    <div class="col-xs-8">
+                        <%= f.text_field :nickname, autofocus: true, autocomplete: "nickname",style:"margin-left:30px;" %>
+                  </div>
+                </div>
+              </div>
               <div class="row">
                 <div class="field">
                     <div class=" col-xs-4">

@@ -10,30 +10,34 @@ html lang="ja"
     script crossorigin="anonymous" src="https://kit.fontawesome.com/a1965c550c.js" 
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    script src="https://js.pay.jp/" type="text/javascript"
   body
     .wrapper
         header
         .jumbotron.jumbotron-extend.jumbotron-fluid.padding_margin_0 
                 .navbar.navbar-inverse.opacity.margin
                     nav.nav.navbar-nav.navbar-left
-                    = link_to "Picsel", root_path
+                    = link_to "PICSELL", root_path
+                    / = image_tag 'アートボード1.png'
                     ul.nav.navbar-nav.navbar-right
                         - if user_signed_in?
                             li[style="margin:15px 20px 0 0;color:white;"]
                                 | ようこそ、
-                                = current_user.first_name + current_user.last_name
+                                = current_user.nickname
                                 | さん
-                            | ようこそ、#{current_user.first_name + current_user.last_name}さん
                             li.nav-item= link_to "マイページ", my_page_public_users_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "写真一覧",  public_photos_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "カート", public_cart_items_path, class: "btn btn-light nav-link"
                             li.nav-item= link_to "ログアウト", destroy_user_session_path, class: "btn btn-light nav-link",method: :delete
+                            li.nav-item[style="margin:15px 20px 0 0;"]
+                                 = form_tag(public_hashtag_path, method: :get) do 
+                                    =text_field_tag :hashname_cont
+                                    =submit_tag"検索"
                         - elsif admin_signed_in?
-                            li= link_to "商品一覧", root_path, class: "btn btn-light"
-                            li= link_to "会員一覧", root_path, class: "btn btn-light"
-                            li= link_to "注文履歴一覧", root_path, class: "btn btn-light"
-                            li= link_to "ジャンル一覧", root_path, class: "btn btn-light"
-                            li= link_to "ログアウト", admin_registration_path, class: "btn btn-light" ,method: :delete
+                            li= link_to "写真一覧", top_admins_photos_path, class: "btn btn-light"
+                            li= link_to "会員一覧", admins_users_path, class: "btn btn-light"
+                            li= link_to "注文履歴一覧", admins_order_index_path, class: "btn btn-light"
+                            li= link_to "ログアウト", destroy_admin_session_path, class: "btn btn-light" ,method: :delete
                         - else
                             li= link_to "ページトップ",root_path, class: "btn btn-light"
                             li= link_to "About", root_path, class: "btn btn-light"
@@ -43,3 +47,4 @@ html lang="ja"
             = yield
     footer
         hr size="1" style="color:#fbfbfbf" 
+        = link_to "お問い合わせ",public_inquiry_index_path

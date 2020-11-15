@@ -72,3 +72,8 @@ gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
 gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 gem 'pry-byebug'
+gem 'payjp'
+gem 'ransack'
+gem "gretel"
+gem 'dotenv-rails'
+gem 'enum_help'

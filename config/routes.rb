@@ -1,9 +1,45 @@
 Rails.application.routes.draw do
   namespace :public do
-    get 'orders/new'
+    get 'inquiry/index'
+    get 'inquiry/confirm'
+    get 'inquiry/thanks'
   end
+  namespace :public do
+    get 'cards/index'
+  end
+  # namespace :public do
+  #   get 'credit_card/edit'
+  #   get 'credit_card/create'
+  #   get 'credit_card/delete'
+  #   get 'credit_card/show'
+  # end
+  # namespace :public do
+  #   get 'order_details/index'
+  #   get 'order_details/edit'
+  #   get 'order_details/update'
+  # end
+  # namespace :public do
+  #   get 'credits/new'
+  #   get 'credits/create'
+  # end
+  # namespace :public do
+  #   get 'orders/new'
+  # end
   root 'public/users#top'
   devise_for :admins
+
+  namespace :admins do
+    resources :photos, only: [:index, :create, :destroy,:update,:edit]do
+      collection do
+        get "top"
+      end
+    end
+    resources :likes, only: [:index, :create, :destroy]
+    resources :users, only: [:index,:edit,:destroy,:update]
+    resources :orders, only: [:index,:show]
+
+  end
+
   devise_for :users, controllers: {
     sessions: "users/sessions" ,
     registrations: "users/registrations"
@@ -15,27 +51,52 @@ Rails.application.routes.draw do
       end
         collection do
       get "my_page"
+      get "search"
       get "users_unsubscribe" => "userr#unsubscribe"
       delete "users_withdraw" => "users#withdraw"
     end
-  end
-  resources :tags do
-    get 'photos', to: 'photos#search'
-  end
-    resources :relationships, only: [:create, :destroy]
-    resources :cart_items, only:[:index,:create,:update,:destroy]
-    delete "cart_items/delete_all" => "cart_items#delete_all"
-    resources :orders, only:[:new,:index,:create,:show] do
-    collection do
-    get "confirm" 
-    get "complete" 
+  en
+    resources :credit_cards, only: [:edit,:create,:show]do
+    member do
+      get "confirmation"
     end
+    collection do
+      post 'delete',to:'credit_card#delete'
+      post 'show'
+    end
+    end
+
+    resources :relationships, only: [:create, :destroy]
+    resources :cart_items, only:[:index,:create,:update,:destroy]do
+    collection do
+    delete "delete_all"
+    end
+    end
+    resources :order_details ,only:[:index, :create,:edit ,:update]
+    
+    resources :orders, only:[:new,:index,:create,:show,:update] do
+      member do
+        get "sold"
+        get "sold_detail"
+      end
+      collection do
+    get "confirm"
+    get "complete"
+    end
+   
     end
     resources :book_marks, only:[:index]
     resources :gallaries, only:[:new,:index,:edit,:create,:update,:delete]
     resources :photos do
-    resources :likes, only: [:index, :create, :destroy]
+      get 'search'
+      collection do 
+      get 'hashtag'
+      end
+      resources :likes, only: [:index, :create, :destroy]
     end
+    get "/credits" => "credits#index"
+    get '/hashtag' => 'photos#hashtag'
+
   end
 
 

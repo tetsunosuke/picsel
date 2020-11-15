@@ -1,0 +1,61 @@
+   <h3 >販売履歴詳細aaaaa</h3>
+    <div class="row">
+        <div class="field">
+                <div class="col-xs-3"> 購入者</div>
+                <div class="col-xs-7">
+                    <%= (@user.first_name) + " " +(@user.last_name) %>
+                </div>
+        </div>
+    </div>
+<div class="row">
+            <div class="field">
+                <div class="col-xs-3"> 配送先</div>
+                <div class="col-xs-7">
+                    <%= @user.address %>
+                </div>
+            </div>
+    </div>
+    <div class="row">
+            <div class="field">
+                <div class="col-xs-3"> 支払方法</div>
+                <div class="col-xs-7">
+                    <%= @order_payment %>
+                </div>
+            </div>
+    </div>
+    <div class="row">
+            <div class="field">
+                <div class="col-xs-3"> 注文ステータス</div>
+                <div class="col-xs-7">
+                    <%= "order#{@order.id}" %>
+                    <%= @order_details.pluck(:id) %>
+                    <%= form_with(model:@order, url:public_order_path(@order),local: true,method: :patch) do |f| %>
+                    <%= f.select :status, [["入金待ち", 0], ["入金確認", 1], ["発送準備中", 2], ["受領確認待ち", 3], ["取引終了", 4]],:selected => Order.statuses[@order.status] %>
+                    <%= f.submit "更新",class:"btn btn-primary"%>
+                    <% end %>
+                </div>
+            </div>
+    </div>
+    <br>
+<div class="items_small_index">
+    <table class="table table-hover table-inverse">
+        <tr style="background-color:lightgray"  >
+            <th>商品名</th><th>単価（税込）</th><th>数量</th><th>製作ステータス</th><th></th>
+        </tr>
+                <% @order_details.each do |order_detail|%>
+                <tr>
+                    <td><%= order_detail.photo.title %></td>
+                    <td><%= order_detail.photo.price %></td>
+                    <td><%= order_detail.amount %></td>
+                    <td>
+                        <%= form_with(model: order_detail, url:public_order_detail_path(order_detail),local: true,method: :patch) do |f| %>
+                        <%= f.select :shipping_status, [["プリント開始", 0], ["発送済み",1]]],:selected => OrderDetail.shipping_statuses[order_detail.shipping_status]%>
+        
+                        <%= f.submit "更新",class:"btn btn-primary"%>
+                        <%#= f.select :making_status, options_for_select(OrderDetail.making_status.keys.map {|k| [k, k]}, selected: order_detail.making_status)%>
+                        <% end %>
+                    </td>
+                </tr>
+                <% end %>
+    </table>
+</div>

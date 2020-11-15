@@ -1,9 +1,12 @@
+
+<% breadcrumb :edit %>
+<%= breadcrumbs separator: " &rsaquo; " %>
 <h3>My page</h3>
     <div class="row">
         <div class="col-xs-1"></div>
             <div class="col-xs-6" style="padding:0px;">
                 <div class="about">
-                    <h5>About <%= @user.first_name %></h5>
+                    <h5>About <%= (@user.first_name )+ ( @user.last_name) %></h5>
                 </div>
                 <%= form_with(model: @user, url:public_user_path(@user),method: :patch ,local: true ) do |f|%>
                     <div class="row">
@@ -32,7 +35,7 @@
                                         <tr>
                                             <td>
                                             <i class="fas fa-user"></i>
-                                            <%= @user.first_name + @user.last_name %>
+                                            <%= f.text_field :nickname %>
                                             </td>
                                         </tr>
                                         <tr>

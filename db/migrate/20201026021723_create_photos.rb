@@ -7,6 +7,7 @@ class CreatePhotos < ActiveRecord::Migration[5.2]
       t.text :caption , null: false, default: ""
       t.integer :price , null: false, default: 0
      t.integer :gallary_id
+     t.string :hashbody ,default:""
       t.boolean :is_active , null: false, default: true, comment: "ステータス"
       t.timestamps
     end

@@ -1,8 +1,24 @@
- <% @user.followers.each do |user| %>
-    <table>
-        <tr>
-            <td>  <%= user.username %> </td>
-            <td><%= link_to '詳細',　public_photos_path(user) %></td>
-        </tr>
-    </table>
-<% end %>
+<div class="follow_view">
+    <% @user.followers.each do |user| %>
+        <div class="follow_view_detail">
+            <p><%= attachment_image_tag user,:profile_image,fallback: "noimage.jpg", style: 'border-radius: 50%; width: 40px;height: 40px;object-fit: cover;' %></p>
+            <p style="padding:10px 0 0 10px"><%= user.nickname %></p>
+            <% unless current_user?(user) %>
+                <% if current_user.following?(user) %>
+                    <div id="follow_view_form">
+                        <%= form_for(current_user.following_relationships.find_by(following_id: user.id), url:public_relationship_path(user),method: :delete) do |f| %>
+                            <%= f.submit "Unfollow", class: "btn btn-large follow-btn" %>
+                        <% end %>
+                    </div>
+                <% else %>
+                    <div id="follow_view_form">
+                        <%= form_for(current_user.following_relationships.build(following_id: user.id), url: public_relationships_path)do |f| %>
+                            <div><%= f.hidden_field :following_id %></div>
+                            <%= f.submit "Follow",class: "btn btn-large btn-primary follow-btn" %>
+                        <% end %>
+                    </div>
+                <% end %>
+            <% end %>
+        </div>
+    <% end %>
+</div>

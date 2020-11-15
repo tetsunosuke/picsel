@@ -1,33 +1,38 @@
-<div class="row">
+<% breadcrumb :user,@user %>
+<%= breadcrumbs separator: " &rsaquo; " %>
+<div class="index_photo">
     <% if user_signed_in? %>
         <div class="index_photo_wrapper">
-            <h3><%= @user.first_name %></h3>
-            <%= link_to new_public_photo_path do %>
-                <p class="fas fa-plus-circle fa-3x"></p>
-            <% end %>
-            <%#@user ||= current_user %>
-            <% unless current_user?(@user) %>
-                <div id="follow_form">
-                    <% if current_user.following?(@user) %>
-                        <%#= form_for(current_user.following_relationships.find_by(following_id: @user.id), public_relationship_path(@user),method: :delete) do |f| %>
-                        <%= form_for(current_user.following_relationships.find_by(following_id: @user.id), html: { method: :delete }) do |f| %>
-                            <%= f.submit "Unfollow", class: "btn btn-large follow-btn" %>
-                        <% end %>
-                    <% else %>
-                        <%= form_for(current_user.following_relationships.build(following_id: @user.id), url: public_relationships_path)do |f| %>
-                            <div><%= f.hidden_field :following_id %></div>
-                            <%= f.submit "Follow",class: "btn btn-large btn-primary follow-btn" %>
-                        <% end %>
-                    <% end %>
-                </div>
-            <% end %>
-        </div>
-        <div class="photo_index_images">
-            <% @photos.each do |photo| %>
-                <%= link_to public_photo_path(photo) do  %>
-                     <%= attachment_image_tag photo,:image,fallback: "noimage.jpg", style:'width: 33%;height:33%;padding:10px;' %>
+            <%= attachment_image_tag @user,:profile_image,fallback: "noimage.jpg", style: 'border-radius: 50%; width: 40px;height: 40px;object-fit: cover;margin:10px 10px ' %>
+            <h3><%= @user.nickname %>の写真一覧</h3>
+            <% if @user == current_user %>
+                <%= link_to new_public_photo_path do %>
+                    <p class="fas fa-plus-circle fa-2x"></p>
                 <% end %>
             <% end %>
         </div>
+        <% unless current_user?(@user) %>
+            <% if current_user.following?(@user) %>
+                    <div class="index_photo_follow_form">
+                        <%= form_for(current_user.following_relationships.find_by(following_id: @user.id), url:public_relationship_path(@user),method: :delete) do |f| %>
+                            <%= f.submit "Unfollow", class: "btn btn-large follow-btn" %>
+                        <% end %>
+                    </div>
+            <% else %>
+                <div class="index_photo_follow_form">
+                    <%= form_for(current_user.following_relationships.build(following_id: @user.id), url: public_relationships_path)do |f| %>
+                        <div><%= f.hidden_field :following_id %></div>
+                        <%= f.submit "Follow",class: "btn btn-large btn-primary follow-btn" %>
+                    <% end %>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+</div>
+<div class="photo_index_images">
+    <% @photos.each do |photo| %>
+        <%= link_to public_photo_path(photo) do  %>
+            <%= attachment_image_tag photo,:image,fallback: "noimage.jpg", style:'width: 33%;height:33%;padding:10px;' %>
+        <% end %>
     <% end %>
 </div>

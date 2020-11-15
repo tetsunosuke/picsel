@@ -1,0 +1,9 @@
+= form_tag("/pay", method: :POST, id: "charge-form") do 
+    %h4 支払い
+    %label カード番号 
+        %input{maxlength: "16", type: "text", class: "number", id: "payment_card_no" name: "number", placeholder: "カード番号"} 
+    %label CVC 
+        %input{type: "text", class: "cvc", id: "cvc_code", name: "cvc", maxlength: "3", placeholder: "CVC"} 
+    %label 有効期限 
+        %input{type: "text", class: "exp_month", id: "card_expire_mm", name: "exp_month", maxlength: "2", placeholder: "月"} 
+        %input{type: "text", class: "exp_year", id: "card_expire_yy", name: "exp_year", maxlength: "4", placeholder: "年"}
