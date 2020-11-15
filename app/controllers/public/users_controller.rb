@@ -23,7 +23,7 @@ class Public::UsersController < ApplicationController
     def update
         @user = User.where(id: current_user.id)
         if @user.update(user_params)
-            redirect_to  public_user_my_page_path
+            redirect_to  my_page_public_users_path
         else
           render root_path
         end

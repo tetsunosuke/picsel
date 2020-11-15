@@ -19,6 +19,9 @@ Rails.application.routes.draw do
       delete "users_withdraw" => "users#withdraw"
     end
   end
+  resources :tags do
+    get 'photos', to: 'photos#search'
+  end
     resources :relationships, only: [:create, :destroy]
     resources :cart_items, only:[:index,:create,:update,:destroy]
     delete "cart_items/delete_all" => "cart_items#delete_all"

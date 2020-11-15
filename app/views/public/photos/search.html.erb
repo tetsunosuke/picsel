@@ -1,0 +1,25 @@
+<%# h2 投稿一覧
+#タグリスト
+- @tag_list.each do |list|
+  span
+    = link_to list.tag_name, public_tag_photos_path(photo_tag_id: list.id)
+    = "(#{list.photos.count})"
+br
+#タグによって絞り込んだ投稿一覧
+= "タグが ─ "
+strong= "#{@tag.tag_name}"
+= " ─ の投稿一覧"
+br
+- @photos.each do |photo|
+  = link_to photo.title, root_path
+br %>
+<%# = link_to 'ホーム', root_path %>
+
+<%# @photos.each do |photo| %>
+<h2>タグ一覧</h2>
+<% @tag_list.each do |list|  %>
+<%= link_to list.tag_name,public_tag_photos_path(photo_tag_id: list.id) %>
+<%= "(#{list.photos.count})" %>
+<% end %>
+<%= "#{@tag.tag_name}" %>の一覧
+<% link_to @photo,root_path %>

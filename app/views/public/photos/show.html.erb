@@ -23,6 +23,13 @@
                     <% end %>
                 <h4><%= @photo.title %></h4>
                 <p><%= @photo.caption %></p>
+                <% @photo_tags.each do |tag|  %>
+                <%#= link_to tag.tag_name,  public_tag_photos_path(tag_id: tag.id)%>
+                
+                <%#= link_to tag.tag_name, public_tags_path(@tag) %>
+                <%="(#{tag.photos.count})" %>
+                <% end %>
+                <%#= link_to 'ホーム', root_path %>
                 <h5>¥<%= @photo.price %>(税込み)</h5>
             </div>
             <div class="photo_price">
