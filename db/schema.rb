@@ -12,6 +12,7 @@
 
 ActiveRecord::Schema.define(version: 2020_11_07_055014) do
 
+
   create_table "addresses", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.integer "user_id"
@@ -146,6 +147,21 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
     t.index ["follower_id", "following_id"], name: "index_relationships_on_follower_id_and_following_id", unique: true
     t.index ["follower_id"], name: "index_relationships_on_follower_id"
     t.index ["following_id"], name: "index_relationships_on_following_id"
+  end
+
+  create_table "tag_maps", force: :cascade do |t|
+    t.integer "photo_id"
+    t.integer "tag_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["photo_id"], name: "index_tag_maps_on_photo_id"
+    t.index ["tag_id"], name: "index_tag_maps_on_tag_id"
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "tag_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

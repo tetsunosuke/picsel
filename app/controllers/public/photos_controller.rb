@@ -2,6 +2,7 @@ class Public::PhotosController < ApplicationController
     before_action :authenticate_user!
     def index
         # binding/pry
+        @tag_list = Tag.all  
         if params[:user_id].nil?
             @user = current_user
             # @photos = Photo.where(user_id: current_user.id)
@@ -22,9 +23,18 @@ class Public::PhotosController < ApplicationController
     def new
         @photo = Photo.new
         @gallaries = Gallary.all
+        @tag_list = Tag.all 
     end
     def create
         @photo = current_user.photos.new(photo_params)
+        tag_list = params[:photo][:tag_name].split(nil)
+        if @photo.save
+            @photo.save_tag(tag_list)
+            redirect_back(fallback_location: root_path)
+        else
+            redirect_back(fallback_location: root_path)
+        end
+
         if photo_params[:is_active] == '有効'
             @photo.is_active = true
         elsif photo_params[:is_active] == '無効'
@@ -37,12 +47,15 @@ class Public::PhotosController < ApplicationController
         else
             render new_public_photo_path
         end
+
     end
     def show
         @photo = Photo.find(params[:id])
         @cart_item = CartItem.new
         @user = User.find_by(id: @photo.user_id)
         @like = Like.new
+        @photo_tags = @photo.tags
+        # @tag = Tag.find_by(id:@photo.tag_id)
     end
     def edit
         @photo = Photo.find(params[:id])
@@ -94,6 +107,7 @@ class Public::PhotosController < ApplicationController
         #Viewのformで取得したパラメータをモデルに渡す
         @Photoss = Photo.search(params[:search])
       end
+
     private
         def photo_params
             params.require(:photo).permit(:title, :gallary_id , :image, :caption, :price,:hashbody, :is_active, hashtag_ids:[])

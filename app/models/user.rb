@@ -5,7 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :book_marks, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :liked_posts,through: :likes, source: :photo
+  has_many :liked_photos,through: :likes, source: :photo
   has_many :photos, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :cart_items, dependent: :destroy
@@ -16,6 +16,7 @@ class User < ApplicationRecord
   has_many :follower_relationships, foreign_key: "following_id", class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :follower_relationships
   # has_one :card, optional: true
+
   def following?(other_user)
     following_relationships.find_by(following_id: other_user.id)
   end
