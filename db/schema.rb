@@ -12,7 +12,6 @@
 
 ActiveRecord::Schema.define(version: 2020_11_07_055014) do
 
-
   create_table "addresses", force: :cascade do |t|
     t.string "name", default: "", null: false
     t.integer "user_id"
@@ -113,7 +112,7 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
     t.string "name", default: "", null: false
     t.integer "user_id"
     t.integer "total_payment", default: 0, null: false
-    t.integer "R", null: false
+    t.integer "payment_method", null: false
     t.integer "status", null: false
     t.integer "buyer_id", null: false
     t.datetime "created_at", null: false
@@ -184,6 +183,7 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
     t.datetime "datetime"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name"
     t.string "nickname", default: "", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

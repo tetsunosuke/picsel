@@ -1,8 +1,0 @@
-ja:
-  enums:
-    user:
-      shipping_status:
-        print: プリント開始
-        shipped: 配送済み
-          receives: 受け取り待ち
-            done: 取引終了
