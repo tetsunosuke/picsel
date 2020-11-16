@@ -122,7 +122,7 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
     t.string "title", default: "", null: false
     t.integer "user_id"
     t.string "image_id", default: "", null: false
-    t.text "caption", default: "", null: false
+    t.text "caption", null: false
     t.integer "price", default: 0, null: false
     t.integer "gallary_id"
     t.string "hashbody", default: ""
