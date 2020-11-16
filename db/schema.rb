@@ -88,11 +88,10 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "photo_id"
+    t.integer "photo_id", null: false
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["photo_id"], name: "index_likes_on_photo_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
