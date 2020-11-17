@@ -32,4 +32,4 @@
 //     false
 //   );
 //いらない文章です
-//条文すべてcapistrano
+//条文すべてcapistranoです・
