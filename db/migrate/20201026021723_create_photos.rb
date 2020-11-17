@@ -4,7 +4,7 @@ class CreatePhotos < ActiveRecord::Migration[5.2]
       t.string :title , null: false, default: ""
       t.integer :user_id
       t.string :image_id , null: false, default: ""
-      t.text :caption , null: false, default: ""
+      t.text :caption , null: false
       t.integer :price , null: false, default: 0
      t.integer :gallary_id
      t.string :hashbody ,default:""

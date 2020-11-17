@@ -88,11 +88,10 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
   end
 
   create_table "likes", force: :cascade do |t|
-    t.integer "photo_id"
+    t.integer "photo_id", null: false
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["photo_id"], name: "index_likes_on_photo_id"
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
@@ -123,7 +122,7 @@ ActiveRecord::Schema.define(version: 2020_11_07_055014) do
     t.string "title", default: "", null: false
     t.integer "user_id"
     t.string "image_id", default: "", null: false
-    t.text "caption", default: "", null: false
+    t.text "caption", null: false
     t.integer "price", default: 0, null: false
     t.integer "gallary_id"
     t.string "hashbody", default: ""
