@@ -13,7 +13,7 @@
                     type="text/javascript"
                     src="https://checkout.pay.jp/"
                     class="payjp-button"
-                    data-key="pk_test_0383a1b8f91e8a6e3ea0e2a9"
+                    data-key=ENV['PAYJP_DATAKEY']
                     data-submit-text="入力確定"
                     data-partial="true">
                 </script>
@@ -57,6 +57,9 @@
             </div>
       </div>
       <br>
+     <%# form_with(model: @trading_status,url: confirm_public_orders_path, method: :get,local: true) do |f| %>
+      <%= f.hidden_field :trading_status, value:0 %>
       <%= f.submit "確認画面へ進む",class:"btn btn-primary",style:"margin-left:200px;"%>
     </div>
     <% end %>
+    <%# end %>
