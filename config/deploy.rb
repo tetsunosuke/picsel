@@ -7,7 +7,7 @@ set :deploy_to, "/home/ec2-user/picsel"
 set :rbenv_ruby, '2.5.7'
 set :linked_files, %w{config/master.key .env}
 append :linked_dirs, "log", "public", "tmp"
-
+set :branch, ENV['BRANCH'] || "base1"
 # Default branch is :base1
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
