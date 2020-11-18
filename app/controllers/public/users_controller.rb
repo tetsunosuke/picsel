@@ -20,7 +20,7 @@ class Public::UsersController < ApplicationController
     end
     def my_page
         @user = current_user
-        @order_detail = OrderDetail.where(photo_id: @user.photos.ids).pluck(:order_detail_id)
+        # @order_detail = OrderDetail.where(photo_id: @user.photos.ids).pluck(:order_detail_id)
     end
     def update
         @user = User.where(id: current_user.id)
@@ -32,7 +32,7 @@ class Public::UsersController < ApplicationController
     end
     def edit
         @user = current_user
-        @order_detail = OrderDetail.where(photo_id: @user.photos.ids).pluck(:order_detail_id)
+        # @order_detail = OrderDetail.where(photo_id: @user.photos.ids).pluck(:order_detail_id)
     end
     def following
         @user  = User.find(params[:id])
