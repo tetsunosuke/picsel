@@ -21,7 +21,9 @@
     height: 30vh;
     min-height: 100px;
     margin-bottom: 60px;
-    background-image: image-url("20170623_1814.jpg") no-repeat center center;
+    background-image: image-url("20170623_1814.jpg");
+    background-repeat: no-repeat;
+    background-position:center;
     background-size: cover;
 }
 .jumbotron-container {
