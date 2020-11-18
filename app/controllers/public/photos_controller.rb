@@ -27,13 +27,13 @@ class Public::PhotosController < ApplicationController
     end
     def create
         @photo = current_user.photos.new(photo_params)
-        tag_list = params[:photo][:tag_name].split(nil)
-        if @photo.save
-            @photo.save_tag(tag_list)
-            redirect_back(fallback_location: root_path)
-        else
-            redirect_back(fallback_location: root_path)
-        end
+        # tag_list = params[:photo][:tag_name].split(nil)
+        # if @photo.save
+        #     @photo.save_tag(tag_list)
+        #     redirect_back(fallback_location: root_path)
+        # else
+        #     redirect_back(fallback_location: root_path)
+        # end
 
         if photo_params[:is_active] == '有効'
             @photo.is_active = true
@@ -54,7 +54,7 @@ class Public::PhotosController < ApplicationController
         @cart_item = CartItem.new
         @user = User.find_by(id: @photo.user_id)
         @like = Like.new
-        @photo_tags = @photo.tags
+        # @photo_tags = @photo.tags
         # @tag = Tag.find_by(id:@photo.tag_id)
     end
     def edit

@@ -16,7 +16,6 @@ class Public::OrdersController < ApplicationController
     else
       render 'index'
     end
-    
   end
   def index
     # Payjp.api_key = Rails.application.credentials.payjp[:secret_key]

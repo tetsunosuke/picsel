@@ -1,24 +1,7 @@
     <h3>注文情報入力</h3>
-   <div class="order_info">
+    <div class="order_info">
     <%= form_with(model: @order,url: confirm_public_orders_path, method: :get,local: true) do |f| %>
-            <h2>支払方法</h2>
-            <div class="payment">
-            <%#= render '_show.html.slim' %>
-                <span>
-                    クレジット
-                </span>
-                <%= f.hidden_field :payment_method, value: "クレジット" %>
-                <%#= f.label :payment_method,"クレジット",{style: "display: inline-block;"}%>
-                <script
-                    type="text/javascript"
-                    src="https://checkout.pay.jp/"
-                    class="payjp-button"
-                    data-key=ENV['PAYJP_DATAKEY']
-                    data-submit-text="入力確定"
-                    data-partial="true">
-                </script>
-            </div>
-            <h2>お届け先</h2>
+        <h2>お届け先</h2>
         <div class="address">
             <div class="address_button">
                 <%= f.radio_button :address_option, 0 %>
@@ -31,9 +14,9 @@
                 <%= f.radio_button :address_option, 1 %>
                 <%= f.label :address_option,"新しいお届け先",{value: 1,style: "display: inline-block;"}%>
             </div>
-             <div class="row">
+                <div class="row">
                 <div class="col-xs-4">
-                     <h4>郵便番号(ハイフンなし)</h4>
+                        <h4>郵便番号(ハイフンなし)</h4>
                 </div>
                 <div class="col-xs-8">
                     <%= f.text_field :postal_code %>
@@ -55,11 +38,26 @@
                     <%= f.text_field :name %>
                 </div>
             </div>
-      </div>
+        </div>
+        <h2>支払方法</h2>
+        <div class="payment">
+            <span>
+                クレジット
+            </span>
+            <%= f.hidden_field :payment_method, value: "クレジット" %>
+            <script
+                type="text/javascript"
+                src="https://checkout.pay.jp/"
+                class="payjp-button"
+                data-key="<%= ENV["PAYJP_PUBLIC_KEY"] %>"
+                data-submit-text="入力確定"
+                data-partial="true">
+            </script>
+        </div>
       <br>
      <%# form_with(model: @trading_status,url: confirm_public_orders_path, method: :get,local: true) do |f| %>
       <%= f.hidden_field :trading_status, value:0 %>
-      <%= f.submit "確認画面へ進む",class:"btn btn-primary",style:"margin-left:200px;"%>
+      <%= f.submit "確認画面へ進む",class:"btn btn-primary",style:"margin:0 0 100px 200px;"%>
     </div>
     <% end %>
     <%# end %>
