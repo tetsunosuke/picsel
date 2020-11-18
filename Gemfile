@@ -63,24 +63,20 @@ group :test do
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
   gem 'chromedriver-helper'
+  gem 'rspec-rails'
 end
 gem 'jquery-rails'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
 
 group :production do
   gem 'mysql2'
 end
-gem 'slim-rails'
 gem "refile", require: "refile/rails", github: 'manfe/refile'
 gem "refile-mini_magick"
-gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
 gem 'pry-byebug'
 gem 'payjp'
 gem 'ransack'
 gem "gretel"
 gem 'dotenv-rails'
 gem 'enum_help'
-group :production do
-  gem 'mysql2'
-end

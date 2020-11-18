@@ -1,7 +1,7 @@
 
 <div class="row">
     <div class="col-xs-3">
-        <div class="txt-heading">confirm order</div>
+        <h3 class="txt-heading">confirm order</h3>
     </div>
         <%= form_with(model: @order, url:public_orders_path,local: true, method: :post) do |f| %>  
             <div class="col-xs-9">
@@ -50,7 +50,7 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="user_details"style="height:20px;width:100%;background-color:black;margin-top:10px;" >お客様情報</div>
+                <div class="user_details"style="height:20px;width:100%;background-color:black;margin-top:10px;color:white;" >お客様情報</div>
                     <h5> <%= @order_payment %>払い</h5>
                        
                     <h5>〒<%= @order_address.postal_code%></h5>

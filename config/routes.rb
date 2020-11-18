@@ -50,6 +50,7 @@ Rails.application.routes.draw do
         get :following, :followers
       end
         collection do
+      get "about"
       get "my_page"
       get "search"
       get "users_unsubscribe" => "userr#unsubscribe"

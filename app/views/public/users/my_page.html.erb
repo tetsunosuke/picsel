@@ -67,7 +67,9 @@
                         <%= link_to"Your Orders",sold_public_order_path(@user)  %>
                     </div>
                     <div class="mypage_detail__orders_info">
-                        <p>You got xxx orders</p>
+                        <p>You got
+                        <%= @order_detail.count %>
+                        orders</p>
                     </div>
                 </div>
             </div>

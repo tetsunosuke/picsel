@@ -1,5 +1,5 @@
 class Public::UsersController < ApplicationController
-    before_action :authenticate_user!, except: [:top]
+    before_action :authenticate_user!, except: [:top,:about]
     before_action :set_search
     def top
         # ランキング表示
@@ -20,6 +20,7 @@ class Public::UsersController < ApplicationController
     end
     def my_page
         @user = current_user
+        @order_detail = OrderDetail.where(photo_id: @user.photos.ids).pluck(:order_detail_id)
     end
     def update
         @user = User.where(id: current_user.id)
@@ -29,8 +30,9 @@ class Public::UsersController < ApplicationController
           render root_path
         end
     end
-    def edit 
+    def edit
         @user = current_user
+        @order_detail = OrderDetail.where(photo_id: @user.photos.ids).pluck(:order_detail_id)
     end
     def following
         @user  = User.find(params[:id])
