@@ -41,23 +41,22 @@
         </div>
         <h2>支払方法</h2>
         <div class="payment">
-            <span>
-                クレジット
-            </span>
-            <%= f.hidden_field :payment_method, value: "クレジット" %>
-            <script
+             <div class="payment">
+                <%= f.radio_button :payment_method, :"クレジット" %>
+                <%= f.label :payment_method,"クレジット",{style: "display: inline-block;"}%>
+               <p> <%= f.radio_button :payment_method, :"銀行振込" %>
+                <%= f.label :payment_method,"銀行振込",{style: "display: inline-block;"}%></p>
+            </div>
+            <!--/script
                 type="text/javascript"
                 src="https://checkout.pay.jp/"
                 class="payjp-button"
                 data-key="<%= ENV["PAYJP_PUBLIC_KEY"] %>"
                 data-submit-text="入力確定"
                 data-partial="true">
-            </script>
+            </script-->
         </div>
       <br>
-     <%# form_with(model: @trading_status,url: confirm_public_orders_path, method: :get,local: true) do |f| %>
-      <%= f.hidden_field :trading_status, value:0 %>
       <%= f.submit "確認画面へ進む",class:"btn btn-primary",style:"margin:0 0 100px 200px;"%>
     </div>
     <% end %>
-    <%# end %>

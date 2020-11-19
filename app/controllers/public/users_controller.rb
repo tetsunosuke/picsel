@@ -20,7 +20,8 @@ class Public::UsersController < ApplicationController
     end
     def my_page
         @user = current_user
-        # @order_detail = OrderDetail.where(photo_id: @user.photos.ids).pluck(:order_detail_id)
+        # binding.pry
+        @order_detail = OrderDetail.where(photo_id: @user.photos.ids).pluck(:order_detail_id)
     end
     def update
         @user = User.where(id: current_user.id)

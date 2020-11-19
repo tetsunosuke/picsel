@@ -106,7 +106,7 @@ end
     def sold_detail
       @order = Order.find(params[:id])
       @order_details = @order.order_details.where(photo_id:current_user.photos.pluck(:id))
-      @order_payment = "クレジット"
+      # @order_payment = params[:order][:payment_method]
   end
   private
   def order_params
