@@ -9,7 +9,6 @@ class Public::PhotosController < ApplicationController
         else
             # binding.pry
             @user = User.find(params[:user_id])
-            
         end
         @photos = Photo.where(user_id: @user.id)
         #  binding.pry
