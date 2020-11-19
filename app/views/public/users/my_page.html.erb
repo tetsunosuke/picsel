@@ -67,13 +67,14 @@
                         <%= link_to"Your Orders",sold_public_order_path(@user)  %>
                     </div>
                     <div class="mypage_detail__orders_info">
-                        <%# if @order_detail.empty? %>
-                            
-                        <%# else %>
+                        <% if @order_detail.empty? %>
+                          い  
+                        <% else %>
                             <p>
-                            <%#= @order_detail.count %>
+                            <%= @order_detail.count %>
+                            う
                             </p>
-                        <%# end %>
+                        <% end %>
                     </div>
                 </div>
             </div>
