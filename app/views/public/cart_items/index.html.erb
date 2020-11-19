@@ -37,14 +37,13 @@
                             </tr>
                         <% end %>
                             <% sum_price = 0 %>
-                            <% @cart_items.each do |cart_item| %> 
+                            <% @cart_items.each do |cart_item| %>
                                 <%  cart_item_price =(cart_item.photo.price*1.08).round*(cart_item.amount) %>
                                 <% cart_item_price %>
                                 <% sum_price = sum_price + cart_item_price %>
                             <% end %>
                             <% sum_amount = 0 %>
-                            <% @cart_items.each do |cart_item| %> 
-        
+                            <% @cart_items.each do |cart_item| %>
                                 <% sum_amount = sum_amount + cart_item.amount %>
                             <% end %>
                             <tr style="font-size:20px;">
