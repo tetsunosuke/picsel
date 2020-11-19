@@ -18,7 +18,7 @@ html lang="ja"
                 .navbar.navbar-inverse.opacity.margin
                     nav.nav.navbar-nav.navbar-left
                     = link_to root_path do
-                        = image_tag asset_path('picselogo.png')
+                        = image_tag asset_path('picselogo.png'),style:"width:10%;"
                     / = link_to "picsel" ,root_path
                     ul.nav.navbar-nav.navbar-right
                         - if user_signed_in?
