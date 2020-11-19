@@ -1,0 +1,122 @@
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+8 18:38:22 +0900
+"schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+5m (1.3ms)[0m  [1m[35mCREATE TABLE "addresses" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar DEFAULT '' NOT NULL, "user_id" integer, "postal_code" varchar DEFAULT '' NOT NULL, "address" varchar DEFAULT '' NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "admins"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "admins" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "remember_created_at" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_email" ON "admins" ("email")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_admins_on_reset_password_token" ON "admins" ("reset_password_token")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "book_marks"[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "book_marks" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "photo_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "cards"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "cards" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "customer_token" varchar NOT NULL, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX "index_cards_on_user_id" ON "cards" ("user_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "cart_items"[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "cart_items" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "amount" integer DEFAULT 0, "photo_id" integer, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "comments"[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "comments" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "photo_id" integer, "user_id" integer, "text" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "gallaries"[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "gallaries" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "photo_id" integer NOT NULL, "gallary_name" varchar NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "hashtag_photos"[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "hashtag_photos" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "photo_id" integer, "hashtag_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE  INDEX "index_hashtag_photos_on_hashtag_id" ON "hashtag_photos" ("hashtag_id")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX "index_hashtag_photos_on_photo_id" ON "hashtag_photos" ("photo_id")[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "hashtags"[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE TABLE "hashtags" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "hashname" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_hashtags_on_hashname" ON "hashtags" ("hashname")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "likes"[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "likes" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "photo_id" integer NOT NULL, "user_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX "index_likes_on_user_id" ON "likes" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "order_details"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "order_details" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "order_id" integer, "photo_id" integer, "price" integer DEFAULT 0 NOT NULL, "amount" integer DEFAULT 0 NOT NULL, "shipping_status" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "orders"[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "orders" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "postal_code" varchar DEFAULT '' NOT NULL, "address" varchar DEFAULT '' NOT NULL, "name" varchar DEFAULT '' NOT NULL, "user_id" integer, "total_payment" integer DEFAULT 0 NOT NULL, "payment_method" integer NOT NULL, "status" integer NOT NULL, "buyer_id" integer NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "photos"[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "photos" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "title" varchar DEFAULT '' NOT NULL, "user_id" integer, "image_id" varchar DEFAULT '' NOT NULL, "caption" text NOT NULL, "price" integer DEFAULT 0 NOT NULL, "gallary_id" integer, "hashbody" varchar DEFAULT '', "is_active" boolean DEFAULT 1 NOT NULL, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.3ms)[0m  [1m[35mDROP TABLE IF EXISTS "public_cards"[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE TABLE "public_cards" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "index" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "relationships"[0m
+  [1m[35m (1.6ms)[0m  [1m[35mCREATE TABLE "relationships" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "follower_id" integer, "following_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_relationships_on_follower_id_and_following_id" ON "relationships" ("follower_id", "following_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX "index_relationships_on_follower_id" ON "relationships" ("follower_id")[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX "index_relationships_on_following_id" ON "relationships" ("following_id")[0m
+  [1m[35m (0.5ms)[0m  [1m[35mDROP TABLE IF EXISTS "tag_maps"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "tag_maps" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "photo_id" integer, "tag_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX "index_tag_maps_on_photo_id" ON "tag_maps" ("photo_id")[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE  INDEX "index_tag_maps_on_tag_id" ON "tag_maps" ("tag_id")[0m
+  [1m[35m (0.4ms)[0m  [1m[35mDROP TABLE IF EXISTS "tags"[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE TABLE "tags" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "tag_name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users"[0m
+  [1m[35m (1.4ms)[0m  [1m[35mCREATE TABLE "users" ("id" integer PRIMARY KEY AUTOINCREMENT NOT NULL, "email" varchar DEFAULT '' NOT NULL, "encrypted_password" varchar DEFAULT '' NOT NULL, "reset_password_token" varchar, "reset_password_sent_at" datetime, "last_name" varchar DEFAULT '' NOT NULL, "first_name" varchar DEFAULT '' NOT NULL, "last_name_kana" varchar DEFAULT '' NOT NULL, "first_name_kana" varchar DEFAULT '' NOT NULL, "postal_code" varchar DEFAULT '' NOT NULL, "address" varchar DEFAULT '' NOT NULL, "telephone_number" varchar DEFAULT '' NOT NULL, "is_deleted" boolean DEFAULT 1 NOT NULL, "rate" float DEFAULT 0.0 NOT NULL, "profile_image_id" varchar DEFAULT '' NOT NULL, "introduce" varchar DEFAULT '' NOT NULL, "remember_created_at" datetime, "datetime" datetime, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL, "name" varchar, "nickname" varchar DEFAULT '' NOT NULL)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (1.5ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" varchar NOT NULL PRIMARY KEY)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (2.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20201107055014)[0m
+  [1m[35m (1.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20201026021457),
+(20201103112133),
+(20201026021723),
+(20201026013607),
+(20201105012805),
+(20201026021712),
+(20201026021803),
+(20201026021541),
+(20201026021525),
+(20201026021738),
+(20201105060328),
+(20201107054656),
+(20201105012902),
+(20201026013034),
+(20201102033541),
+(20201026021658),
+(20201103112142),
+(20201106073422),
+(20201105014033),
+(20201103112646),
+(20201026021706),
+(20201026021753),
+(20201105012509);
+
+[0m
+  [1m[35m (4.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" varchar NOT NULL PRIMARY KEY, "value" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Create (1.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["key", "environment"], ["value", "test"], ["created_at", "2020-11-18 09:38:22.302428"], ["updated_at", "2020-11-18 09:38:22.302428"]]
+  [1m[35m (1.2ms)[0m  [1m[36mcommit transaction[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.1ms)[0m  [1m[34mSELECT  "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = ? LIMIT ?[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mcommit transaction[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/public/photos/new" for 127.0.0.1 at 2020-11-18 18:39:44 +0900
+Processing by Public::PhotosController#new as HTML
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/public/photos/new" for 127.0.0.1 at 2020-11-18 18:39:44 +0900
+Processing by Public::PhotosController#new as HTML
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/public/photos/new" for 127.0.0.1 at 2020-11-18 18:40:58 +0900
+Processing by Public::PhotosController#new as HTML
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/public/photos/new" for 127.0.0.1 at 2020-11-18 18:40:58 +0900
+Processing by Public::PhotosController#new as HTML
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/public/photos/new" for 127.0.0.1 at 2020-11-18 18:44:50 +0900
+Processing by Public::PhotosController#new as HTML
+Completed 401 Unauthorized in 7ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
+  [1m[35m (0.0ms)[0m  [1m[36mbegin transaction[0m
+Started GET "/public/photos/new" for 127.0.0.1 at 2020-11-18 18:44:50 +0900
+Processing by Public::PhotosController#new as HTML
+Completed 401 Unauthorized in 0ms (ActiveRecord: 0.0ms)
+  [1m[35m (0.1ms)[0m  [1m[31mrollback transaction[0m
