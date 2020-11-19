@@ -67,9 +67,13 @@
                         <%= link_to"Your Orders",sold_public_order_path(@user)  %>
                     </div>
                     <div class="mypage_detail__orders_info">
-                        <p>You got
-                        <%= @order_detail.count %>
-                        orders</p>
+                        <% if @order_detail.empty? %>
+                            Your order is nothing
+                        <% else %>
+                            <p>You got
+                            <%= @order_detail.count %>
+                            orders</p>
+                        <% end %>
                     </div>
                 </div>
             </div>
