@@ -17,9 +17,9 @@ html lang="ja"
         .jumbotron.jumbotron-extend.jumbotron-fluid.padding_margin_0 
                 .navbar.navbar-inverse.opacity.margin
                     nav.nav.navbar-nav.navbar-left
-                    / = link_to root_path do
-                        image src="/assets/picselogo.png" style="width:10%;"
-                    = link_to "picsel" ,root_path
+                    = link_to root_path do
+                        image_tag asset_path('picselogo.png')
+                    / = link_to "picsel" ,root_path
                     ul.nav.navbar-nav.navbar-right
                         - if user_signed_in?
                             li[style="margin:15px 20px 0 0;color:white;"]
