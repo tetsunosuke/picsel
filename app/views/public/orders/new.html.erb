@@ -45,14 +45,14 @@
                 クレジット
             </span>
             <%= f.hidden_field :payment_method, value: "クレジット" %>
-            <script
+            <!--/script
                 type="text/javascript"
                 src="https://checkout.pay.jp/"
                 class="payjp-button"
                 data-key="<%= ENV["PAYJP_PUBLIC_KEY"] %>"
                 data-submit-text="入力確定"
                 data-partial="true">
-            </script>
+            </script-->
         </div>
       <br>
      <%# form_with(model: @trading_status,url: confirm_public_orders_path, method: :get,local: true) do |f| %>
