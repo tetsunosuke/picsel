@@ -17,8 +17,9 @@ html lang="ja"
         .jumbotron.jumbotron-extend.jumbotron-fluid.padding_margin_0 
                 .navbar.navbar-inverse.opacity.margin
                     nav.nav.navbar-nav.navbar-left
-                    = link_to root_path do
-                        image-url src="/assets/picselogo.png" style="width:10%;"
+                    / = link_to root_path do
+                        image src="/assets/picselogo.png" style="width:10%;"
+                    = link_to "picsel" ,root_path
                     ul.nav.navbar-nav.navbar-right
                         - if user_signed_in?
                             li[style="margin:15px 20px 0 0;color:white;"]
@@ -36,7 +37,7 @@ html lang="ja"
                         - elsif admin_signed_in?
                             li= link_to "写真一覧", top_admins_photos_path, class: "btn btn-light"
                             li= link_to "会員一覧", admins_users_path, class: "btn btn-light"
-                            li= link_to "注文履歴一覧", admins_order_index_path, class: "btn btn-light"
+                            li= link_to "注文履歴一覧", admins_orders_path, class: "btn btn-light"
                             li= link_to "ログアウト", destroy_admin_session_path, class: "btn btn-light" ,method: :get
                         - else
                             li= link_to "ページトップ",root_path, class: "btn btn-light"
