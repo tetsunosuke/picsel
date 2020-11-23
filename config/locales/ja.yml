@@ -1,0 +1,8 @@
+ja:
+  public:
+    orders:
+        show:
+          print: 'プリント'
+          shipped: '配送済み'
+          recieved: '受け取り済み'
+          done: '取引終了'

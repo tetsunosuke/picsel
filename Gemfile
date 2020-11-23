@@ -45,6 +45,8 @@ group :development, :test do
   gem 'capistrano-rails'
   gem 'capistrano3-puma'
   gem 'capistrano-rbenv'
+  gem "factory_bot_rails", "~> 4.10.0"
+  gem 'rspec-rails', "~> 3.6.0"
 end
 gem 'bootstrap-sass', '~> 3.3.6'
 
@@ -54,6 +56,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+  gem 'spring-commands-rspec'
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 gem 'pry-rails'
@@ -62,8 +65,8 @@ group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
   # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'chromedriver-helper'
-  gem 'rspec-rails'
+  # gem 'chromedriver-helper'
+  gem 'webdrivers', '~> 3.0'
 end
 gem 'jquery-rails'
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
@@ -80,3 +83,4 @@ gem 'ransack'
 gem "gretel"
 gem 'dotenv-rails'
 gem 'enum_help'
+gem 'rails-i18n', '~> 5.1'

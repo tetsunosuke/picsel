@@ -15,6 +15,12 @@ class User < ApplicationRecord
   has_many :followings, through: :following_relationships
   has_many :follower_relationships, foreign_key: "following_id", class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :follower_relationships
+  validates :first_name, presence: true,
+                      length: { minimum: 2,maximum: 20}
+  validates :last_name, presence: true,uniqueness:true,
+                      length: { minimum: 2,maximum: 20}
+  validates :email, presence: true, uniqueness: true,
+                      length: { minimum: 1,maximum: 50}
   # has_one :card, optional: true
 
   def following?(other_user)

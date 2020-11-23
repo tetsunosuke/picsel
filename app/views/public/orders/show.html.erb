@@ -42,7 +42,17 @@
                                             <% end %>
                                         <% else %>
                                             <%#= order_detail.shipping_status_i18n  %>
-                                            <%= order_detail.shipping_status  %>
+                                            <% if order_detail.shipping_status == "print"  %>
+                                                <%= t '.print' %>
+                                            <% elsif order_detail.shipping_status == "shipped" %>
+                                                <%= t '.shipped' %>
+                                            <% elsif order_detail.shipping_status == "received" %>
+                                                <%= t '.received' %>
+                                            <% elsif order_detail.shipping_status == "done" %>
+                                                <%= t '.done' %>
+                                            <% else %>
+                                                <p>取引前</p>
+                                            <% end %>
                                         <% end %>
                                     </td>
                                 </tr>
