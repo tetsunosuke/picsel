@@ -84,7 +84,6 @@ Rails.application.routes.draw do
     get "confirm"
     get "complete"
     end
-   
     end
     resources :book_marks, only:[:index]
     resources :gallaries, only:[:new,:index,:edit,:create,:update,:delete]

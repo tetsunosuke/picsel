@@ -15,7 +15,6 @@ class Public::PhotosController < ApplicationController
         # @Photoss = Photo.search(params[:search])
         @hashtag = Hashtag.find_by(hashname: params[:tag])
         @hashtag_photos = @hashtag.photos if @hashtag.present?
-        
         # @hashtag_photos = HashtagPhoto.where(hashtag_id: @hashtag.id)
         # @hashtag_photos = HashtagPhoto.search(params[:search])
     end
@@ -80,10 +79,10 @@ class Public::PhotosController < ApplicationController
         # @hashtag = Hashtag.find_by(hashname: @hashname)
         @hashtags = Hashtag.where(['hashname LIKE ?', "%#{params[:hashname_cont]}%"])
         hashtag_photo_ids = []
-        @hashtags.each do |hashtag| 
+        @hashtags.each do |hashtag|
             # binding.pry
             hashtag.hashtag_photos.each do |hashtag_photo|
-            hashtag_photo_ids << hashtag_photo.id
+                hashtag_photo_ids << hashtag_photo.id
             # binding.pry
             end
         end
