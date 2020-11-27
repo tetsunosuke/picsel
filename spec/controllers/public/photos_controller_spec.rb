@@ -12,10 +12,10 @@ RSpec.describe Public::PhotosController, type: :controller do
             it "responds successfully" do
                 sign_in @user
                 get :index
-                expect(response).to be_success
+                expect(response).to be_successful
             end
 
-            # 200レスポンスを返すこと
+            # 成功200レスポンスを返すこと
             it "returns a 200 response" do
                 sign_in @user
                 get :index
@@ -25,7 +25,7 @@ RSpec.describe Public::PhotosController, type: :controller do
     end
     # ゲストとして
     context "as a guest" do
-        # 302レスポンスを返すこと
+        # リダイレクト302レスポンスを返すこと
         it "returns a 302 response" do
             get :index
             expect(response).to have_http_status "302"
@@ -42,13 +42,13 @@ RSpec.describe Public::PhotosController, type: :controller do
         context "as an authorized user" do
             before do
                 @user = FactoryBot.create(:user)
-                @photo = FactoryBot.create(:photo, @user)
+                @photo = FactoryBot.create(:photo)
             end
             # 正常にレスポンスを返すこと
             it "responds successfully" do
                 sign_in @user
-                get :show, params: { id: @photo.id } 
-                expect(response).to be_success
+                get :show, params: { id: @photo.id }
+                expect(response).to be_successful
             end
         end
         # 認可されていないユーザーとして
@@ -56,12 +56,12 @@ RSpec.describe Public::PhotosController, type: :controller do
             before do
                 @user = FactoryBot.create(:user)
                 other_user = FactoryBot.create(:user)
-                @photo = FactoryBot.create(:photo, other_user)
+                @photo = FactoryBot.create(:photo, owner: other_user)
             end
-            # ダッシュボードにリダイレクトすること
+            # トップページにリダイレクトすること
             it "redirects to the dashboard" do
                 sign_in @user
-                get :show, params: { id: @photo.id }
+                get :top, params: { id: @photo.id }
                 expect(response).to redirect_to root_path
             end
         end

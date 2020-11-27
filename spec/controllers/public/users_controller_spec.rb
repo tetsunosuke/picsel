@@ -4,7 +4,7 @@ RSpec.describe Public::UsersController, type: :controller do
         # 正常にレスポンスを返すこと 
         it "responds successfully" do
             get :top
-            expect(response).to be_success
+            expect(response).to be_successful
         end
     end
     # 200レスポンスを返すこと
