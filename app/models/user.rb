@@ -16,9 +16,9 @@ class User < ApplicationRecord
   has_many :follower_relationships, foreign_key: "following_id", class_name: "Relationship", dependent: :destroy
   has_many :followers, through: :follower_relationships
   validates :first_name, presence: true,
-                      length: { minimum: 2,maximum: 20}
+                      length: { minimum: 1,maximum: 20}
   validates :last_name, presence: true,uniqueness:true,
-                      length: { minimum: 2,maximum: 20}
+                      length: { minimum: 1,maximum: 20}
   validates :email, presence: true, uniqueness: true,
                       length: { minimum: 1,maximum: 50}
   # has_one :card, optional: true
@@ -41,4 +41,28 @@ class User < ApplicationRecord
   def already_liked?(photo)
     self.likes.exists?(photo_id: photo.id)
   end
+
+  def full_name
+    last_name + ' ' + first_name
+  end
+
+  def self.fujiwara_full_name
+    fujiwara = self.find_by(last_name: 'fujiwara')
+    "#{fujiwara.last_name} #{fujiwara.first_name}"
+  end
+
+  def self.sawaki_full_name
+    fujiwara = self.find_by(last_name: 'fujiwara')
+    "#{fujiwara.last_name} #{fujiwara.first_name}"
+  end
+
+  def self.full_name(last_name)
+    fujiwara = self.find_by(last_name: last_name)
+    "#{fujiwara.last_name} #{fujiwara.first_name}"
+  end
+
+  def self.hoge
+    "hoge"
+  end
+
 end

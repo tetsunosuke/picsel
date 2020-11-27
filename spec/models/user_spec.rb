@@ -4,28 +4,28 @@ RSpec.describe User, type: :model do
   # 姓、名、メール、パスワードがあれば有効な状態であること
   it "is valid with a first name, last name, email, and password" do
     user = User.new(
-    first_name: "Aaron",
-    last_name: "Sumner",
-    email: "tester@example.com",
+    first_name: "Aearon",
+    last_name: "Sumneer",
+    email: "teseter@example.com",
     password: "dottle-nouveau-pavilion-tights-furze",
     )
     expect(user).to be_valid
   end
   # 名がなければ無効な状態であること
   it "is invalid without a first name" do
-    user = User.new(first_name: nil)
+    user = FactoryBot.build(:user, first_name: nil)
     user.valid?
     expect(user.errors[:first_name]).to include("can't be blank")
   end
   # 姓がなければ無効な状態であること
   it "is invalid without a last name" do
-    user = User.new(last_name: nil)
+    user = FactoryBot.build(:user, last_name: nil)
     user.valid?
     expect(user.errors[:last_name]).to include("can't be blank")
   end
   # メールアドレスがなければ無効な状態であること
   it "is invalid without an email address" do
-    user = User.new(email: nil)
+    user = FactoryBot.build(:user, email: nil)
     user.valid?
     expect(user.errors[:email]).to include("can't be blank")
   end
@@ -62,9 +62,9 @@ RSpec.describe User, type: :model do
   #姓、名、メール、パスワードがあれば有効な状態であること
   it "is valid with a first name,last name,email,and password" do
     user = User.new(
-      first_name: "Aaron",
-      last_name: "sumner",
-      email: "tester@example.com",
+      first_name: "Aaronds",
+      last_name: "sumnerd",
+      email: "tessdter@example.com",
       password: "skakfjsksjksjkssp@kfd09402921j",
     )
     expect(user).to be_valid

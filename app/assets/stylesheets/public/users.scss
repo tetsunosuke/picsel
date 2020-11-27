@@ -1,19 +1,19 @@
 // Place all the styles related to the users::users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.about{
+.mypage_view {
     background-color: #2F3751;
     width: 100%;
     height: 30px;
     margin:0px;
-    p{
+    .mypage_view p{
         display: inline-block;
     }
-    h6{
+    .mypage_view h6{
         color:white;
         margin:0px;
     }
-    i{
+    .mypage_view i{
         size:100px;
     }
 }
@@ -97,3 +97,38 @@
 // .mypage_box{
 //     padding-bottom:200px;
 // }
+.picsell_about{
+    width:100%;
+    height: 100%;
+    &_each_sec{
+        width:100%;
+        text-align: center;
+        margin: 20px;
+    }
+    &_each_sec{
+        margin-top:20px;
+    }
+    &_content_wrapper{
+        width:100%;
+        margin-left:20%;
+        text-align: center;
+    }
+    &_content1{
+      display:flex;
+      width:100%;
+    }
+    &_content2{
+        display:flex;
+        width:100%;
+      }
+      &_content3{
+        display:flex;
+        width:100%;
+      }
+    &_content_box{
+        border:1px solid black;
+        margin:10px;
+        width:30%;
+        box-shadow: 2px 2px 2px;
+    }
+}
