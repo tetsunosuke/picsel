@@ -5,19 +5,17 @@
 <%= @hashtag_photos_count %>
 件</h3>
 </center>
-        <div class="index_photo_wrapper">
-   
-            <%#@user ||= current_user %>
-            
-        </div>
-        <div class="photo_index_images">
+        <div class="recommend_item_each">
+        <div class="recommend_photographer">
             <% @hashtag_photos.each do |hashtag_photo| %>
-                <%= link_to public_photo_path(hashtag_photo.photo) do  %>
-                     <%= attachment_image_tag hashtag_photo.photo,:image,fallback: "noimage.jpg", style:'width: 33%;height:33%;padding:10px;' %>
-                <% end %>
-            <% end %>
+                <div class="photo_index_view">
+                    <%= link_to public_photo_path(hashtag_photo.photo) do  %>
+                        <%= attachment_image_tag hashtag_photo.photo,:image,fallback: "noimage.jpg",class:"image_index",style:"border-radius: 10px;"%>
+                    <% end %>
+                </div>
+            <% end%>
         </div>
-</div>
+    </div>
 
 
 

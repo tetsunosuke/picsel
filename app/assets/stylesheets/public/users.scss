@@ -1,43 +1,66 @@
 // Place all the styles related to the users::users controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.mypage_view {
-    background-color: #2F3751;
-    width: 100%;
+.yourname {
+    // display: flex;
     height: 30px;
-    margin:0px;
-    .mypage_view p{
-        display: inline-block;
+    text-align: center;
     }
-    .mypage_view h6{
-        color:white;
-        margin:0px;
-    }
-    .mypage_view i{
-        size:100px;
-    }
-}
-.profile_box{
-    display:flex;
+.mypage{
     width:100%;
-}
-// .profile_detail table {
-    //     height: 270px;
-//     width:100%;
-
-// }
-.profile{
-    width:40%;
-    border: thin solid #2F3751;
-    height:400px;
-}
-.profile_detail{
-    width:60%;
-    table{
-        width:100%;
-        height:400px;
+    height:500px;
+    .row{
+        margin: 10px;
     }
-   
+    &_profile{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    height:100%;
+    border: thin solid black;
+    h6{
+        padding:10px 50px;
+    }
+    }
+    .col-xs-3{
+        padding:0;
+        height: 350px;
+    }
+    .col-xs-5{
+        padding:0;
+        height: 350px;
+    }
+    &_profile_detail{
+        table{
+            width:100%;
+            height:350px;
+            i{
+                padding:10px;
+            }
+        }
+    }
+        &_detail{
+        height:350px;
+    }
+        &_detail_box{
+            margin-top:10px;
+            height:30% ;
+            text-align:center;
+            padding-top:30px;
+            color:white;
+            background-color: gray;
+            font-size:20px;
+        }
+            &_detail_box:nth-child(1){
+                margin: 0%;
+            }
+            &_detail_box:nth-child(3){
+                height:34%;
+            }
+    &_orders_info{
+        height:100%;
+    }
+
 }
 
 // .profile{
@@ -57,43 +80,42 @@
     &_wrapper {
         display: flex;
         padding-left:40%;
-        p{
-            margin:15px 0 0 10px ;
-        }
     }
     &_follow_form{
         margin:15px;
     }
 }
-.photo_profile{
-    margin:20px;
-}
-.mypage_detail{
-    height:100%;
 
-    text-align: left;
-    &__parchase{
-        height:20%;
-        background-color: #2F3751;
-        padding:10%;
-    }
-    &__favorites{
-        height:20%;
-        margin:10px 0;
-        padding:10%;
-        background-color: #2F3751;
-    }
-    &__orders_button{
-        height:50%;
-        margin-top:10px;
-        padding:10%;
-        background-color:#2F3751;
-    }
-    &__orders_info{
-    border:1px solid #2F3751;
-    height:120px;
-    }
-}
+
+// .photo_profile{
+//     margin:20px;
+// }
+// .mypage_detail{
+//     height:100%;
+
+//     text-align: left;
+//     &__parchase{
+//         height:20%;
+//         background-color: #2F3751;
+//         padding:10%;
+//     }
+//     &__favorites{
+//         height:20%;
+//         margin:10px 0;
+//         padding:10%;
+//         background-color: #2F3751;
+//     }
+//     &__orders_button{
+//         height:50%;
+//         margin-top:10px;
+//         padding:10%;
+//         background-color:#2F3751;
+//     }
+//     &__orders_info{
+//     border:1px solid #2F3751;
+//     height:120px;
+//     }
+// }
 // .mypage_box{
 //     padding-bottom:200px;
 // }
@@ -107,6 +129,11 @@
     }
     &_each_sec{
         margin-top:20px;
+    }
+    &_content {
+        border:1px solid black;
+        margin-left:10%;
+        width:80%;
     }
     &_content_wrapper{
         width:100%;
@@ -131,4 +158,9 @@
         width:30%;
         box-shadow: 2px 2px 2px;
     }
+    &_each_image{
+        display:flex;
+    }
+    &_content_bottom{
+}
 }

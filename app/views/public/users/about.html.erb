@@ -1,38 +1,12 @@
 <div class="picsell_about">
     <div class="picsell_about_each_sec">
-        <div class="picsell_about_content">
+        <div class="picsell_about_content_top">
             <h4>ABOUT PICSELL</h4>
             <p>- 写真に価値を　-</p>
             <p>写真を通じて生活を豊にすることをテーマに写真家とあなたを繋ぐプラットフォームです</p>
             <p></p>
             <p></p>
             <p></p>
-        </div>
-    </div>
-    <div class="picsell_about_each_sec",style="background-color:white;">
-        <div class="picsell_about_content">
-            <div class="row">
-                <div class="col-xs-4 col-xs-offset-2">
-                    <h4>出品</h4>
-                    <p>販売したい写真を出品しよう</p>
-                    <p>↓</p>
-                    <p>あとは売れるのを待つだけ</p>
-                    <p>↓</p>
-                    <p>売れたら指定のサイズにプリントして発送</p>
-                    <p>↓</p>
-                    <p>購入者が受け取り評価したら取引は終了</p>
-                </div>
-                <div class="col-xs-4 ">
-                    <h4>購入</h4>
-                    <p>お気に入りの写真を探そう</p>
-                    <p>↓</p>
-                    <p>好きなサイズを選択肢、注文へ</p>
-                    <p>↓</p>
-                    <p>支払いが完了したら後は受け取りを待つだけ</p>
-                    <p>↓</p>
-                    <p>届き次第、受け取り評価をしよう</p>
-                </div>
-            </div>
         </div>
     </div>
     <div class="picsell_about_each_sec">
@@ -69,27 +43,66 @@
             </div>
         </div>
     </div>
-    <div class="picsell_about_each_image",style="width:100%;">
-        <div class="picsell_about_image_of_wallpaper",style="margin:0 auto;">
-            <%= image_tag asset_path('1222.jpg'),style:"width:60%;" %>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-2",style="width:100%;">
+            <div class="picsell_about_image_of_wallpaper",style="width:60%;">
+                <%= image_tag asset_path('1222.jpg'),style:"width:100%;" %>
+            </div>
         </div>
-        <div class="picsell_about_content" style="text-align:left;">
-            <h4></h4>
-            <p>SNSなどの発展により写真を共有する場が増えてきました。</p>
-            <p>いままで訪れたことのない場所に行ってみたり</p>
-            <p>普段の何気ない生活も写真に残したり</p>
-            <p>今まで以上に写真文化は身近になったのではないでしょうか</p>
-            <br>
-            <p>PICSELLの目的は写真というものをより身近にすることです。</p>
-            <p>あなたは撮った写真をどのように生かしていますか？</p>
-            <p>ただただデータとして保存されてはいませんか？</p>
-            <p>写真には様々な価値があります。</p>
-            <p>人々を感動させたり、</p>
-            <p>その空間に行ってみたくなったり</p>
-            <p>多くの影響を与えることができます。</p>
-            <p>共有することができる場をつくることで、</p>
-            <p>それらが持つ真価を見出すことができると考えています</p>
-            <p>まずはあなたの写真を共有してみませんか？</p>
+        <div class="col-xs-6 ",style="width:100%;">
+            <div class="picsell_about_content_bottom" style="text-align:left;">
+                <h4></h4>
+                <p>SNSなどの発展により写真を共有する場が増えてきました。</p>
+                <p>いままで訪れたことのない場所に行ってみたり</p>
+                <p>普段の何気ない生活も写真に残したり</p>
+                <p>今まで以上に写真文化は身近になったのではないでしょうか</p>
+                <br>
+                <p>PICSELLの目的は写真というものをより身近にすることです。</p>
+                <p>あなたは撮った写真をどのように生かしていますか？</p>
+                <p>ただただデータとして保存されてはいませんか？</p>
+                <p>写真には様々な価値があります。</p>
+                <p>人々を感動させたり、</p>
+                <p>その空間に行ってみたくなったり</p>
+                <p>多くの影響を与えることができます。</p>
+                <p>共有することができる場をつくることで、</p>
+                <p>それらが持つ真価を見出すことができると考えています</p>
+                <p>まずはあなたの写真を共有してみませんか？</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-4 col-xs-offset-2">
+            <div class="picsell_about_each_sec",style="background-color:white;">
+                <div class="picsell_about_content">
+                    <div class="row">
+                        <div class="col-xs-5 col-xs-offset-1">
+                            <h4>出品</h4>
+                            <p>販売したい写真を出品しよう</p>
+                            <p>↓</p>
+                            <p>あとは売れるのを待つだけ</p>
+                            <p>↓</p>
+                            <p>売れたら指定のサイズにプリントして発送</p>
+                            <p>↓</p>
+                            <p>購入者が受け取り評価したら取引は終了</p>
+                        </div>
+                        <div class="col-xs-5 ">
+                            <h4>購入</h4>
+                            <p>お気に入りの写真を探そう</p>
+                            <p>↓</p>
+                            <p>好きなサイズを選択肢、注文へ</p>
+                            <p>↓</p>
+                            <p>支払いが完了したら後は受け取りを待つだけ</p>
+                            <p>↓</p>
+                            <p>届き次第、受け取り評価をしよう</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-4">
+            <div class="picsell_about_image_of_wallpaper",style="width:60%;">
+               <%= image_tag asset_path('221.jpg'),style:"width:100%;" %>
+            </div>
         </div>
     </div>
 </div>

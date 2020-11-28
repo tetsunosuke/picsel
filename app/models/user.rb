@@ -21,6 +21,7 @@ class User < ApplicationRecord
                       length: { minimum: 1,maximum: 20}
   validates :email, presence: true, uniqueness: true,
                       length: { minimum: 1,maximum: 50}
+  validates :introduce,length: { minimum: 1,maximum: 200}
   # has_one :card, optional: true
 
   def following?(other_user)
