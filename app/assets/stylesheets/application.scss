@@ -42,9 +42,9 @@
 .field{
     margin-top:10px;
 }
-.container-fluid{
-    background-color:lightgray;
-}
+// .container-fluid{
+//     background-color:lightgray;
+// }
 .opacity{
     opacity: 70%;
 }
@@ -74,9 +74,6 @@
 
 .photo_profile{
     margin:20px;
-}
-.recommend_item_each{
-    width:100%;
 }
 // .cart_item {
     
@@ -133,3 +130,66 @@ tr td{
         width:50%;
     }
 }
+// .recommend_photographer{
+//     width:100%;
+//     display:flex;
+//     justify-content: center;
+//     flex-wrap:wrap;
+// }
+// .photo_index_view{
+//     background-color: cadetblue;
+//     width:30%;
+//     margin:1%;
+//     height:
+// }
+// パターン２
+//  .recommend_photographer{
+//     display: grid;
+//     grid-template-columns: repeat(3, 1fr);
+//     grid-auto-rows: auto;
+//     grid-gap: 1%;
+//     padding: 1% 3%;
+//     }
+//     .photo_index_view{
+//         background-color: cadetblue;
+//         background-size: cover;
+//         background-position: center;
+//         background-repeat: no-repeat;
+//         &::before {
+//           content: "";
+//           display: block;
+//           padding-top: 100%;
+//           .image{
+//               width:100%;
+//               padding-top: 100%;
+//           }
+//     }
+// }
+// パターン３
+.recommend_photographer{
+    display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.photo_index_view{
+    position: relative;
+    width: 31%;
+    margin:1% 1% 0 1%;
+    
+    :before{
+        content: "";
+        display: block;
+        padding-top: 100%;
+      }
+}
+.image_index{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+    object-fit: cover;
+  }

@@ -1,34 +1,45 @@
 <% breadcrumb :root %>
 <%= breadcrumbs separator: " &rsaquo; " %>
 <% if user_signed_in? %>
-    <div class="recommend_photographer">
-        <div class="recommend_item_each">
+    <div class="recommend_item_each">
+        <div class="recommend_photographer">
             <% @photos.each do |photo|%>
-                <%= link_to public_photo_path(photo) do  %>
-                    <%= attachment_image_tag photo,:image,fallback: "noimage.jpg", style:'width: 30%;height:33%;padding:3%;' %>
-                <% end %>
+                <div class="photo_index_view">
+                    <%= link_to public_photo_path(photo) do  %>
+                        <%= attachment_image_tag photo,:image,fallback: "noimage.jpg",class:"image_index",style:"border-radius: 10px;"%>
+                    <% end %>
+                </div>
             <% end%>
         </div>
     </div>
-    <% elsif admin_signed_in? %>
+<% elsif admin_signed_in? %>
     <center>
-<h3>Admin Photos Index</h3>
-</center>
-<% @photos.each do |photo| %>
-        <%= link_to admins_photo_path(photo) do  %>
-            <%= attachment_image_tag photo,:image,fallback: "noimage.jpg", style:'width: 15%;height:15%;padding:10px;' %>
-        <% end %>
-    <% end %>
-</div>
+        <h3>Admin Photos Index</h3>
+    </center>
+    <div class="recommend_item_each">
+        <div class="recommend_photographer">
+            <% @photos.each do |photo|%>
+                <div class="photo_index_view">
+                    <%= link_to admins_photo_path(photo) do  %>
+                        <%= attachment_image_tag photo,:image,fallback: "noimage.jpg",class:"image_index",style:"border-radius: 10px;"%>
+                    <% end %>
+                </div>
+            <% end%>
+        </div>
+    </div>
 <% else %>
     <center>
         <%= link_to"let's explore photos",  new_user_registration_path ,class:"btn btn-primary",style:"margin-top:10px;"%>
     </center>
-    <div class="recommend_item_each"> 
-        <%#9.times do |i|%>
-            <%#= link_to public_photo_path(@photos[i].id) do %>
-                <%#= attachment_image_tag @photos[i],:image, fallback: "noimage.png", style:'width: 30%;height:33%;padding:3%;'%>
-            <%# end %>
-        <%#end %>
+    <div class="recommend_item_each">
+        <div class="recommend_photographer">
+            <% @photos.each do |photo|%>
+                <div class="photo_index_view">
+                    <%= link_to public_photo_path(photo) do  %>
+                        <%= attachment_image_tag photo,:image,fallback: "noimage.jpg",class:"image_index",style:"border-radius: 10px;"%>
+                    <% end %>
+                </div>
+            <% end%>
+        </div>
     </div>
 <% end %>
