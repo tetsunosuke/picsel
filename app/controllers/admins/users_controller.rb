@@ -5,12 +5,12 @@ class Admins::UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
-    
   end
 
   def update
   end
 
   def delete
+    @user = User.find(params[:id])
   end
 end

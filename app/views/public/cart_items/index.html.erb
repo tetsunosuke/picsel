@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-xs-3">
-        <h3 class="txt-heading">Shopping Cart</h3>
+        <h3 class="txt-heading">ショッピングカート</h3>
     </div>
     <div class="col-xs-9">
           <%= button_to 'カートを空にする', delete_all_public_cart_items_path, method: :delete, data: {confirm: 'カートを空にして本当によろしいですか？'}, class: 'btn btn-danger',style:"float:right;margin:10px;" %></td>
@@ -16,7 +16,7 @@
                         </tr>
                         <% @cart_items.each do |cart_item| %>
                             <tr style="height:100px;" >
-                                <td><%= attachment_image_tag cart_item.photo,:image ,fallback: "noimage.jpg", style:'height:100px;%;padding:3%;'%></td>
+                                <td><%= attachment_image_tag cart_item.photo,:image ,fallback: "noimages.jpg", style:'height:100px;%;padding:3%;'%></td>
                                 <td><%= cart_item.photo.title %></td>
                                 <td>
                                     <%= form_for(cart_item,url:public_cart_item_path(cart_item.id),method: :patch) do |f| %>

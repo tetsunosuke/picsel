@@ -1,87 +1,111 @@
 <div class="row">
     <div class="col-xs-3">
-        <h3 class="txt-heading">confirm order</h3>
+        <h3 class="txt-heading">注文詳細</h3>
     </div>
-            <div class="col-xs-9">
-                <div class="cart_item_table">
-                    <table class="tbl-cart" cellpadding="10" cellspacing="1" width=100%;>
-                        <tbody>
-                            <tr class="cart_item_header"style="border:solid 1px black">
-                                <th style="width:30%;"></th>
-                                <th style="width:20%;">出品者</th>
-                                <th style="width:20%;">枚数</th>
-                                <th style="width:10%;">金額</th>
-                                <th style="width:10%;">小計</th>
-                                <th style="width:10%;">配送ステータス</th>
-                            </tr>
-                            <% @order_details.each do |order_detail| %>
-                                <tr style="height:100px;" >
-                                    <td>
-                                        <%= link_to public_photo_path(order_detail.photo) do %>
-                                            <%= attachment_image_tag order_detail.photo,:image ,fallback: "noimage.jpg", style:'height:100px;%;padding:3%;'%>
-                                        <% end %>
-                                    </td>
-                                    <td>
-                                        <%= order_detail.photo.user.first_name + order_detail.photo.user.last_name %>
-                                        </td>
-                                    <td>
-                                        <%= order_detail.amount  %>
-                                    </td>
-                                    <td>
-                                        <%= (order_detail.photo.price*1.08).round.to_s(:delimited)  %>
-                                    </td>
-                                    <td>
-                                        <%= ((order_detail.photo.price*1.08) * (order_detail.amount)).round.to_s(:delimited) %>
-                                    </td>
-                                     <td>
-                                        <% if order_detail.shipping_status == "received"  %>
-                                            <%#= order_detail.shipping_status = "done" %>
-                                            <%= form_with(model:order_detail,url:public_order_detail_path(order_detail),local: true,method: :patch) do  |f| %>
-                                                <%= f.hidden_field :shipping_status, value: "done" %>
-                                                <%= f.submit "受取完了",class:"btn btn-primary"%>
-                                            <% end %>
-                                        <% else %>
-                                            <%#= order_detail.shipping_status_i18n  %>
-                                            <% if order_detail.shipping_status == "print"  %>
-                                                <%= t '.print' %>
-                                            <% elsif order_detail.shipping_status == "shipped" %>
-                                                <%= t '.shipped' %>
-                                            <% elsif order_detail.shipping_status == "received" %>
-                                                <%= t '.received' %>
-                                            <% elsif order_detail.shipping_status == "done" %>
-                                                <%= t '.done' %>
-                                            <% else %>
-                                                <p>取引前</p>
-                                            <% end %>
-                                        <% end %>
-                                    </td>
-                                </tr>
-                            <% end %>
-                            <% sum_price = 0 %>
-                                <% @order_details.each do |order_detail| %> 
-                                    <%  order_detail_price =(order_detail.photo.price*1.08).round*(order_detail.amount) %>
-                                    <% order_detail_price %>
-                                    <% sum_price = sum_price + order_detail_price %>
+    <div class="col-xs-9">
+        <div class="cart_item_table">
+            <table class="tbl-cart" cellpadding="10" cellspacing="1" width=100%;>
+                <tbody>
+                    <tr class="cart_item_header"style="border:solid 1px black">
+                        <th style="width:30%;"></th>
+                        <th style="width:20%;">出品者</th>
+                        <th style="width:20%;">枚数</th>
+                        <th style="width:10%;">金額</th>
+                        <th style="width:10%;">小計</th>
+                        <th style="width:10%;">配送ステータス</th>
+                    </tr>
+                    <% @order_details.each do |order_detail| %>
+                        <tr style="height:100px;" >
+                            <td>
+                                <%= link_to public_photo_path(order_detail.photo) do %>
+                                    <%= attachment_image_tag order_detail.photo,:image ,fallback: "noimage.jpg", style:'height:100px;%;padding:3%;'%>
                                 <% end %>
-                            <% sum_amount = 0 %>
-                                <% @order_details.each do |order_detail| %> 
-                                    <% sum_amount = sum_amount + order_detail.amount %>
+                            </td>
+                            <td>
+                                <%= order_detail.photo.user.first_name + order_detail.photo.user.last_name %>
+                                </td>
+                            <td>
+                                <%= order_detail.amount  %>
+                            </td>
+                            <td>
+                                <%= (order_detail.photo.price*1.08).round.to_s(:delimited)  %>
+                            </td>
+                            <td>
+                                <%= ((order_detail.photo.price*1.08) * (order_detail.amount)).round.to_s(:delimited) %>
+                            </td>
+                                <td>
+                                <% if order_detail.shipping_status == "received"  %>
+                                    <%#= order_detail.shipping_status = "done" %>
+                                    <%= form_with(model:order_detail,url:public_order_detail_path(order_detail),local: true,method: :patch) do  |f| %>
+                                        <%= f.hidden_field :shipping_status, value: "done" %>
+                                        <%= f.submit "受取完了",class:"btn btn-primary"%>
+                                    <% end %>
+                                <% else %>
+                                    <%#= order_detail.shipping_status_i18n  %>
+                                    <% if order_detail.shipping_status == "print"  %>
+                                        <%= t '.print' %>
+                                    <% elsif order_detail.shipping_status == "shipped" %>
+                                        <%= t '.shipped' %>
+                                    <% elsif order_detail.shipping_status == "received" %>
+                                        <%= t '.received' %>
+                                    <% elsif order_detail.shipping_status == "done" %>
+                                        <%= t '.done' %>
+                                    <% else %>
+                                        <p>取引前</p>
+                                    <% end %>
                                 <% end %>
-                                <tr style="font-size:20px;">
-                                    <td colspan="2" align="right">Total:</td>
-                                    <td align="right"><%= sum_amount %></td>
-                                    <td align="right" colspan="3">
-                                        <%= sum_price.to_s(:delimited)  %>
-                                    </td>
-                                </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="user_details"style="height:20px;width:100%;background-color:black;margin-top:10px;" >お客様情報</div>
-                    <h5> <%= @order_payment %>払い</h5>
-
-                    <h5>〒<%= @order.postal_code%></h5>
-                    <h5> <%= @order.address%></h5>
-                    <h5><%= @order.name%>様</h5>
-            </div>
+                            </td>
+                        </tr>
+                    <% end %>
+                    <% sum_price = 0 %>
+                        <% @order_details.each do |order_detail| %> 
+                            <%  order_detail_price =(order_detail.photo.price*1.08).round*(order_detail.amount) %>
+                            <% order_detail_price %>
+                            <% sum_price = sum_price + order_detail_price %>
+                        <% end %>
+                    <% sum_amount = 0 %>
+                        <% @order_details.each do |order_detail| %> 
+                            <% sum_amount = sum_amount + order_detail.amount %>
+                        <% end %>
+                        <tr style="font-size:20px;">
+                            <td colspan="2" align="right">Total:</td>
+                            <td align="right"><%= sum_amount %></td>
+                            <td align="right" colspan="3">
+                                <%= sum_price.to_s(:delimited)  %>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+        <div class="buyer_details">
+            <table class="tbl-cart" cellpadding="10" cellspacing="1" width=100%;>
+                <tr><td style="width:20%;background-color: rgb(131, 131, 131);">お客様情報</td></tr>
+                <tr>
+                    <td>支払い方法</td>
+                    <td>
+                        <h5> <%= @order.payment_method %></h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>郵便番号</td>
+                    <td>
+                        <h5>〒<%= @order.postal_code%></h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>お届け先住所</td>
+                    <td>
+                        <h5> <%= @order.address%></h5>
+                    </td>
+                </tr>
+                <tr>
+                    <td>お名前</td>
+                    <td>
+                    <h5><%= @order.user.first_name%>様</h5>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>

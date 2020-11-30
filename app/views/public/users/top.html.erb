@@ -6,7 +6,7 @@
             <% @photos.each do |photo|%>
                 <div class="photo_index_view">
                     <%= link_to public_photo_path(photo) do  %>
-                        <%= attachment_image_tag photo,:image,fallback: "noimage.jpg",class:"image_index",style:"border-radius: 10px;"%>
+                        <%= attachment_image_tag photo,:image,fallback: "noimages.jpg",class:"image_index",style:"border-radius: 10px;"%>
                     <% end %>
                 </div>
             <% end%>
@@ -21,7 +21,7 @@
             <% @photos.each do |photo|%>
                 <div class="photo_index_view">
                     <%= link_to admins_photo_path(photo) do  %>
-                        <%= attachment_image_tag photo,:image,fallback: "noimage.jpg",class:"image_index",style:"border-radius: 10px;"%>
+                        <%= attachment_image_tag photo,:image,fallback: "noimages.jpg",class:"image_index",style:"border-radius: 10px;"%>
                     <% end %>
                 </div>
             <% end%>
@@ -36,7 +36,7 @@
             <% @photos.each do |photo|%>
                 <div class="photo_index_view">
                     <%= link_to public_photo_path(photo) do  %>
-                        <%= attachment_image_tag photo,:image,fallback: "noimage.jpg",class:"image_index",style:"border-radius: 10px;"%>
+                        <%= attachment_image_tag photo,:image,fallback: "noimages.jpg",class:"image_index",style:"border-radius: 10px;"%>
                     <% end %>
                 </div>
             <% end%>

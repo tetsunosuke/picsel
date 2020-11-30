@@ -10,7 +10,7 @@
             <% @hashtag_photos.each do |hashtag_photo| %>
                 <div class="photo_index_view">
                     <%= link_to public_photo_path(hashtag_photo.photo) do  %>
-                        <%= attachment_image_tag hashtag_photo.photo,:image,fallback: "noimage.jpg",class:"image_index",style:"border-radius: 10px;"%>
+                        <%= attachment_image_tag hashtag_photo.photo,:image,fallback: "noimages.jpg",class:"image_index",style:"border-radius: 10px;"%>
                     <% end %>
                 </div>
             <% end%>

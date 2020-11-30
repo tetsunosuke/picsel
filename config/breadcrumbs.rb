@@ -1,3 +1,4 @@
+
 crumb :root do
   link "Home", root_path
 end
@@ -10,13 +11,17 @@ crumb :edit do
   parent :mypage
 end
 crumb :user do |user|
-  link "#{user.nickname}さんの写真", public_photos_path(user)
+  link "#{user.nickname}の写真一覧", public_photos_path(user)
   parent :root
 end
-# crumb :photo_show do
-  # link "詳細", public_photo_path
-  # parent :user
-# end
+crumb :photo_show do
+  link "写真詳細", public_photo_path
+  parent :root
+end
+crumb :photo_edit do
+  link "詳細編集", edit_public_photo_path
+  parent :photo_show
+end
 
 # crumb :photo_edit do
 #   link "詳細", edit_public_photo_path

@@ -1,70 +1,91 @@
 
 <div class="row">
     <div class="col-xs-3">
-        <h3 class="txt-heading">confirm order</h3>
+        <h3 class="txt-heading">注文確認</h3>
     </div>
-        <%= form_with(model: @order, url:public_orders_path,local: true, method: :post) do |f| %>  
-            <div class="col-xs-9">
-                <div class="cart_item_table">
-                    <table class="tbl-cart" cellpadding="10" cellspacing="1" width=100%;>
-                        <tbody>
-                            <tr class="cart_item_header"style="border:solid 1px black">
-                                <th style="width:40%;"></th>
-                                <th style="width:20%;">title</th>
-                                <th style="width:20%;">Quantity</th>
-                                <th style="width:10%;">Price</th>
-                                <th style="width:10%;">Remove</th>
+    <%= form_with(model: @order, url:public_orders_path,local: true, method: :post) do |f| %>  
+        <div class="col-xs-9">
+            <div class="cart_item_table">
+                <table class="tbl-cart" cellpadding="10" cellspacing="1" width=100%;>
+                    <tbody>
+                        <tr class="cart_item_header"style="border:solid 1px black;">
+                            <th style="width:40%;"></th>
+                            <th style="width:20%;">タイトル</th>
+                            <th style="width:20%;">数</th>
+                            <th style="width:10%;">税込価格</th>
+                        </tr>
+                        <% @cart_items.each do |cart_item| %>
+                            <tr style="height:100px;" >
+                                <td><%= attachment_image_tag cart_item.photo,:image ,fallback: "noimages.jpg", style:'height:100px;%;padding:3%;'%></td>
+                                <td><%= cart_item.photo.title %></td>
+                                <td>
+                                    <%= cart_item.amount  %>
+                                </td>
+                                <td>
+                                    <%= (cart_item.photo.price*1.08).round.to_s(:delimited)  %>
+                                </td>
                             </tr>
-                            <% @cart_items.each do |cart_item| %>
-                                <tr style="height:100px;" >
-                                    <td><%= attachment_image_tag cart_item.photo,:image ,fallback: "noimage.jpg", style:'height:100px;%;padding:3%;'%></td>
-                                    <td><%= cart_item.photo.title %></td>
-                                    <td>
-                                        <%= cart_item.amount  %>
-                                    </td>
-                                    <td>
-                                        <%= (cart_item.photo.price*1.08).round.to_s(:delimited)  %>
-                                    </td>
-                                    <td>
-                                        <%= ((cart_item.photo.price*1.08) * (cart_item.amount)).round.to_s(:delimited) %>
-                                    </td>
-                                </tr>
+                        <% end %>
+                        <% sum_price = 0 %>
+                            <% @cart_items.each do |cart_item| %> 
+                                <%  cart_item_price =(cart_item.photo.price*1.08).round*(cart_item.amount) %>
+                                <% cart_item_price %>
+                                <% sum_price = sum_price + cart_item_price %>
                             <% end %>
-                            <% sum_price = 0 %>
-                                <% @cart_items.each do |cart_item| %> 
-                                    <%  cart_item_price =(cart_item.photo.price*1.08).round*(cart_item.amount) %>
-                                    <% cart_item_price %>
-                                    <% sum_price = sum_price + cart_item_price %>
-                                <% end %>
-                            <% sum_amount = 0 %>
-                                <% @cart_items.each do |cart_item| %> 
-                                    <% sum_amount = sum_amount + cart_item.amount %>
-                                <% end %>
-                                <tr style="font-size:20px;">
-                                    <td colspan="2" align="right">Total:</td>
-                                    <td align="right"><%= sum_amount %></td>
-                                    <td align="right" colspan="2">
-                                        <%= sum_price.to_s(:delimited)  %>
-                                    </td>
-                                </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="user_details"style="height:20px;width:100%;background-color:black;margin-top:10px;color:white;" >お客様情報</div>
-                    <h5> <%= @order_payment %>払い</h5>
-                       
-                    <h5>〒<%= @order_address.postal_code%></h5>
-                    <h5> <%= @order_address.address%></h5>
-                    <h5><%= @order_address.name%>様</h5>
-                
+                        <% sum_amount = 0 %>
+                            <% @cart_items.each do |cart_item| %> 
+                                <% sum_amount = sum_amount + cart_item.amount %>
+                            <% end %>
+                            <tr style="font-size:20px;">
+                                <td colspan="2" align="right">Total</td>
+                                <td align="right"><%= sum_amount %></td>
+                                <td align="right" colspan="2">
+                                    <%= sum_price.to_s(:delimited)  %>
+                                </td>
+                            </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br>
+            <div class="buyer_details">
+                <table class="tbl-cart" cellpadding="10" cellspacing="1" width=100%;>
+                        <tr><td style="width:20%;background-color: rgb(131, 131, 131);">お客様情報</td></tr>
+                        <tr>
+                            <td>支払い方法</td>
+                            <td>
+                                <h5> <%= @order_payment %></h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>郵便番号</td>
+                            <td>
+                                <h5>〒<%= @order_address.postal_code%></h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>お届け先住所</td>
+                            <td>
+                                <h5> <%= @order_address.address%></h5>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>お名前</td>
+                            <td>  
+                            <h5><%= @order_address.name%>様</h5>
+                            </td>
+                        </tr>
                         <%= f.hidden_field :payment_method, value: @order_payment %>
                         <%= f.hidden_field :postal_code, value: @order_address.postal_code %>
                         <%= f.hidden_field :address, value: @order_address.address %>
                         <%= f.hidden_field :name, value: @order_address.name %>
                         <%= f.hidden_field :total_payment, value: (sum_price + 800).round %>
-                            <center>
-                                <%= f.submit '情報を確定する',class:"btn btn-success"%>
-                            </center>
+                    </div>
+                </table>
             </div>
-        <% end %>
+            <br>
+            <center>
+                <%= f.submit '情報を確定する',class:"btn btn-success"%>
+            </center>
+        </div>
+    <% end %>
 </div>

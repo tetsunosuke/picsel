@@ -1,88 +1,94 @@
-<%# breadcrumb :photo_show %>
-<%#= breadcrumbs separator: " &rsaquo; " %>
+<% breadcrumb :photo_show %>
+<%= breadcrumbs separator: " &rsaquo; " %>
 <div class="row">
-    <div class="col-xs-4 col-xs-offset-1">
-        <div class="photo_wrapper">
-            <div class="photo_wrapper_image" style="height:95%; width: 100%;">
-                <%= attachment_image_tag @photo,:image,fallback: "noimage.jpg", style: 'width: 100%;height: 100%;' %>
-            </div>
-        </div>
-    </div>
     <% if user_signed_in? && current_user.id == @photo.user_id %>
-        <div class="col-xs-4 col-xs-offset-1">
-            <div class="photo_title_caption">
-                <i><%= @photo.likes.count %></i>
-                    <% if current_user.already_liked?(@photo) %>
-                        <%= link_to public_photo_like_path(@photo),method: :delete do %>
-                            <i class="fas fa-heart unlike-btn"></i>
-                        <% end %>
-                    <% else %>
-                        <%= button_to public_photo_likes_path(@photo) do %>
-                            <i class="far fa-heart like-btn" ></i>
-                        <% end %>
-                    <% end %>
-                <h4><%= @photo.title %></h4>
-                <p><%= @photo.caption %></p>
-
-                <%= render_with_hashtags(@photo.hashbody) %>
-
-                <h5>¥<%= @photo.price %>(税込み)</h5>
-            </div>
-            <div class="photo_price">
-                <%= link_to "Edit",edit_public_photo_path,class:"btn btn-primary"%>
+        <div class="col-xs-9" >
+            <div class="show_details_of_image">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="photo_wrapper">
+                            <div class="photo_wrapper_image" style="height:95%; width: 100%;">
+                                <%= attachment_image_tag @photo,:image,fallback: "noimages.jpg", style: 'width: 100%;height: 100%;' %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="photo_title_caption">
+                            <div class="photo_like">
+                                <h4 style="margin:10px;"><%= @photo.likes.count %></h4>
+                                <% if current_user.already_liked?(@photo) %>
+                                    <%= link_to public_photo_like_path(@photo),method: :delete do %>
+                                        <h4 class="fas fa-heart unlike-btn"></h4>
+                                    <% end %>
+                                <% else %>
+                                    <%= button_to public_photo_likes_path(@photo) do %>
+                                        <h4 class="far fa-heart like-btn" ></h4>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                            <h4>「<%= @photo.title %>」</h4>
+                            <p><%= @photo.caption %></p>
+                            <%= render_with_hashtags(@photo.hashbody) %>
+                            <h5>A4size ¥<%= @photo.price %>(税込)</h5>
+                        </div>
+                        <div class="photo_price">
+                            <%= link_to "Edit",edit_public_photo_path,class:"btn btn-primary"%>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     <% else %>
-        <div class="col-xs-4 col-xs-offset-1">
-            <div class="photo_title_caption">
-               <%# @user ||= current_user %>
-    <%# unless current_user?(@user) %>
-         <div id="follow_form">
-            <%# if current_user.following?(@user) %>
-                <%#= form_for(current_user.following_relationships.find_by(following_id: @user.id), html: { method: :delete }) do |f| %>
-                    <%#= f.submit "Unfollow",following_public_user_path(@user) ,class: "btn btn-large follow-btn" %>
-                <%# end %>
-            <%# else %>
-                <%#= form_for(current_user.following_relationships.build(following_id: @user.id)) do |f| %>
-                    <div><%#= f.hidden_field :following_id %></div>
-                    <%#= f.submit "Follow",following_public_user_path(@user), class: "btn btn-large btn-primary follow-btn" %>
-                <%# end %>
-            <%# end %>
-        </div>
-    <%# end %>
-                <i><%= @photo.likes.count %></i>
-                    <% if current_user.already_liked?(@photo) %>
-                        <%= link_to public_photo_like_path(@photo),method: :delete do %>
-                            <i class="fas fa-heart unlike-btn"></i>
-                        <% end %>
-                    <% else %>
-                        <%= button_to public_photo_likes_path(@photo) do %>
-                            <i class="far fa-heart like-btn" ></i>
-                        <% end %>
-                    <% end %>
-                <h4><%= @photo.title %></h4>
-                <p><%= @photo.caption %></p>
-                 <%= render_with_hashtags(@photo.hashbody) %>
-                <h5>¥<%= @photo.price %>(税込み)</h5>
-            </div>
-            <div class="photo_price">
-                <%= form_with(model: @cart_item,url:public_cart_items_path, local: true, method: :post) do |f| %>
-                    <%= f.select :amount, [*1..100], include_blank: "個数選択" %>
-                    <%= f.hidden_field :photo_id, :value => @photo.id %>
-                    <%= f.submit "カートにいれる",class:"btn btn-primary btn-sm"%>
-                <% end %>
+        <div class="col-xs-9" >
+            <div class="show_details_of_image">
+                <div class="row">
+                    <div class="col-xs-8">
+                        <div class="photo_wrapper">
+                            <div class="photo_wrapper_image" style="height:95%; width: 100%;">
+                                <%= attachment_image_tag @photo,:image,fallback: "noimages.jpg", style: 'width: 100%;height: 100%;' %>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="photo_title_caption">
+                            <div class="photo_like">
+                                <h4 style="margin:10px;"><%= @photo.likes.count %></h4>
+                                <% if current_user.already_liked?(@photo) %>
+                                    <%= link_to public_photo_like_path(@photo),method: :delete do %>
+                                        <h4 class="fas fa-heart unlike-btn"></h4>
+                                    <% end %>
+                                <% else %>
+                                    <%= button_to public_photo_likes_path(@photo) do %>
+                                        <h4 class="far fa-heart like-btn" ></h4>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                            <h4>「<%= @photo.title %>」</h4>
+                            <p><%= @photo.caption %></p>
+                            <%= render_with_hashtags(@photo.hashbody) %>
+                            <h5>A4size ¥<%= @photo.price %>(税込)</h5>
+                            <div class="photo_price">
+                                <%= form_with(model: @cart_item,url:public_cart_items_path, local: true, method: :post) do |f| %>
+                                    <%= f.select :amount, [*1..100], include_blank: "個数選択" %>
+                                    <%= f.hidden_field :photo_id, :value => @photo.id %>
+                                    <%= f.submit "カートにいれる",class:"btn btn-primary btn-sm"%>
+                                <% end %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     <% end %>
-    <div class="col-xs-2">
+    <div class="col-xs-3">
         <div class="photo_profile">
             <%= link_to public_photos_path(user_id: @user.id) do %>
                 <%# <%= hidden_field_tag :user_id, @user.id %>
-                <%= attachment_image_tag @user,:profile_image,fallback: "noimage.jpg", style: 'border-radius: 50%; width: 100px;height: 100px;object-fit: cover;' %>
-                    <center>
+                <center>
+                <%= attachment_image_tag @user,:profile_image,fallback: "noimages.jpg", style: 'border-radius: 50%; width: 100px;height: 100px;object-fit: cover;' %>
                     <p><%= @user.nickname %></p>
                     <p><%= @user.introduce %></p>
-                    </center>
-            <% end %>
+                <% end %>
+                </center>
         </div>
 </div>
