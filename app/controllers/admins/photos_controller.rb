@@ -9,7 +9,7 @@ class Admins::PhotosController < ApplicationController
     @user = User.find(params[:user_id])
     @photos = Photo.where(user_id: @user.id)
   end
-  def edit  
+  def edit
     @photo = Photo.find(params[:id])
     @user = User.find_by(id: @photo.user_id)
 
@@ -27,7 +27,7 @@ class Admins::PhotosController < ApplicationController
   def destroy
     @photo = Photo.find(params[:id])
     @photo.destroy
-   redirect_to admins_photos_path
+   redirect_to top_admins_photospath
 end
 
   def show

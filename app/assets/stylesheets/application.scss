@@ -16,12 +16,37 @@
  @import "bootstrap-sprockets";
  @import "bootstrap";
  @media screen { #filename { display: none; } }
+ .wrapper{
+    min-height: 100vh;
+    position: relative;
+    padding-bottom: 120px;
+    box-sizing: border-box;
+    font-family: 'Osaka';
+}
 
+footer{
+    width: 100%;
+    background-color: #2e2e2e;
+    color: #fff;
+    text-align: center;
+    height:100px;
+    .row{
+        padding:10px;
+        text-align: left;
+
+    }
+
+ position: absolute;
+    bottom: 0;
+}
+body{
+    background-color: rgb(230, 230, 230);
+}
  .jumbotron-extend {
     height: 30vh;
     min-height: 100px;
     margin-bottom: 60px;
-    background-image: image-url("20170623_1814.jpg");
+    background-image: image-url("backgroundimage.jpg");
     background-repeat: no-repeat;
     background-position:center;
     background-size: cover;
@@ -34,9 +59,10 @@
     transform: translateY(-50%);
 
 }
-.container-fluid.jumbotron-container {
+
+.jumbotron-container {
     .nav-item{
-    color:white;
+    color:rgb(52, 52, 52);
     }
 }
 .field{
@@ -54,7 +80,7 @@
     padding:0px;
 }
 .photo_wrapper{
-    padding-top:30px;
+    padding:10px;
 
 }
 
@@ -62,7 +88,7 @@
     display:flex;
     &_wrapper {
         display: flex;
-        padding-left:40%;
+        padding-left:35%;
         p{
             margin:15px 0 0 10px ;
         }
@@ -100,7 +126,7 @@ tr td{
     border:solid 1px black;
 }
 .cart_item_header{
-    background-color: lightgreen;
+    background-color: rgb(131, 131, 131);
 }
 .cart_item_table {
     width:100%;
@@ -192,4 +218,35 @@ tr td{
     left: 0;
     margin: auto;
     object-fit: cover;
+  }
+  .photo_like{
+      display: flex;
+
+  }
+  .photo_title_caption{
+      margin:10px;
+  }
+  .show_details_of_image{
+     width:100%;
+     .row{
+         background-color: rgb(211, 211, 211);
+         margin:20px 0 10px 10px;
+         box-shadow: 1px 1px 1px;
+     }
+  }
+  .follow_view_detail{
+      display: flex;
+  }
+    .address_text{
+        color: red;
+    
+  }
+
+  .cart_item_table{
+      margin-top:10px;
+  }
+  .buyer_details{
+      td{
+          padding-left:10px;
+      }
   }

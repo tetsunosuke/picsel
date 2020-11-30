@@ -1,14 +1,13 @@
 <h3 >販売履歴一覧</h3>
 <table class="table table-hover table-inverse">
     <tr style="background-color:lightgray">
-      <th>販売日時</th><th>購入者</th><th>販売個数</th>
+      <th>販売日時</th><th>購入者</th><th>入金ステータス</th>
     </tr>
     <tbody>
     <%#= @seller %>
     <%#= @order.address %>
         <% @orders.each do |order|%>
             <%# <tr onclick='window.location="<%= '/public/order_details/' + order_detail.id.to_s + '/solddetail'%>
-           
                 <% amount_sum = 0%>
                 <td>
                 <%= link_to sold_detail_public_order_path(order) do  %>
@@ -21,11 +20,6 @@
                 <td>
                     <%= order.status %>
                 </td>
-                 <td>
-                    <%= order.id %>
-                </td>
-              
-              
             </tr>
         <% end %>
     </tbody>

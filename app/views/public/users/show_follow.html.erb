@@ -1,14 +1,16 @@
 <%#= if @user.following_id.nil? %>
 <%# フォローしているユーザーがいません %>
 <%# else %>
-
+<center>
+<h4>following</h4>
+</center>
 <div class="follow_view">
     <% @user.followings.each do |user| %>
         <div class="follow_view_detail">
-        <%= link_to public_photos_path(user_id: user.id) do %>
-            <p><%= attachment_image_tag user,:profile_image,fallback: "noimage.jpg", style: 'border-radius: 50%; width: 40px;height: 40px;object-fit: cover;' %></p>
-            <p style="padding:10px 0 0 10px"><%= user.nickname %></p>
-        <% end %>
+            <%= link_to public_photos_path(user_id: user.id) do %>
+                <p><%= attachment_image_tag user,:profile_image,fallback: "noimages.jpg", style: 'border-radius: 50%; width: 40px;height: 40px;object-fit: cover;' %></p>
+                <p style="padding:10px 0 0 10px"><%= user.nickname %></p>
+            <% end %>
             <% unless current_user?(user) %>
                 <% if current_user.following?(user) %>
                     <div id="follow_view_form">
