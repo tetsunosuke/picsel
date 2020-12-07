@@ -24,13 +24,32 @@ http://picsell.site
 
 ## 設計書
 https://docs.google.com/spreadsheets/d/1kx6cJdFdkjHX8DVCggezwWHUm6-l7I1Km1divuqK2ZE/edit?usp=sharing
-### 機能一覧
-https://docs.google.com/spreadsheets/d/1rNuZrzqdIFMnn9P3LGZb8-F0uIwPkrWugncKwf-Bgio/edit?usp=sharing
+
+###　実装機能/技術一覧
+・ユーザー管理機能 (ユーザー登録/ログイン/ログアウト)
+・投稿機能 (新規作成/編集/削除)
+・ユーザーマイページ (ユーザープロフィール登録/編集機能)
+・プロフィール写真アップロード機能 (アップロード/削除)
+・インフラ (AWS EC2)
+・WEBサーバー (Nginx)
+・Applicationサーバー (Puma)
+・データベース (MySQL)
+・ストレージ (AWS RDS)
+・デプロイ自動化 (Capistrano)
+・テスト(rspec)
+・商品売買機能
+・いいね機能
+・ユーザーフォロー機能
+・画像のアップロード（refile
+・検索機能(ransack)
+・バグチェック(byebug) 
+・環境変数(dotenv-rails) 
+・HTML(slim,bootstrap)
+等
+
 ## 開発環境
-- OS：Linux(CentOS)
+- OS：Linux
 - 言語：HTML,CSS,JavaScript,Ruby,SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
-- 仮想環境：Vagrant,VirtualBox
-
 - 仮想環境：Vagrant,VirtualBox
