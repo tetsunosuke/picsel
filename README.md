@@ -27,7 +27,7 @@ http://picsell.site
 ## 設計書
 https://docs.google.com/spreadsheets/d/1kx6cJdFdkjHX8DVCggezwWHUm6-l7I1Km1divuqK2ZE/edit?usp=sharing
 
-###　実装機能/技術一覧
+### 実装機能/技術一覧
 - ユーザー管理機能 (ユーザー登録/ログイン/ログアウト)
 - 投稿機能 (新規作成/編集/削除)
 - ユーザーマイページ (ユーザープロフィール登録/編集機能)
